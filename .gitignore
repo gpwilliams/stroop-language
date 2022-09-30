@@ -1,0 +1,17 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+.Rapp.history
+
+# RStudio files
+.Rproj.user
+.Rproj.user/
+
+# Misc
+desktop.ini
+.DS_Store
+.Ruserdata
+.Rproj.user
+Icon?
