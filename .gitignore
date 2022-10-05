@@ -9,6 +9,9 @@
 .Rproj.user
 .Rproj.user/
 
+# paper drafts
+drafts
+
 # Misc
 desktop.ini
 .DS_Store
