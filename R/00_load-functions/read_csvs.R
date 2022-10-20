@@ -14,8 +14,8 @@ read_csvs <- function(
   #' @param .skip_first logical: Whether the first column should be excluded. 
   #' This is useful for cases where row numbers are included in the csv but not needed.
   #' @param .id string: the column name used to identify the data source (i.e. file).
-  #' @param .include string or NULL: keep only files containing the string.
-  #' @param .exclude string or NULL: remove any files containing the string.
+  #' @param .include string/vector of strings or NULL: keep only files containing the string.
+  #' @param .exclude string/vector of strings or NULL: remove any files containing the string.
   #' @examples
   #' read_csvs(here("path/to/file"), .exclude = "demographics")
   
@@ -37,12 +37,14 @@ read_csvs <- function(
  
  # keep only things in include
  if(!is.null(.include)) {
+   .include <- paste(.include, collapse = "|")
    files <- files[grepl(.include, files)]
    file_names <- file_names[grepl(.include, file_names)]
    }
 
  # remove things in exclude
  if(!is.null(.exclude)) {
+   .exclude <- paste(.exclude, collapse = "|")
    files <- files[!grepl(.exclude, files)]
    file_names <- file_names[!grepl(.exclude, file_names)]
    }
