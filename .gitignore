@@ -9,8 +9,11 @@
 .Rproj.user
 .Rproj.user/
 
-# paper drafts
+# Paper drafts
 drafts
+
+# Large models
+04_analysis/03_models/02_bayesian
 
 # Misc
 desktop.ini
