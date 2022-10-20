@@ -1,0 +1,4 @@
+study,original,dat_cleaned,dat_accuracy,dat_accuracy_filtered,dat_rt,dat_rt_filtered
+arabic_stroop,50,45,45,45,45,45
+chinese_stroop,50,49,46,46,46,46
+dutch_stroop,48,47,46,46,46,46

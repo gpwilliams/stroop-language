@@ -1,0 +1,4 @@
+study,n,min,lower_95,mean,median,upper_95,max
+arabic_stroop,45,0,0,0.926,1,1,1
+chinese_stroop,46,0,0,0.89,1,0,1
+dutch_stroop,46,0,0,0.924,1,1,1
