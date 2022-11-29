@@ -1,434 +1,280 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+Results
+================
+Dr Glenn Williams
 
-<meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.267">
+- <a href="#experiment-1" id="toc-experiment-1">Experiment 1</a>
+  - <a href="#participants" id="toc-participants">Participants</a>
+  - <a href="#analysis" id="toc-analysis">Analysis</a>
+    - <a href="#response-time" id="toc-response-time">Response Time</a>
+    - <a href="#accuracy" id="toc-accuracy">Accuracy</a>
+- <a href="#experiment-2" id="toc-experiment-2">Experiment 2</a>
+  - <a href="#participants-1" id="toc-participants-1">Participants</a>
+    - <a href="#response-time-1" id="toc-response-time-1">Response Time</a>
+    - <a href="#accuracy-1" id="toc-accuracy-1">Accuracy</a>
+- <a href="#experiment-3" id="toc-experiment-3">Experiment 3</a>
+  - <a href="#participants-2" id="toc-participants-2">Participants</a>
+    - <a href="#response-time-2" id="toc-response-time-2">Response Time</a>
+    - <a href="#accuracy-2" id="toc-accuracy-2">Accuracy</a>
+- <a href="#references" id="toc-references">References</a>
+- <a href="#appendices" id="toc-appendices">Appendices</a>
+  - <a href="#appendix-a.-frequentist-model-specification"
+    id="toc-appendix-a.-frequentist-model-specification">Appendix A.
+    Frequentist Model Specification</a>
+    - <a href="#experiment-1-1" id="toc-experiment-1-1">Experiment 1</a>
+    - <a href="#experiment-2-1" id="toc-experiment-2-1">Experiment 2</a>
+    - <a href="#experiment-3-1" id="toc-experiment-3-1">Experiment 3</a>
+  - <a href="#appendix-b.-bayesian-model-specification"
+    id="toc-appendix-b.-bayesian-model-specification">Appendix B. Bayesian
+    Model Specification</a>
+    - <a href="#model-priors" id="toc-model-priors">Model Priors</a>
+    - <a href="#sensitivity-of-parameter-estimates"
+      id="toc-sensitivity-of-parameter-estimates">Sensitivity of Parameter
+      Estimates</a>
+    - <a href="#sensitivity-of-bayes-factors"
+      id="toc-sensitivity-of-bayes-factors">Sensitivity of Bayes Factors</a>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-<meta name="author" content="Dr Glenn Williams">
-
-<title>Results</title>
-<style>
-code{white-space: pre-wrap;}
-span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
-div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-ul.task-list{list-style: none;}
-ul.task-list li input[type="checkbox"] {
-  width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
-  vertical-align: middle;
-}
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
-
-
-<script src="results_files/libs/clipboard/clipboard.min.js"></script>
-<script src="results_files/libs/quarto-html/quarto.js"></script>
-<script src="results_files/libs/quarto-html/popper.min.js"></script>
-<script src="results_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="results_files/libs/quarto-html/anchor.min.js"></script>
-<link href="results_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="results_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="results_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="results_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="results_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-</head>
-
-<body>
-
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-  <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#experiment-1" id="toc-experiment-1" class="nav-link active" data-scroll-target="#experiment-1">Experiment 1</a>
-  <ul class="collapse">
-  <li><a href="#participants" id="toc-participants" class="nav-link" data-scroll-target="#participants">Participants</a></li>
-  <li><a href="#analysis" id="toc-analysis" class="nav-link" data-scroll-target="#analysis">Analysis</a>
-  <ul class="collapse">
-  <li><a href="#response-time" id="toc-response-time" class="nav-link" data-scroll-target="#response-time">Response Time</a></li>
-  <li><a href="#accuracy" id="toc-accuracy" class="nav-link" data-scroll-target="#accuracy">Accuracy</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#experiment-2" id="toc-experiment-2" class="nav-link" data-scroll-target="#experiment-2">Experiment 2</a>
-  <ul class="collapse">
-  <li><a href="#participants-1" id="toc-participants-1" class="nav-link" data-scroll-target="#participants-1">Participants</a>
-  <ul class="collapse">
-  <li><a href="#response-time-1" id="toc-response-time-1" class="nav-link" data-scroll-target="#response-time-1">Response Time</a></li>
-  <li><a href="#accuracy-1" id="toc-accuracy-1" class="nav-link" data-scroll-target="#accuracy-1">Accuracy</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#experiment-3" id="toc-experiment-3" class="nav-link" data-scroll-target="#experiment-3">Experiment 3</a>
-  <ul class="collapse">
-  <li><a href="#participants-2" id="toc-participants-2" class="nav-link" data-scroll-target="#participants-2">Participants</a>
-  <ul class="collapse">
-  <li><a href="#response-time-2" id="toc-response-time-2" class="nav-link" data-scroll-target="#response-time-2">Response Time</a></li>
-  <li><a href="#accuracy-2" id="toc-accuracy-2" class="nav-link" data-scroll-target="#accuracy-2">Accuracy</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  <li><a href="#appendices" id="toc-appendices" class="nav-link" data-scroll-target="#appendices">Appendices</a>
-  <ul class="collapse">
-  <li><a href="#appendix-a.-frequentist-model-specification" id="toc-appendix-a.-frequentist-model-specification" class="nav-link" data-scroll-target="#appendix-a.-frequentist-model-specification">Appendix A. Frequentist Model Specification</a>
-  <ul class="collapse">
-  <li><a href="#experiment-1-1" id="toc-experiment-1-1" class="nav-link" data-scroll-target="#experiment-1-1">Experiment 1</a></li>
-  <li><a href="#experiment-2-1" id="toc-experiment-2-1" class="nav-link" data-scroll-target="#experiment-2-1">Experiment 2</a></li>
-  <li><a href="#experiment-3-1" id="toc-experiment-3-1" class="nav-link" data-scroll-target="#experiment-3-1">Experiment 3</a></li>
-  </ul></li>
-  <li><a href="#appendix-b.-bayesian-model-specification" id="toc-appendix-b.-bayesian-model-specification" class="nav-link" data-scroll-target="#appendix-b.-bayesian-model-specification">Appendix B. Bayesian Model Specification</a>
-  <ul class="collapse">
-  <li><a href="#model-priors" id="toc-model-priors" class="nav-link" data-scroll-target="#model-priors">Model Priors</a></li>
-  <li><a href="#sensitivity-of-parameter-estimates" id="toc-sensitivity-of-parameter-estimates" class="nav-link" data-scroll-target="#sensitivity-of-parameter-estimates">Sensitivity of Parameter Estimates</a></li>
-  <li><a href="#sensitivity-of-bayes-factors" id="toc-sensitivity-of-bayes-factors" class="nav-link" data-scroll-target="#sensitivity-of-bayes-factors">Sensitivity of Bayes Factors</a></li>
-  </ul></li>
-  </ul></li>
-  </ul>
-</nav>
-</div>
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Results</h1>
-</div>
-
-
-
-<div class="quarto-title-meta">
-
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Dr Glenn Williams </p>
-          </div>
-  </div>
-    
-  
-    
-  </div>
-  
-
-</header>
-
-<div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load packages ----</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(english)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># set options ----</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># functions ----</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="fu">here</span>(<span class="st">"R"</span>, <span class="st">"00_load-functions"</span>), <span class="at">full.names =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  purrr<span class="sc">::</span><span class="fu">walk</span>(source)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># process data ----</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># data summaries</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>performance_exclusions <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"01_data"</span>, <span class="st">"01_raw"</span>, <span class="st">"performance_exclusions.csv"</span>))</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>data_checks <span class="ot">&lt;-</span> <span class="fu">map_files_to_list</span>(<span class="fu">here</span>(<span class="st">"04_analysis"</span>, <span class="st">"01_data-checks"</span>), <span class="at">file_type =</span> <span class="st">".csv"</span>)</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>descriptives <span class="ot">&lt;-</span> <span class="fu">map_files_to_list</span>(<span class="fu">here</span>(<span class="st">"04_analysis"</span>, <span class="st">"02_descriptives"</span>), <span class="at">file_type =</span> <span class="st">".csv"</span>)</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co"># models and model products</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>freq_results <span class="ot">&lt;-</span> <span class="fu">map_files_to_list</span>(</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">here</span>(<span class="st">"04_analysis"</span>, <span class="st">"04_model-predictions"</span>, <span class="st">"01_frequentist"</span>),</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">file_type =</span> <span class="st">".csv"</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co"># add indicator of consistent results for ANOVA and mixed models</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>freq_results<span class="sc">$</span>rt_mixed_freq_table_est <span class="ot">&lt;-</span> <span class="fu">left_join</span>(</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  freq_results<span class="sc">$</span>rt_mixed_freq_table_est,</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>  freq_results<span class="sc">$</span>rt_anova_freq_table <span class="sc">|&gt;</span> </span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Study, Parameter, p_value) <span class="sc">|&gt;</span> </span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">p_anova =</span> p_value),</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Study"</span>, <span class="st">"Parameter"</span>)</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> </span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">p_inconsistent =</span> <span class="fu">case_when</span>(</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>      <span class="fu">is.na</span>(p_anova) <span class="sc">~</span> <span class="cn">NA</span>, <span class="co"># not in ANOVA model</span></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>      p_value <span class="sc">&amp;</span> p_anova <span class="sc">&lt;</span> .<span class="dv">05</span> <span class="sc">~</span> <span class="cn">FALSE</span>, <span class="co"># consistent</span></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>      p_value <span class="sc">&amp;</span> p_anova <span class="sc">&gt;</span> .<span class="dv">05</span> <span class="sc">~</span> <span class="cn">FALSE</span>, <span class="co"># consistent</span></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">TRUE</span> <span class="co"># default, inconsistent</span></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>p_anova)</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>freq_results<span class="sc">$</span>accuracy_mixed_freq_table_est <span class="ot">&lt;-</span> <span class="fu">left_join</span>(</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>  freq_results<span class="sc">$</span>accuracy_mixed_freq_table_est,</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>  freq_results<span class="sc">$</span>accuracy_anova_freq_table <span class="sc">|&gt;</span> </span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Study, Parameter, p_value) <span class="sc">|&gt;</span> </span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">p_anova =</span> p_value),</span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Study"</span>, <span class="st">"Parameter"</span>)</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> </span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>    <span class="at">p_inconsistent =</span> <span class="fu">case_when</span>(</span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>      <span class="fu">is.na</span>(p_anova) <span class="sc">~</span> <span class="cn">NA</span>, <span class="co"># not in ANOVA model</span></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>      p_value <span class="sc">&lt;</span> .<span class="dv">05</span> <span class="sc">&amp;</span> p_anova <span class="sc">&lt;</span> .<span class="dv">05</span> <span class="sc">~</span> <span class="cn">FALSE</span>, <span class="co"># consistent</span></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>      p_value <span class="sc">&gt;</span> .<span class="dv">05</span> <span class="sc">&amp;</span> p_anova <span class="sc">&gt;</span> .<span class="dv">05</span> <span class="sc">~</span> <span class="cn">FALSE</span>, <span class="co"># consistent</span></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">TRUE</span> <span class="co"># default, inconsistent</span></span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>p_anova)</span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="co"># make df into a single column for ANOVA tables</span></span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>freq_results[<span class="fu">c</span>(</span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>  <span class="st">"accuracy_anova_freq_table"</span>, </span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>  <span class="st">"rt_anova_freq_table"</span>,</span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>  <span class="st">"rt_mixed_freq_table_anova"</span></span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>)] <span class="ot">&lt;-</span> freq_results[<span class="fu">c</span>(</span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>  <span class="st">"accuracy_anova_freq_table"</span>, </span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>  <span class="st">"rt_anova_freq_table"</span>,</span>
-<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>  <span class="st">"rt_mixed_freq_table_anova"</span></span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>)] <span class="sc">|&gt;</span></span>
-<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>( </span>
-<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span> .x <span class="sc">|&gt;</span> </span>
-<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">df =</span> <span class="fu">paste0</span>(<span class="st">"["</span>, num_df, <span class="st">", "</span>, <span class="fu">round</span>(den_df), <span class="st">"]"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>      <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(num_df, den_df))</span>
-<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a><span class="co"># make df label consistent across all tables</span></span>
-<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>freq_results[<span class="st">"accuracy_mixed_freq_table_anova"</span>] <span class="ot">&lt;-</span> </span>
-<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>  freq_results[<span class="st">"accuracy_mixed_freq_table_anova"</span>] <span class="sc">|&gt;</span></span>
-<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>( </span>
-<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span> .x <span class="sc">|&gt;</span> </span>
-<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">df =</span> <span class="fu">as.character</span>(chi_df)) <span class="sc">|&gt;</span> </span>
-<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>      <span class="fu">select</span>(<span class="sc">-</span>chi_df)</span>
-<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="co"># make all parameter names consistent</span></span>
-<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a><span class="co"># fix printing of p-values for APA formatting</span></span>
-<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>freq_results <span class="ot">&lt;-</span> freq_results <span class="sc">|&gt;</span> </span>
-<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>( </span>
-<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span> .x <span class="sc">|&gt;</span> </span>
-<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">p_value =</span> <span class="fu">papa</span>(p_value, <span class="at">asterisk =</span> <span class="cn">FALSE</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate_if</span>(is.numeric, round_pad) <span class="sc">|&gt;</span> </span>
-<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>( <span class="co"># fix inconsistent ordering</span></span>
-<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>       <span class="at">Parameter =</span> <span class="fu">case_when</span>(</span>
-<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>          Parameter <span class="sc">==</span> <span class="st">"(Intercept)"</span> <span class="sc">~</span> <span class="st">"Intercept"</span>,</span>
-<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>          Parameter <span class="sc">==</span> <span class="st">"Trial Type × Language"</span> <span class="sc">~</span> <span class="st">"Language × Trial Type"</span>,</span>
-<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>          Parameter <span class="sc">==</span> <span class="st">"Stroop × Trial Type × Language"</span> <span class="sc">~</span> <span class="st">"Stroop × Language × Trial Type"</span>,</span>
-<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>          <span class="cn">TRUE</span> <span class="sc">~</span> Parameter</span>
-<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>      ) <span class="sc">|&gt;</span> </span>
-<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>      <span class="fu">arrange</span>( <span class="co"># sort to specific order across data sets</span></span>
-<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>        Study,</span>
-<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a>        Measure,</span>
-<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>        <span class="fu">factor</span>(</span>
-<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a>          Parameter,</span>
-<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a>          <span class="at">levels =</span> <span class="fu">c</span>(</span>
-<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Intercept"</span>,</span>
-<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Stroop"</span>,</span>
-<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Language"</span>,</span>
-<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Trial Type"</span>,</span>
-<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Stroop × Language"</span>,</span>
-<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Stroop × Trial Type"</span>,</span>
-<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Language × Trial Type"</span>,</span>
-<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Stroop × Language × Trial Type"</span></span>
-<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>          ))</span>
-<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a><span class="co"># load bayesian data</span></span>
-<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a>bayes_results <span class="ot">&lt;-</span> <span class="fu">map_files_to_list</span>(</span>
-<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a>  <span class="fu">here</span>(<span class="st">"04_analysis"</span>, <span class="st">"04_model-predictions"</span>, <span class="st">"02_bayesian"</span>),</span>
-<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a>  <span class="at">file_type =</span> <span class="st">".csv"</span></span>
-<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a><span class="co"># compute bayes factors in support of the null hypothesis</span></span>
-<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a><span class="co"># find when bayes factors are inconsistent across models 3-5</span></span>
-<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a><span class="co"># due to prior sensitivity</span></span>
-<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a><span class="co"># fix printing of Bayes factors to limit max values</span></span>
-<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a><span class="co"># fix printing of parameter names for consistency</span></span>
-<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a>bayes_results[<span class="fu">grep</span>(<span class="st">'bayes-factors'</span>, <span class="fu">names</span>(bayes_results))] <span class="ot">&lt;-</span> </span>
-<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a>  bayes_results[<span class="fu">grep</span>(<span class="st">'bayes-factors'</span>, <span class="fu">names</span>(bayes_results))] <span class="sc">|&gt;</span> </span>
-<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(</span>
-<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span> .x <span class="sc">|&gt;</span> </span>
-<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">BF =</span> <span class="dv">1</span><span class="sc">/</span>BF) <span class="sc">|&gt;</span> <span class="co"># make BF into evidence for null</span></span>
-<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rename</span>(<span class="at">BF_01 =</span> BF) <span class="sc">|&gt;</span> <span class="co"># rename to make this clear</span></span>
-<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>      <span class="fu">select</span>(Study, Prior_Model, Parameter, BF_01) <span class="sc">|&gt;</span> </span>
-<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a>      <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Prior_Model, <span class="at">values_from =</span> BF_01) <span class="sc">|&gt;</span> </span>
-<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(</span>
-<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>        <span class="at">prior_sensitive =</span> <span class="fu">case_when</span>(</span>
-<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>          <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="sc">&lt;=</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span> <span class="sc">&amp;</span> <span class="st">`</span><span class="at">4</span><span class="st">`</span> <span class="sc">&lt;=</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span> <span class="sc">&amp;</span> <span class="st">`</span><span class="at">5</span><span class="st">`</span> <span class="sc">&lt;=</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span> <span class="sc">~</span> <span class="cn">FALSE</span>, <span class="co"># all negative</span></span>
-<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a>          <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="sc">&gt;=</span> <span class="dv">3</span> <span class="sc">&amp;</span> <span class="st">`</span><span class="at">4</span><span class="st">`</span> <span class="sc">&gt;=</span> <span class="dv">3</span> <span class="sc">&amp;</span> <span class="st">`</span><span class="at">5</span><span class="st">`</span> <span class="sc">&gt;=</span> <span class="dv">3</span> <span class="sc">~</span> <span class="cn">FALSE</span>, <span class="co"># all positive</span></span>
-<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a>          <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="sc">&lt;=</span> <span class="dv">3</span> <span class="sc">&amp;</span> <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="sc">&gt;=</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span> <span class="sc">&amp;</span> <span class="st">`</span><span class="at">4</span><span class="st">`</span> <span class="sc">&lt;=</span> <span class="dv">3</span> <span class="sc">&amp;</span> <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="sc">&gt;=</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span> <span class="sc">&amp;</span> <span class="st">`</span><span class="at">4</span><span class="st">`</span> <span class="sc">&lt;=</span> <span class="dv">3</span> <span class="sc">&amp;</span> <span class="st">`</span><span class="at">5</span><span class="st">`</span> <span class="sc">&gt;=</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span> <span class="sc">~</span> <span class="cn">FALSE</span>, <span class="co"># all insensitive</span></span>
-<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a>        <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">TRUE</span></span>
-<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a>      ) <span class="sc">|&gt;</span> </span>
-<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rename</span>(<span class="at">BF_01 =</span> <span class="st">`</span><span class="at">4</span><span class="st">`</span>) <span class="sc">|&gt;</span>  <span class="co"># keep model 4</span></span>
-<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a>      <span class="fu">select</span>(Study, Parameter, BF_01, prior_sensitive) <span class="sc">|&gt;</span> </span>
-<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(</span>
-<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a>        <span class="at">BF_01 =</span> <span class="fu">case_when</span>(</span>
-<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a>          BF_01 <span class="sc">&gt;</span> <span class="dv">1000</span> <span class="sc">~</span> <span class="st">"&gt;1000"</span>,</span>
-<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a>          BF_01 <span class="sc">&lt;</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">1000</span> <span class="sc">~</span> <span class="st">"&lt;0.001"</span>,</span>
-<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a>          <span class="cn">TRUE</span> <span class="sc">~</span> <span class="fu">round_pad</span>(BF_01, <span class="at">digits =</span> <span class="dv">3</span>, <span class="at">nsmall =</span> <span class="dv">2</span>)</span>
-<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a>        ),</span>
-<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a>        <span class="at">Parameter =</span> <span class="fu">case_when</span>(</span>
-<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a>          Parameter <span class="sc">==</span> <span class="st">"Trial Type × Language"</span> <span class="sc">~</span> <span class="st">"Language × Trial Type"</span>,</span>
-<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a>          Parameter <span class="sc">==</span> <span class="st">"Stroop × Trial Type × Language"</span> <span class="sc">~</span> <span class="st">"Stroop × Language × Trial Type"</span>,</span>
-<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a>          <span class="cn">TRUE</span> <span class="sc">~</span> Parameter</span>
-<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a>      ) <span class="sc">|&gt;</span> </span>
-<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate_if</span>(is.numeric, round_pad) </span>
-<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a><span class="co"># fix printing for all values</span></span>
-<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a>bayes_results <span class="ot">&lt;-</span> bayes_results <span class="sc">|&gt;</span> </span>
-<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a>    <span class="fu">map</span>( <span class="sc">~</span> .x <span class="sc">|&gt;</span>  <span class="fu">mutate_if</span>(is.numeric, round_pad))</span>
-<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a><span class="co"># get pairwise tests, fix p-values for printing, round numbers</span></span>
-<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a>pairwise_tests <span class="ot">&lt;-</span> <span class="fu">map_files_to_list</span>(</span>
-<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a>  <span class="fu">here</span>(<span class="st">"04_analysis"</span>, <span class="st">"05_pairwise-tests"</span>),</span>
-<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a>  <span class="at">file_type =</span> <span class="st">".csv"</span></span>
-<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a>) </span>
-<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a>pairwise_tests_plots <span class="ot">&lt;-</span> pairwise_tests</span>
-<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a><span class="co"># fix printing of pairwise tests</span></span>
-<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a>pairwise_tests[<span class="fu">grep</span>(<span class="st">'pairs'</span>, <span class="fu">names</span>(pairwise_tests))] <span class="ot">&lt;-</span> </span>
-<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a>  pairwise_tests[<span class="fu">grep</span>(<span class="st">'pairs'</span>, <span class="fu">names</span>(pairwise_tests))] <span class="sc">|&gt;</span> </span>
-<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a>    <span class="fu">map</span>( </span>
-<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span> .x <span class="sc">|&gt;</span> </span>
-<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rename</span>(<span class="at">p_value =</span> p.value) <span class="sc">|&gt;</span> </span>
-<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">p_value =</span> <span class="fu">papa</span>(p_value, <span class="at">asterisk =</span> <span class="cn">FALSE</span>))</span>
-<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a>pairwise_tests <span class="ot">&lt;-</span> pairwise_tests <span class="sc">|&gt;</span> </span>
-<span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>( <span class="sc">~</span> .x <span class="sc">|&gt;</span> <span class="fu">mutate_if</span>(is.numeric, round_pad))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+``` r
+# load packages ----
+
+library(tidyverse)
+library(here)
+library(gt)
+library(english)
+
+# set options ----
+
+options(scipen = 999)
+
+# functions ----
+
+list.files(here("R", "00_load-functions"), full.names = TRUE) |> 
+  purrr::walk(source)
+
+# process data ----
+
+# data summaries
+performance_exclusions <- read_csv(here("01_data", "01_raw", "performance_exclusions.csv"))
+data_checks <- map_files_to_list(here("04_analysis", "01_data-checks"), file_type = ".csv")
+descriptives <- map_files_to_list(here("04_analysis", "02_descriptives"), file_type = ".csv")
+
+# models and model products
+freq_results <- map_files_to_list(
+  here("04_analysis", "04_model-predictions", "01_frequentist"),
+  file_type = ".csv"
+)
+
+# add indicator of consistent results for ANOVA and mixed models
+freq_results$rt_mixed_freq_table_est <- left_join(
+  freq_results$rt_mixed_freq_table_est,
+  freq_results$rt_anova_freq_table |> 
+  select(Study, Parameter, p_value) |> 
+  rename(p_anova = p_value),
+  by = c("Study", "Parameter")
+) |> 
+  mutate(
+    p_inconsistent = case_when(
+      is.na(p_anova) ~ NA, # not in ANOVA model
+      p_value & p_anova < .05 ~ FALSE, # consistent
+      p_value & p_anova > .05 ~ FALSE, # consistent
+      TRUE ~ TRUE # default, inconsistent
+    )
+  ) |> 
+  select(-p_anova)
+
+freq_results$accuracy_mixed_freq_table_est <- left_join(
+  freq_results$accuracy_mixed_freq_table_est,
+  freq_results$accuracy_anova_freq_table |> 
+  select(Study, Parameter, p_value) |> 
+  rename(p_anova = p_value),
+  by = c("Study", "Parameter")
+) |> 
+  mutate(
+    p_inconsistent = case_when(
+      is.na(p_anova) ~ NA, # not in ANOVA model
+      p_value < .05 & p_anova < .05 ~ FALSE, # consistent
+      p_value > .05 & p_anova > .05 ~ FALSE, # consistent
+      TRUE ~ TRUE # default, inconsistent
+    )
+  ) |> 
+  select(-p_anova)
+
+# make df into a single column for ANOVA tables
+freq_results[c(
+  "accuracy_anova_freq_table", 
+  "rt_anova_freq_table",
+  "rt_mixed_freq_table_anova"
+)] <- freq_results[c(
+  "accuracy_anova_freq_table", 
+  "rt_anova_freq_table",
+  "rt_mixed_freq_table_anova"
+)] |>
+  map( 
+    ~ .x |> 
+      mutate(df = paste0("[", num_df, ", ", round(den_df), "]")) |> 
+      select(-c(num_df, den_df))
+  )
+
+# make df label consistent across all tables
+freq_results["accuracy_mixed_freq_table_anova"] <- 
+  freq_results["accuracy_mixed_freq_table_anova"] |>
+  map( 
+    ~ .x |> 
+      mutate(df = as.character(chi_df)) |> 
+      select(-chi_df)
+  )
+
+# make all parameter names consistent
+# fix printing of p-values for APA formatting
+freq_results <- freq_results |> 
+  map( 
+    ~ .x |> 
+      mutate(p_value = papa(p_value, asterisk = FALSE)) |> 
+      mutate_if(is.numeric, round_pad) |> 
+      mutate( # fix inconsistent ordering
+       Parameter = case_when(
+          Parameter == "(Intercept)" ~ "Intercept",
+          Parameter == "Trial Type × Language" ~ "Language × Trial Type",
+          Parameter == "Stroop × Trial Type × Language" ~ "Stroop × Language × Trial Type",
+          TRUE ~ Parameter
+        )
+      ) |> 
+      arrange( # sort to specific order across data sets
+        Study,
+        Measure,
+        factor(
+          Parameter,
+          levels = c(
+            "Intercept",
+            "Stroop",
+            "Language",
+            "Trial Type",
+            "Stroop × Language",
+            "Stroop × Trial Type",
+            "Language × Trial Type",
+            "Stroop × Language × Trial Type"
+          ))
+      )
+  )
+
+# load bayesian data
+bayes_results <- map_files_to_list(
+  here("04_analysis", "04_model-predictions", "02_bayesian"),
+  file_type = ".csv"
+)
+
+# compute bayes factors in support of the null hypothesis
+# find when bayes factors are inconsistent across models 3-5
+# due to prior sensitivity
+# fix printing of Bayes factors to limit max values
+# fix printing of parameter names for consistency
+bayes_results[grep('bayes-factors', names(bayes_results))] <- 
+  bayes_results[grep('bayes-factors', names(bayes_results))] |> 
+  map(
+    ~ .x |> 
+      mutate(BF = 1/BF) |> # make BF into evidence for null
+      rename(BF_01 = BF) |> # rename to make this clear
+      select(Study, Prior_Model, Parameter, BF_01) |> 
+      pivot_wider(names_from = Prior_Model, values_from = BF_01) |> 
+      mutate(
+        prior_sensitive = case_when(
+          `3` <= 1/3 & `4` <= 1/3 & `5` <= 1/3 ~ FALSE, # all negative
+          `3` >= 3 & `4` >= 3 & `5` >= 3 ~ FALSE, # all positive
+          `3` <= 3 & `3` >= 1/3 & `4` <= 3 & `3` >= 1/3 & `4` <= 3 & `5` >= 1/3 ~ FALSE, # all insensitive
+        TRUE ~ TRUE
+        )
+      ) |> 
+      rename(BF_01 = `4`) |>  # keep model 4
+      select(Study, Parameter, BF_01, prior_sensitive) |> 
+      mutate(
+        BF_01 = case_when(
+          BF_01 > 1000 ~ ">1000",
+          BF_01 < 1/1000 ~ "<0.001",
+          TRUE ~ round_pad(BF_01, digits = 3, nsmall = 2)
+        ),
+        Parameter = case_when(
+          Parameter == "Trial Type × Language" ~ "Language × Trial Type",
+          Parameter == "Stroop × Trial Type × Language" ~ "Stroop × Language × Trial Type",
+          TRUE ~ Parameter
+        )
+      ) |> 
+      mutate_if(is.numeric, round_pad) 
+  )
+
+# fix printing for all values
+bayes_results <- bayes_results |> 
+    map( ~ .x |>  mutate_if(is.numeric, round_pad))
+
+# get pairwise tests, fix p-values for printing, round numbers
+pairwise_tests <- map_files_to_list(
+  here("04_analysis", "05_pairwise-tests"),
+  file_type = ".csv"
+) 
+
+pairwise_tests_plots <- pairwise_tests
+
+# fix printing of pairwise tests
+pairwise_tests[grep('pairs', names(pairwise_tests))] <- 
+  pairwise_tests[grep('pairs', names(pairwise_tests))] |> 
+    map( 
+    ~ .x |> 
+      rename(p_value = p.value) |> 
+      mutate(p_value = papa(p_value, asterisk = FALSE))
+  )
+
+pairwise_tests <- pairwise_tests |> 
+  map( ~ .x |> mutate_if(is.numeric, round_pad))
+```
+
 </details>
-</div>
-<section id="experiment-1" class="level1">
-<h1>Experiment 1</h1>
-<section id="participants" class="level2">
-<h2 class="anchored" data-anchor-id="participants">Participants</h2>
-<p>Forty-eight Dutch-English bilinguals were recruited. One participant was excluded due to a recording failure and 1 participant was removed due to being under-age, leaving 46 (33 female, 13 male) participants with a mean age of 23.348 (<em>SD</em> = 5.61). Following the experiment, participants were asked to complete a language background questionnaire <span class="citation" data-cites="kirk2018can">(cf. <a href="#ref-kirk2018can" role="doc-biblioref">Kirk et al., 2018</a>)</span>, and English and Dutch vocabulary tests based on lexical decision tasks <span class="citation" data-cites="lemhofer2012introducing">(i.e., LexTale, <a href="#ref-lemhofer2012introducing" role="doc-biblioref">Lemhöfer &amp; Broersma, 2012</a>, see <a href="#tbl-dutch-demo" role="doc-biblioref">Table&nbsp;1</a>)</span>.</p>
-<div class="cell">
+
+# Experiment 1
+
+## Participants
+
+Forty-eight Dutch-English bilinguals were recruited. One participant was
+excluded due to a recording failure and 1 participant was removed due to
+being under-age, leaving 46 (33 female, 13 male) participants with a
+mean age of 23.348 (*SD* = 5.61). Following the experiment, participants
+were asked to complete a language background questionnaire (cf. Kirk et
+al., 2018), and English and Dutch vocabulary tests based on lexical
+decision tasks (i.e., LexTale, Lemhöfer & Broersma, 2012, see
+**?@tbl-dutch-demo**).
+
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>descriptives<span class="sc">$</span>demo_summary <span class="sc">|&gt;</span> </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    study <span class="sc">==</span> <span class="st">"dutch_stroop"</span>, </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(parameter, <span class="st">"current_percent|lex_tale"</span>), </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    statistic <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"mean"</span>, <span class="st">"sd"</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> statistic, <span class="at">values_from =</span> value) <span class="sc">|&gt;</span> </span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.numeric, round_pad) <span class="sc">|&gt;</span> </span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">Parameter =</span> <span class="fu">case_when</span>(</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>      parameter <span class="sc">==</span> <span class="st">"current_percent_english"</span> <span class="sc">~</span> <span class="st">"English Current Use"</span>,</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>      parameter <span class="sc">==</span> <span class="st">"current_percent_english_pair"</span> <span class="sc">~</span> <span class="st">"Dutch Current Use"</span>,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>      parameter <span class="sc">==</span> <span class="st">"lex_tale_english"</span> <span class="sc">~</span> <span class="st">"English LexTale"</span>,</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>      parameter <span class="sc">==</span> <span class="st">"lex_tale_english_pair"</span> <span class="sc">~</span> <span class="st">"Dutch LexTale"</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">Score =</span> <span class="fu">paste0</span>(mean, <span class="st">" ("</span>, sd, <span class="st">")"</span>)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Parameter, Score) <span class="sc">|&gt;</span> </span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">apa_gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div id="tbl-dutch-demo" class="anchored">
 
-<div id="mkesouprtj" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+``` r
+descriptives$demo_summary |> 
+  filter(
+    study == "dutch_stroop", 
+    str_detect(parameter, "current_percent|lex_tale"), 
+    statistic %in% c("mean", "sd")
+  ) |> 
+  pivot_wider(names_from = statistic, values_from = value) |> 
+  mutate_if(is.numeric, round_pad) |> 
+  mutate(
+    Parameter = case_when(
+      parameter == "current_percent_english" ~ "English Current Use",
+      parameter == "current_percent_english_pair" ~ "Dutch Current Use",
+      parameter == "lex_tale_english" ~ "English LexTale",
+      parameter == "lex_tale_english_pair" ~ "Dutch LexTale"
+    ),
+    Score = paste0(mean, " (", sd, ")")
+  ) |> 
+  select(Parameter, Score) |> 
+  apa_gt()
+```
+
+</details>
+<div id="ntmaaylhbp" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#mkesouprtj) .gt_table {
+#ntmaaylhbp .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -453,7 +299,7 @@ div.csl-indent {
   border-left-color: #D3D3D3;
 }
 
-:where(#mkesouprtj) .gt_heading {
+#ntmaaylhbp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -465,7 +311,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#mkesouprtj) .gt_title {
+#ntmaaylhbp .gt_title {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -477,7 +323,7 @@ div.csl-indent {
   border-bottom-width: 0;
 }
 
-:where(#mkesouprtj) .gt_subtitle {
+#ntmaaylhbp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -489,13 +335,13 @@ div.csl-indent {
   border-top-width: 0;
 }
 
-:where(#mkesouprtj) .gt_bottom_border {
+#ntmaaylhbp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#mkesouprtj) .gt_col_headings {
+#ntmaaylhbp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 3px;
   border-top-color: #000000;
@@ -510,7 +356,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#mkesouprtj) .gt_col_heading {
+#ntmaaylhbp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -530,7 +376,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-:where(#mkesouprtj) .gt_column_spanner_outer {
+#ntmaaylhbp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -542,15 +388,15 @@ div.csl-indent {
   padding-right: 4px;
 }
 
-:where(#mkesouprtj) .gt_column_spanner_outer:first-child {
+#ntmaaylhbp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#mkesouprtj) .gt_column_spanner_outer:last-child {
+#ntmaaylhbp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#mkesouprtj) .gt_column_spanner {
+#ntmaaylhbp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 3px;
   border-bottom-color: #000000;
@@ -562,7 +408,7 @@ div.csl-indent {
   width: 100%;
 }
 
-:where(#mkesouprtj) .gt_group_heading {
+#ntmaaylhbp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -587,7 +433,7 @@ div.csl-indent {
   vertical-align: middle;
 }
 
-:where(#mkesouprtj) .gt_empty_group_heading {
+#ntmaaylhbp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -602,15 +448,15 @@ div.csl-indent {
   vertical-align: middle;
 }
 
-:where(#mkesouprtj) .gt_from_md > :first-child {
+#ntmaaylhbp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#mkesouprtj) .gt_from_md > :last-child {
+#ntmaaylhbp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#mkesouprtj) .gt_row {
+#ntmaaylhbp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -629,7 +475,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-:where(#mkesouprtj) .gt_stub {
+#ntmaaylhbp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -642,7 +488,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#mkesouprtj) .gt_stub_row_group {
+#ntmaaylhbp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -656,11 +502,11 @@ div.csl-indent {
   vertical-align: top;
 }
 
-:where(#mkesouprtj) .gt_row_group_first td {
+#ntmaaylhbp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#mkesouprtj) .gt_summary_row {
+#ntmaaylhbp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -670,16 +516,16 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#mkesouprtj) .gt_first_summary_row {
+#ntmaaylhbp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#mkesouprtj) .gt_first_summary_row.thick {
+#ntmaaylhbp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#mkesouprtj) .gt_last_summary_row {
+#ntmaaylhbp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -689,7 +535,7 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-:where(#mkesouprtj) .gt_grand_summary_row {
+#ntmaaylhbp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -699,7 +545,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#mkesouprtj) .gt_first_grand_summary_row {
+#ntmaaylhbp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -709,11 +555,11 @@ div.csl-indent {
   border-top-color: #D3D3D3;
 }
 
-:where(#mkesouprtj) .gt_striped {
+#ntmaaylhbp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#mkesouprtj) .gt_table_body {
+#ntmaaylhbp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -722,7 +568,7 @@ div.csl-indent {
   border-bottom-color: #000000;
 }
 
-:where(#mkesouprtj) .gt_footnotes {
+#ntmaaylhbp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -736,7 +582,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#mkesouprtj) .gt_footnote {
+#ntmaaylhbp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -745,7 +591,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#mkesouprtj) .gt_sourcenotes {
+#ntmaaylhbp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -759,7 +605,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#mkesouprtj) .gt_sourcenote {
+#ntmaaylhbp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -767,68 +613,68 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#mkesouprtj) .gt_left {
+#ntmaaylhbp .gt_left {
   text-align: left;
 }
 
-:where(#mkesouprtj) .gt_center {
+#ntmaaylhbp .gt_center {
   text-align: center;
 }
 
-:where(#mkesouprtj) .gt_right {
+#ntmaaylhbp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#mkesouprtj) .gt_font_normal {
+#ntmaaylhbp .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#mkesouprtj) .gt_font_bold {
+#ntmaaylhbp .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#mkesouprtj) .gt_font_italic {
+#ntmaaylhbp .gt_font_italic {
   font-style: italic;
 }
 
-:where(#mkesouprtj) .gt_super {
+#ntmaaylhbp .gt_super {
   font-size: 65%;
 }
 
-:where(#mkesouprtj) .gt_footnote_marks {
+#ntmaaylhbp .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#mkesouprtj) .gt_asterisk {
+#ntmaaylhbp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#mkesouprtj) .gt_indent_1 {
+#ntmaaylhbp .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#mkesouprtj) .gt_indent_2 {
+#ntmaaylhbp .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#mkesouprtj) .gt_indent_3 {
+#ntmaaylhbp .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#mkesouprtj) .gt_indent_4 {
+#ntmaaylhbp .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#mkesouprtj) .gt_indent_5 {
+#ntmaaylhbp .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
-<table class="gt_table"><caption>Table&nbsp;1:  Mean percentages (SD) for language use and proficiency for each language for participants in Experiment 1 </caption>
+<table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
@@ -850,39 +696,88 @@ div.csl-indent {
   
 </table>
 </div>
-</div>
-</div>
-</div>
-</section>
-<section id="analysis" class="level2">
-<h2 class="anchored" data-anchor-id="analysis">Analysis</h2>
-<p>We used R <span class="citation" data-cites="R-base">(<a href="#ref-R-base" role="doc-biblioref">R Core Team, 2022</a>)</span> and the R-packages tidyverse <span class="citation" data-cites="tidyverse">(<a href="#ref-tidyverse" role="doc-biblioref">Wickham et al., 2019</a>)</span>, here <span class="citation" data-cites="here">(<a href="#ref-here" role="doc-biblioref">Müller, 2020</a>)</span>, and bayesplot <span class="citation" data-cites="bayesplot-a bayesplot-b">(<a href="#ref-bayesplot-b" role="doc-biblioref">Gabry et al., 2019</a>; <a href="#ref-bayesplot-a" role="doc-biblioref">Gabry &amp; Mahr, 2022</a>)</span> for data preparation, analysis, and presentation. A</p>
-<p>For accuracy and reaction time analyses, the first trial in each block and “recovery” trials following an error were excluded from the analyses. For reaction time analyses only, reaction times under 150ms, or reaction times over 2500ms or more than three standard deviations above the participant mean were discarded as outliers. Taking these criteria into account, a total of 9.95% and 24.09% of trials were excluded from the accuracy and reaction time analyses respectively.</p>
-<p>For each study we performed separate frequentist and Bayesian analyses for both the accuracy and response time dependent variables. For the frequentist analyses, we modelled the data with linear mixed effects models fitted using the lme4 R-package <span class="citation" data-cites="lme4">(<a href="#ref-lme4" role="doc-biblioref">Bates et al., 2015</a>)</span>. We used the afex R-package <span class="citation" data-cites="afex">(<a href="#ref-afex" role="doc-biblioref">Singmann et al., 2022</a>)</span> to fit models with nested fixed effects, evaluating the statistical significance of main effects and interactions using likelihood-ratio tests. For the parameter estimates of each model, statistical significance is evaluated using <em>p</em>-values approximated using the Satterthwaite method implemented in the lmerTest R-package <span class="citation" data-cites="lmerTest">(<a href="#ref-lmerTest" role="doc-biblioref">Kuznetsova et al., 2017</a>)</span>. Significant interactions were further investigated using estimated marginal means and pairwise tests calculated using the emmeans R-package <span class="citation" data-cites="emmeans">(<a href="#ref-emmeans" role="doc-biblioref">Lenth, 2022</a>)</span>. We fitted Bayesian equivalents to the frequentist multilevel models using the brms R-package <span class="citation" data-cites="brms-a brms-b">(<a href="#ref-brms-a" role="doc-biblioref">Bürkner, 2017</a>, <a href="#ref-brms-b" role="doc-biblioref">2018</a>)</span>. Bayes Factors were calculated using the Savage-Dickey approximation using the bayestestR R-package <span class="citation" data-cites="bayestestR">(<a href="#ref-bayestestR" role="doc-biblioref">Makowski et al., 2019</a>)</span>.</p>
-<p>Given the lower bound and skewed nature of response times, this outcome was modelled using linear mixed effects models assuming a log-normal distribution<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Given accuracy scores are binary, this outcome were modelled using generalised linear mixed effects models assuming a binomial distribution with a logit link function.</p>
-<p>All models used sum-coded (-1, 1) fixed effects of Stroop Block (Neutral or Incongruent), Trial Type (Repetition or Switch), and Language (English or Dutch). Models contained crossed random effects of participants and items, using the maximal random effects structure justified by the design that allows for model convergence <span class="citation" data-cites="barr2013random">(<a href="#ref-barr2013random" role="doc-biblioref">Barr et al., 2013</a>)</span>. One advantage of Bayesian analyses is that with relatively informative priors the maximal random effects structure can be fitted without convergence problems <span class="citation" data-cites="vasishth2016statistical nicenboim2016statistical">(<a href="#ref-nicenboim2016statistical" role="doc-biblioref">Nicenboim &amp; Vasishth, 2016</a>; <a href="#ref-vasishth2016statistical" role="doc-biblioref">Vasishth &amp; Nicenboim, 2016</a>)</span>, meaning that no simplification to random effects was needed. For a description of the random effects in each frequentist model, see Appendix A. For a description of priors in each Bayesian model and how these affect parameter estimates and Bayes factors, see Appendix B. Finally, while the mixed effects models form the basis of our conclusions, for direct comparison to Liu et al. <span class="citation" data-cites="liu2019symmetries">(<a href="#ref-liu2019symmetries" role="doc-biblioref">2019</a>)</span>, we also analysed the data aggregated by participant using ANOVAs. Unless otherwise stated, Bayes factors are consistent across different prior specifications from the prior sensitivity analysis. Similarly, unless otherwise stated <em>p</em>-values are consistent across across mixed-effects models and by-participants ANOVAs.</p>
-<section id="response-time" class="level3">
-<h3 class="anchored" data-anchor-id="response-time">Response Time</h3>
-<p>Fixed effects parameter estimates for response time models are shown in <a href="#tbl-param-dutch-rt">Table&nbsp;2</a>.</p>
-<div class="cell">
+
+## Analysis
+
+We used R (R Core Team, 2022) and the R-packages tidyverse (Wickham et
+al., 2019), here (Müller, 2020), and bayesplot (Gabry et al., 2019;
+Gabry & Mahr, 2022) for data preparation, analysis, and presentation. A
+
+For accuracy and reaction time analyses, the first trial in each block
+and “recovery” trials following an error were excluded from the
+analyses. For reaction time analyses only, reaction times under 150ms,
+or reaction times over 2500ms or more than three standard deviations
+above the participant mean were discarded as outliers. Taking these
+criteria into account, a total of 9.95% and 24.09% of trials were
+excluded from the accuracy and reaction time analyses respectively.
+
+For each study we performed separate frequentist and Bayesian analyses
+for both the accuracy and response time dependent variables. For the
+frequentist analyses, we modelled the data with linear mixed effects
+models fitted using the lme4 R-package (Bates et al., 2015). We used the
+afex R-package (Singmann et al., 2022) to fit models with nested fixed
+effects, evaluating the statistical significance of main effects and
+interactions using likelihood-ratio tests. For the parameter estimates
+of each model, statistical significance is evaluated using *p*-values
+approximated using the Satterthwaite method implemented in the lmerTest
+R-package (Kuznetsova et al., 2017). Significant interactions were
+further investigated using estimated marginal means and pairwise tests
+calculated using the emmeans R-package (Lenth, 2022). We fitted Bayesian
+equivalents to the frequentist multilevel models using the brms
+R-package (Bürkner, 2017, 2018). Bayes Factors were calculated using the
+Savage-Dickey approximation using the bayestestR R-package (Makowski et
+al., 2019).
+
+Given the lower bound and skewed nature of response times, this outcome
+was modelled using linear mixed effects models assuming a log-normal
+distribution[^1]. Given accuracy scores are binary, this outcome were
+modelled using generalised linear mixed effects models assuming a
+binomial distribution with a logit link function.
+
+All models used sum-coded (-1, 1) fixed effects of Stroop Block (Neutral
+or Incongruent), Trial Type (Repetition or Switch), and Language
+(English or Dutch). Models contained crossed random effects of
+participants and items, using the maximal random effects structure
+justified by the design that allows for model convergence (Barr et al.,
+2013). One advantage of Bayesian analyses is that with relatively
+informative priors the maximal random effects structure can be fitted
+without convergence problems (Nicenboim & Vasishth, 2016; Vasishth &
+Nicenboim, 2016), meaning that no simplification to random effects was
+needed. For a description of the random effects in each frequentist
+model, see Appendix A. For a description of priors in each Bayesian
+model and how these affect parameter estimates and Bayes factors, see
+Appendix B. Finally, while the mixed effects models form the basis of
+our conclusions, for direct comparison to Liu et al. (2019), we also
+analysed the data aggregated by participant using ANOVAs. Unless
+otherwise stated, Bayes factors are consistent across different prior
+specifications from the prior sensitivity analysis. Similarly, unless
+otherwise stated *p*-values are consistent across across mixed-effects
+models and by-participants ANOVAs.
+
+### Response Time
+
+Fixed effects parameter estimates for response time models are shown in
+**?@tbl-param-dutch-rt**.
+
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_parameters_rt</span>(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  freq_results<span class="sc">$</span>rt_mixed_freq_table_est,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  bayes_results<span class="sc">$</span><span class="st">`</span><span class="at">rt_bayes-factors</span><span class="st">`</span>,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Dutch"</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> </span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">parameters_rt_gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div id="tbl-param-dutch-rt" class="anchored">
 
-<div id="vpchwxzdbq" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+``` r
+bind_parameters_rt(
+  freq_results$rt_mixed_freq_table_est,
+  bayes_results$`rt_bayes-factors`,
+  "Dutch"
+) |> 
+  parameters_rt_gt()
+```
+
+</details>
+<div id="pwwtskfyxi" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#vpchwxzdbq) .gt_table {
+#pwwtskfyxi .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -907,7 +802,7 @@ div.csl-indent {
   border-left-color: #D3D3D3;
 }
 
-:where(#vpchwxzdbq) .gt_heading {
+#pwwtskfyxi .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -919,7 +814,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#vpchwxzdbq) .gt_title {
+#pwwtskfyxi .gt_title {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -931,7 +826,7 @@ div.csl-indent {
   border-bottom-width: 0;
 }
 
-:where(#vpchwxzdbq) .gt_subtitle {
+#pwwtskfyxi .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -943,13 +838,13 @@ div.csl-indent {
   border-top-width: 0;
 }
 
-:where(#vpchwxzdbq) .gt_bottom_border {
+#pwwtskfyxi .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#vpchwxzdbq) .gt_col_headings {
+#pwwtskfyxi .gt_col_headings {
   border-top-style: solid;
   border-top-width: 3px;
   border-top-color: #000000;
@@ -964,7 +859,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#vpchwxzdbq) .gt_col_heading {
+#pwwtskfyxi .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -984,7 +879,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-:where(#vpchwxzdbq) .gt_column_spanner_outer {
+#pwwtskfyxi .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -996,15 +891,15 @@ div.csl-indent {
   padding-right: 4px;
 }
 
-:where(#vpchwxzdbq) .gt_column_spanner_outer:first-child {
+#pwwtskfyxi .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#vpchwxzdbq) .gt_column_spanner_outer:last-child {
+#pwwtskfyxi .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#vpchwxzdbq) .gt_column_spanner {
+#pwwtskfyxi .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 3px;
   border-bottom-color: #000000;
@@ -1016,7 +911,7 @@ div.csl-indent {
   width: 100%;
 }
 
-:where(#vpchwxzdbq) .gt_group_heading {
+#pwwtskfyxi .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1041,7 +936,7 @@ div.csl-indent {
   vertical-align: middle;
 }
 
-:where(#vpchwxzdbq) .gt_empty_group_heading {
+#pwwtskfyxi .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1056,15 +951,15 @@ div.csl-indent {
   vertical-align: middle;
 }
 
-:where(#vpchwxzdbq) .gt_from_md > :first-child {
+#pwwtskfyxi .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#vpchwxzdbq) .gt_from_md > :last-child {
+#pwwtskfyxi .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#vpchwxzdbq) .gt_row {
+#pwwtskfyxi .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1083,7 +978,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-:where(#vpchwxzdbq) .gt_stub {
+#pwwtskfyxi .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1096,7 +991,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#vpchwxzdbq) .gt_stub_row_group {
+#pwwtskfyxi .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1110,11 +1005,11 @@ div.csl-indent {
   vertical-align: top;
 }
 
-:where(#vpchwxzdbq) .gt_row_group_first td {
+#pwwtskfyxi .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#vpchwxzdbq) .gt_summary_row {
+#pwwtskfyxi .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1124,16 +1019,16 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#vpchwxzdbq) .gt_first_summary_row {
+#pwwtskfyxi .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#vpchwxzdbq) .gt_first_summary_row.thick {
+#pwwtskfyxi .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#vpchwxzdbq) .gt_last_summary_row {
+#pwwtskfyxi .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1143,7 +1038,7 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-:where(#vpchwxzdbq) .gt_grand_summary_row {
+#pwwtskfyxi .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1153,7 +1048,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#vpchwxzdbq) .gt_first_grand_summary_row {
+#pwwtskfyxi .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1163,11 +1058,11 @@ div.csl-indent {
   border-top-color: #D3D3D3;
 }
 
-:where(#vpchwxzdbq) .gt_striped {
+#pwwtskfyxi .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#vpchwxzdbq) .gt_table_body {
+#pwwtskfyxi .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1176,7 +1071,7 @@ div.csl-indent {
   border-bottom-color: #000000;
 }
 
-:where(#vpchwxzdbq) .gt_footnotes {
+#pwwtskfyxi .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1190,7 +1085,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#vpchwxzdbq) .gt_footnote {
+#pwwtskfyxi .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -1199,7 +1094,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#vpchwxzdbq) .gt_sourcenotes {
+#pwwtskfyxi .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1213,7 +1108,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#vpchwxzdbq) .gt_sourcenote {
+#pwwtskfyxi .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1221,73 +1116,73 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#vpchwxzdbq) .gt_left {
+#pwwtskfyxi .gt_left {
   text-align: left;
 }
 
-:where(#vpchwxzdbq) .gt_center {
+#pwwtskfyxi .gt_center {
   text-align: center;
 }
 
-:where(#vpchwxzdbq) .gt_right {
+#pwwtskfyxi .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#vpchwxzdbq) .gt_font_normal {
+#pwwtskfyxi .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#vpchwxzdbq) .gt_font_bold {
+#pwwtskfyxi .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#vpchwxzdbq) .gt_font_italic {
+#pwwtskfyxi .gt_font_italic {
   font-style: italic;
 }
 
-:where(#vpchwxzdbq) .gt_super {
+#pwwtskfyxi .gt_super {
   font-size: 65%;
 }
 
-:where(#vpchwxzdbq) .gt_footnote_marks {
+#pwwtskfyxi .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#vpchwxzdbq) .gt_asterisk {
+#pwwtskfyxi .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#vpchwxzdbq) .gt_indent_1 {
+#pwwtskfyxi .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#vpchwxzdbq) .gt_indent_2 {
+#pwwtskfyxi .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#vpchwxzdbq) .gt_indent_3 {
+#pwwtskfyxi .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#vpchwxzdbq) .gt_indent_4 {
+#pwwtskfyxi .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#vpchwxzdbq) .gt_indent_5 {
+#pwwtskfyxi .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
-<table class="gt_table"><caption>Table&nbsp;2:  Fixed effects parameter estimates and test statistics for response time in Experiment 1 </caption>
+<table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">Parameter</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">β</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">&beta;</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><em>SE</em></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><em>t</em></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">df</th>
@@ -1361,33 +1256,42 @@ div.csl-indent {
   </tfoot>
 </table>
 </div>
-</div>
-</div>
-</div>
-<p>There was a significant main effect of Stroop Block with faster response times in the Neutral condition (M = 1120.28, <em>SE</em> = 28.84, 95% CI = [1064.17, 1179.36]) than the Incongruent condition (M = 1251.53, <em>SE</em> = 34.74, 95% CI = [1184.09, 1322.81]). There was also a significant main effect of Trial Type, with faster response times for Repetition (M = 1158.31, <em>SE</em> = 27.39, 95% CI = [1104.84, 1214.37]) than for Switch trials (M = 1210.45, <em>SE</em> = 30.84, 95% CI = [1150.34, 1273.69]). All other effects were non-significant, with Bayes factors &gt; 3, indicating the data are at least 3 times more likely under the null model than the alternative model.</p>
-</section>
-<section id="accuracy" class="level3">
-<h3 class="anchored" data-anchor-id="accuracy">Accuracy</h3>
-<p>Fixed effects parameter estimates for accuracy models are shown in <a href="#tbl-param-dutch-accuracy">Table&nbsp;3</a>.</p>
-<div class="cell">
+
+There was a significant main effect of Stroop Block with faster response
+times in the Neutral condition (M = 1120.28, *SE* = 28.84, 95% CI =
+\[1064.17, 1179.36\]) than the Incongruent condition (M = 1251.53, *SE*
+= 34.74, 95% CI = \[1184.09, 1322.81\]). There was also a significant
+main effect of Trial Type, with faster response times for Repetition (M
+= 1158.31, *SE* = 27.39, 95% CI = \[1104.84, 1214.37\]) than for Switch
+trials (M = 1210.45, *SE* = 30.84, 95% CI = \[1150.34, 1273.69\]). All
+other effects were non-significant, with Bayes factors \> 3, indicating
+the data are at least 3 times more likely under the null model than the
+alternative model.
+
+### Accuracy
+
+Fixed effects parameter estimates for accuracy models are shown in
+**?@tbl-param-dutch-accuracy**.
+
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_parameters_accuracy</span>(</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  freq_results<span class="sc">$</span>accuracy_mixed_freq_table_est,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  bayes_results<span class="sc">$</span><span class="st">`</span><span class="at">accuracy_bayes-factors</span><span class="st">`</span>,</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Dutch"</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">parameters_accuracy_gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div id="tbl-param-dutch-accuracy" class="anchored">
 
-<div id="oldoisgbpg" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+``` r
+bind_parameters_accuracy(
+  freq_results$accuracy_mixed_freq_table_est,
+  bayes_results$`accuracy_bayes-factors`,
+  "Dutch"
+) |>
+  parameters_accuracy_gt()
+```
+
+</details>
+<div id="nynffnahex" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#oldoisgbpg) .gt_table {
+#nynffnahex .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1412,7 +1316,7 @@ div.csl-indent {
   border-left-color: #D3D3D3;
 }
 
-:where(#oldoisgbpg) .gt_heading {
+#nynffnahex .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1424,7 +1328,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#oldoisgbpg) .gt_title {
+#nynffnahex .gt_title {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -1436,7 +1340,7 @@ div.csl-indent {
   border-bottom-width: 0;
 }
 
-:where(#oldoisgbpg) .gt_subtitle {
+#nynffnahex .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1448,13 +1352,13 @@ div.csl-indent {
   border-top-width: 0;
 }
 
-:where(#oldoisgbpg) .gt_bottom_border {
+#nynffnahex .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#oldoisgbpg) .gt_col_headings {
+#nynffnahex .gt_col_headings {
   border-top-style: solid;
   border-top-width: 3px;
   border-top-color: #000000;
@@ -1469,7 +1373,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#oldoisgbpg) .gt_col_heading {
+#nynffnahex .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1489,7 +1393,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-:where(#oldoisgbpg) .gt_column_spanner_outer {
+#nynffnahex .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1501,15 +1405,15 @@ div.csl-indent {
   padding-right: 4px;
 }
 
-:where(#oldoisgbpg) .gt_column_spanner_outer:first-child {
+#nynffnahex .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#oldoisgbpg) .gt_column_spanner_outer:last-child {
+#nynffnahex .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#oldoisgbpg) .gt_column_spanner {
+#nynffnahex .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 3px;
   border-bottom-color: #000000;
@@ -1521,7 +1425,7 @@ div.csl-indent {
   width: 100%;
 }
 
-:where(#oldoisgbpg) .gt_group_heading {
+#nynffnahex .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1546,7 +1450,7 @@ div.csl-indent {
   vertical-align: middle;
 }
 
-:where(#oldoisgbpg) .gt_empty_group_heading {
+#nynffnahex .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1561,15 +1465,15 @@ div.csl-indent {
   vertical-align: middle;
 }
 
-:where(#oldoisgbpg) .gt_from_md > :first-child {
+#nynffnahex .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#oldoisgbpg) .gt_from_md > :last-child {
+#nynffnahex .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#oldoisgbpg) .gt_row {
+#nynffnahex .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1588,7 +1492,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-:where(#oldoisgbpg) .gt_stub {
+#nynffnahex .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1601,7 +1505,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#oldoisgbpg) .gt_stub_row_group {
+#nynffnahex .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1615,11 +1519,11 @@ div.csl-indent {
   vertical-align: top;
 }
 
-:where(#oldoisgbpg) .gt_row_group_first td {
+#nynffnahex .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#oldoisgbpg) .gt_summary_row {
+#nynffnahex .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1629,16 +1533,16 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#oldoisgbpg) .gt_first_summary_row {
+#nynffnahex .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#oldoisgbpg) .gt_first_summary_row.thick {
+#nynffnahex .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#oldoisgbpg) .gt_last_summary_row {
+#nynffnahex .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1648,7 +1552,7 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-:where(#oldoisgbpg) .gt_grand_summary_row {
+#nynffnahex .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1658,7 +1562,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#oldoisgbpg) .gt_first_grand_summary_row {
+#nynffnahex .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1668,11 +1572,11 @@ div.csl-indent {
   border-top-color: #D3D3D3;
 }
 
-:where(#oldoisgbpg) .gt_striped {
+#nynffnahex .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#oldoisgbpg) .gt_table_body {
+#nynffnahex .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1681,7 +1585,7 @@ div.csl-indent {
   border-bottom-color: #000000;
 }
 
-:where(#oldoisgbpg) .gt_footnotes {
+#nynffnahex .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1695,7 +1599,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#oldoisgbpg) .gt_footnote {
+#nynffnahex .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -1704,7 +1608,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#oldoisgbpg) .gt_sourcenotes {
+#nynffnahex .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1718,7 +1622,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#oldoisgbpg) .gt_sourcenote {
+#nynffnahex .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1726,73 +1630,73 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#oldoisgbpg) .gt_left {
+#nynffnahex .gt_left {
   text-align: left;
 }
 
-:where(#oldoisgbpg) .gt_center {
+#nynffnahex .gt_center {
   text-align: center;
 }
 
-:where(#oldoisgbpg) .gt_right {
+#nynffnahex .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#oldoisgbpg) .gt_font_normal {
+#nynffnahex .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#oldoisgbpg) .gt_font_bold {
+#nynffnahex .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#oldoisgbpg) .gt_font_italic {
+#nynffnahex .gt_font_italic {
   font-style: italic;
 }
 
-:where(#oldoisgbpg) .gt_super {
+#nynffnahex .gt_super {
   font-size: 65%;
 }
 
-:where(#oldoisgbpg) .gt_footnote_marks {
+#nynffnahex .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#oldoisgbpg) .gt_asterisk {
+#nynffnahex .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#oldoisgbpg) .gt_indent_1 {
+#nynffnahex .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#oldoisgbpg) .gt_indent_2 {
+#nynffnahex .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#oldoisgbpg) .gt_indent_3 {
+#nynffnahex .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#oldoisgbpg) .gt_indent_4 {
+#nynffnahex .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#oldoisgbpg) .gt_indent_5 {
+#nynffnahex .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
-<table class="gt_table"><caption>Table&nbsp;3:  Fixed effects parameter estimates and test statistics for accuracy in Experiment 1 </caption>
+<table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">Parameter</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">β</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">&beta;</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><em>SE</em></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><em>z</em></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><em>p</em></th>
@@ -1860,50 +1764,65 @@ div.csl-indent {
   </tfoot>
 </table>
 </div>
-</div>
-</div>
-</div>
-<p>There was a significant main effect of Stroop Block with a larger proportion of correct answers in the Neutral condition (M = 0.96, <em>SE</em> = 0.01, 95% CI = [0.94, 0.97]) than the Incongruent condition (M = 0.93, <em>SE</em> = 0.01, 95% CI = [0.90, 0.95]). There was also a significant main effect of Trial Type, with a larger proportion of correct answers for Repetition (M = 0.95, <em>SE</em> = 0.01, 95% CI = [0.94, 0.97]) than for Switch trials (M = 0.94, <em>SE</em> = 0.01, 95% CI = [0.91, 0.95]). All other effects were non-significant. Of these, only the Language × Trial Type interaction provided reliable evidence in support of the null hypothesis that was insensitive to prior specification. Crucially, while the main effect of Language is non-significant in the mixed effects model, this effect is significant in the by-subjects ANOVA, likely indicating that by-subject ANOVAs underestimate by-item variance and thus suffer from an inflated type-I error rate.</p>
-</section>
-</section>
-</section>
-<section id="experiment-2" class="level1">
-<h1>Experiment 2</h1>
-<section id="participants-1" class="level2">
-<h2 class="anchored" data-anchor-id="participants-1">Participants</h2>
-<p>Fifty Arabic-English bilinguals were recruited. Two participant was excluded due to a recording failure, leaving 45 (27 female, 17 male, 1 non-binary) participants with a mean age of 24.318 (<em>SD</em> = 4.296)). Following the experiment, participants were asked to complete a the same language background questionnaire and English and Chinese vocabulary tests based on lexical decision tasks as in Experiment 1.</p>
-<div class="cell">
+
+There was a significant main effect of Stroop Block with a larger
+proportion of correct answers in the Neutral condition (M = 0.96, *SE* =
+0.01, 95% CI = \[0.94, 0.97\]) than the Incongruent condition (M = 0.93,
+*SE* = 0.01, 95% CI = \[0.90, 0.95\]). There was also a significant main
+effect of Trial Type, with a larger proportion of correct answers for
+Repetition (M = 0.95, *SE* = 0.01, 95% CI = \[0.94, 0.97\]) than for
+Switch trials (M = 0.94, *SE* = 0.01, 95% CI = \[0.91, 0.95\]). All
+other effects were non-significant. Of these, only the Language × Trial
+Type interaction provided reliable evidence in support of the null
+hypothesis that was insensitive to prior specification. Crucially, while
+the main effect of Language is non-significant in the mixed effects
+model, this effect is significant in the by-subjects ANOVA, likely
+indicating that by-subject ANOVAs underestimate by-item variance and
+thus suffer from an inflated type-I error rate.
+
+# Experiment 2
+
+## Participants
+
+Fifty Arabic-English bilinguals were recruited. Two participant was
+excluded due to a recording failure, leaving 45 (27 female, 17 male, 1
+non-binary) participants with a mean age of 24.318 (*SD* = 4.296)).
+Following the experiment, participants were asked to complete a the same
+language background questionnaire and English and Chinese vocabulary
+tests based on lexical decision tasks as in Experiment 1.
+
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>descriptives<span class="sc">$</span>demo_summary <span class="sc">|&gt;</span> </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    study <span class="sc">==</span> <span class="st">"arabic_stroop"</span>, </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(parameter, <span class="st">"current_percent|lex_tale"</span>), </span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    statistic <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"mean"</span>, <span class="st">"sd"</span>)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> statistic, <span class="at">values_from =</span> value) <span class="sc">|&gt;</span> </span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.numeric, round_pad) <span class="sc">|&gt;</span> </span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">Parameter =</span> <span class="fu">case_when</span>(</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>      parameter <span class="sc">==</span> <span class="st">"current_percent_english"</span> <span class="sc">~</span> <span class="st">"English Current Use"</span>,</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>      parameter <span class="sc">==</span> <span class="st">"current_percent_english_pair"</span> <span class="sc">~</span> <span class="st">"Arabic Current Use"</span>,</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>      parameter <span class="sc">==</span> <span class="st">"lex_tale_english"</span> <span class="sc">~</span> <span class="st">"English LexTale"</span>,</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>      parameter <span class="sc">==</span> <span class="st">"lex_tale_english_pair"</span> <span class="sc">~</span> <span class="st">"Arabic LexTale"</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">Score =</span> <span class="fu">paste0</span>(mean, <span class="st">" ("</span>, sd, <span class="st">")"</span>)</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Parameter, Score) <span class="sc">|&gt;</span> </span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">apa_gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div id="tbl-arabic-demo" class="anchored">
 
-<div id="gyqkkhxnok" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+``` r
+descriptives$demo_summary |> 
+  filter(
+    study == "arabic_stroop", 
+    str_detect(parameter, "current_percent|lex_tale"), 
+    statistic %in% c("mean", "sd")
+  ) |> 
+  pivot_wider(names_from = statistic, values_from = value) |> 
+  mutate_if(is.numeric, round_pad) |> 
+  mutate(
+    Parameter = case_when(
+      parameter == "current_percent_english" ~ "English Current Use",
+      parameter == "current_percent_english_pair" ~ "Arabic Current Use",
+      parameter == "lex_tale_english" ~ "English LexTale",
+      parameter == "lex_tale_english_pair" ~ "Arabic LexTale"
+    ),
+    Score = paste0(mean, " (", sd, ")")
+  ) |> 
+  select(Parameter, Score) |> 
+  apa_gt()
+```
+
+</details>
+<div id="rflvylwvmx" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#gyqkkhxnok) .gt_table {
+#rflvylwvmx .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1928,7 +1847,7 @@ div.csl-indent {
   border-left-color: #D3D3D3;
 }
 
-:where(#gyqkkhxnok) .gt_heading {
+#rflvylwvmx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1940,7 +1859,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#gyqkkhxnok) .gt_title {
+#rflvylwvmx .gt_title {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -1952,7 +1871,7 @@ div.csl-indent {
   border-bottom-width: 0;
 }
 
-:where(#gyqkkhxnok) .gt_subtitle {
+#rflvylwvmx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1964,13 +1883,13 @@ div.csl-indent {
   border-top-width: 0;
 }
 
-:where(#gyqkkhxnok) .gt_bottom_border {
+#rflvylwvmx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#gyqkkhxnok) .gt_col_headings {
+#rflvylwvmx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 3px;
   border-top-color: #000000;
@@ -1985,7 +1904,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#gyqkkhxnok) .gt_col_heading {
+#rflvylwvmx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2005,7 +1924,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-:where(#gyqkkhxnok) .gt_column_spanner_outer {
+#rflvylwvmx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2017,15 +1936,15 @@ div.csl-indent {
   padding-right: 4px;
 }
 
-:where(#gyqkkhxnok) .gt_column_spanner_outer:first-child {
+#rflvylwvmx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#gyqkkhxnok) .gt_column_spanner_outer:last-child {
+#rflvylwvmx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#gyqkkhxnok) .gt_column_spanner {
+#rflvylwvmx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 3px;
   border-bottom-color: #000000;
@@ -2037,7 +1956,7 @@ div.csl-indent {
   width: 100%;
 }
 
-:where(#gyqkkhxnok) .gt_group_heading {
+#rflvylwvmx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2062,7 +1981,7 @@ div.csl-indent {
   vertical-align: middle;
 }
 
-:where(#gyqkkhxnok) .gt_empty_group_heading {
+#rflvylwvmx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2077,15 +1996,15 @@ div.csl-indent {
   vertical-align: middle;
 }
 
-:where(#gyqkkhxnok) .gt_from_md > :first-child {
+#rflvylwvmx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#gyqkkhxnok) .gt_from_md > :last-child {
+#rflvylwvmx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#gyqkkhxnok) .gt_row {
+#rflvylwvmx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2104,7 +2023,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-:where(#gyqkkhxnok) .gt_stub {
+#rflvylwvmx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2117,7 +2036,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#gyqkkhxnok) .gt_stub_row_group {
+#rflvylwvmx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2131,11 +2050,11 @@ div.csl-indent {
   vertical-align: top;
 }
 
-:where(#gyqkkhxnok) .gt_row_group_first td {
+#rflvylwvmx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#gyqkkhxnok) .gt_summary_row {
+#rflvylwvmx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2145,16 +2064,16 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#gyqkkhxnok) .gt_first_summary_row {
+#rflvylwvmx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#gyqkkhxnok) .gt_first_summary_row.thick {
+#rflvylwvmx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#gyqkkhxnok) .gt_last_summary_row {
+#rflvylwvmx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2164,7 +2083,7 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-:where(#gyqkkhxnok) .gt_grand_summary_row {
+#rflvylwvmx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2174,7 +2093,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#gyqkkhxnok) .gt_first_grand_summary_row {
+#rflvylwvmx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2184,11 +2103,11 @@ div.csl-indent {
   border-top-color: #D3D3D3;
 }
 
-:where(#gyqkkhxnok) .gt_striped {
+#rflvylwvmx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#gyqkkhxnok) .gt_table_body {
+#rflvylwvmx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2197,7 +2116,7 @@ div.csl-indent {
   border-bottom-color: #000000;
 }
 
-:where(#gyqkkhxnok) .gt_footnotes {
+#rflvylwvmx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2211,7 +2130,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#gyqkkhxnok) .gt_footnote {
+#rflvylwvmx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -2220,7 +2139,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#gyqkkhxnok) .gt_sourcenotes {
+#rflvylwvmx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2234,7 +2153,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#gyqkkhxnok) .gt_sourcenote {
+#rflvylwvmx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2242,68 +2161,68 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#gyqkkhxnok) .gt_left {
+#rflvylwvmx .gt_left {
   text-align: left;
 }
 
-:where(#gyqkkhxnok) .gt_center {
+#rflvylwvmx .gt_center {
   text-align: center;
 }
 
-:where(#gyqkkhxnok) .gt_right {
+#rflvylwvmx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#gyqkkhxnok) .gt_font_normal {
+#rflvylwvmx .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#gyqkkhxnok) .gt_font_bold {
+#rflvylwvmx .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#gyqkkhxnok) .gt_font_italic {
+#rflvylwvmx .gt_font_italic {
   font-style: italic;
 }
 
-:where(#gyqkkhxnok) .gt_super {
+#rflvylwvmx .gt_super {
   font-size: 65%;
 }
 
-:where(#gyqkkhxnok) .gt_footnote_marks {
+#rflvylwvmx .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#gyqkkhxnok) .gt_asterisk {
+#rflvylwvmx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#gyqkkhxnok) .gt_indent_1 {
+#rflvylwvmx .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#gyqkkhxnok) .gt_indent_2 {
+#rflvylwvmx .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#gyqkkhxnok) .gt_indent_3 {
+#rflvylwvmx .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#gyqkkhxnok) .gt_indent_4 {
+#rflvylwvmx .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#gyqkkhxnok) .gt_indent_5 {
+#rflvylwvmx .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
-<table class="gt_table"><caption>Table&nbsp;4:  Mean percentages (SD) for language use and proficiency for each language for participants in Experiment 2 </caption>
+<table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
@@ -2325,32 +2244,40 @@ div.csl-indent {
   
 </table>
 </div>
-</div>
-</div>
-</div>
-<p>We used the same analytical techniques in study 2 as we did for study 1. For accuracy and reaction time analyses, the first trial in each block and “recovery” trials following an error were excluded from the analyses. For reaction time analyses only, reaction times under 150ms, or reaction times over 2500ms or more than three standard deviations above the participant mean were discarded as outliers. Taking these criteria into account, a total of 9.26% and 22.55% of trials were excluded from the accuracy and reaction time analyses respectively.</p>
-<section id="response-time-1" class="level3">
-<h3 class="anchored" data-anchor-id="response-time-1">Response Time</h3>
-<p>Fixed effects parameter estimates for accuracy models are shown in <a href="#tbl-param-arabic-rt">Table&nbsp;5</a>.</p>
-<div class="cell">
+
+We used the same analytical techniques in study 2 as we did for study 1.
+For accuracy and reaction time analyses, the first trial in each block
+and “recovery” trials following an error were excluded from the
+analyses. For reaction time analyses only, reaction times under 150ms,
+or reaction times over 2500ms or more than three standard deviations
+above the participant mean were discarded as outliers. Taking these
+criteria into account, a total of 9.26% and 22.55% of trials were
+excluded from the accuracy and reaction time analyses respectively.
+
+### Response Time
+
+Fixed effects parameter estimates for accuracy models are shown in
+**?@tbl-param-arabic-rt**.
+
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_parameters_rt</span>(</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  freq_results<span class="sc">$</span>rt_mixed_freq_table_est,</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  bayes_results<span class="sc">$</span><span class="st">`</span><span class="at">rt_bayes-factors</span><span class="st">`</span>,</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Arabic"</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> </span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">parameters_rt_gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div id="tbl-param-arabic-rt" class="anchored">
 
-<div id="ywzvnyjugp" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+``` r
+bind_parameters_rt(
+  freq_results$rt_mixed_freq_table_est,
+  bayes_results$`rt_bayes-factors`,
+  "Arabic"
+) |> 
+  parameters_rt_gt()
+```
+
+</details>
+<div id="xcbchrzhhv" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#ywzvnyjugp) .gt_table {
+#xcbchrzhhv .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2375,7 +2302,7 @@ div.csl-indent {
   border-left-color: #D3D3D3;
 }
 
-:where(#ywzvnyjugp) .gt_heading {
+#xcbchrzhhv .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2387,7 +2314,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#ywzvnyjugp) .gt_title {
+#xcbchrzhhv .gt_title {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -2399,7 +2326,7 @@ div.csl-indent {
   border-bottom-width: 0;
 }
 
-:where(#ywzvnyjugp) .gt_subtitle {
+#xcbchrzhhv .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2411,13 +2338,13 @@ div.csl-indent {
   border-top-width: 0;
 }
 
-:where(#ywzvnyjugp) .gt_bottom_border {
+#xcbchrzhhv .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#ywzvnyjugp) .gt_col_headings {
+#xcbchrzhhv .gt_col_headings {
   border-top-style: solid;
   border-top-width: 3px;
   border-top-color: #000000;
@@ -2432,7 +2359,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#ywzvnyjugp) .gt_col_heading {
+#xcbchrzhhv .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2452,7 +2379,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-:where(#ywzvnyjugp) .gt_column_spanner_outer {
+#xcbchrzhhv .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2464,15 +2391,15 @@ div.csl-indent {
   padding-right: 4px;
 }
 
-:where(#ywzvnyjugp) .gt_column_spanner_outer:first-child {
+#xcbchrzhhv .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#ywzvnyjugp) .gt_column_spanner_outer:last-child {
+#xcbchrzhhv .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#ywzvnyjugp) .gt_column_spanner {
+#xcbchrzhhv .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 3px;
   border-bottom-color: #000000;
@@ -2484,7 +2411,7 @@ div.csl-indent {
   width: 100%;
 }
 
-:where(#ywzvnyjugp) .gt_group_heading {
+#xcbchrzhhv .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2509,7 +2436,7 @@ div.csl-indent {
   vertical-align: middle;
 }
 
-:where(#ywzvnyjugp) .gt_empty_group_heading {
+#xcbchrzhhv .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2524,15 +2451,15 @@ div.csl-indent {
   vertical-align: middle;
 }
 
-:where(#ywzvnyjugp) .gt_from_md > :first-child {
+#xcbchrzhhv .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#ywzvnyjugp) .gt_from_md > :last-child {
+#xcbchrzhhv .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#ywzvnyjugp) .gt_row {
+#xcbchrzhhv .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2551,7 +2478,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-:where(#ywzvnyjugp) .gt_stub {
+#xcbchrzhhv .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2564,7 +2491,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#ywzvnyjugp) .gt_stub_row_group {
+#xcbchrzhhv .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2578,11 +2505,11 @@ div.csl-indent {
   vertical-align: top;
 }
 
-:where(#ywzvnyjugp) .gt_row_group_first td {
+#xcbchrzhhv .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#ywzvnyjugp) .gt_summary_row {
+#xcbchrzhhv .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2592,16 +2519,16 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#ywzvnyjugp) .gt_first_summary_row {
+#xcbchrzhhv .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#ywzvnyjugp) .gt_first_summary_row.thick {
+#xcbchrzhhv .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#ywzvnyjugp) .gt_last_summary_row {
+#xcbchrzhhv .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2611,7 +2538,7 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-:where(#ywzvnyjugp) .gt_grand_summary_row {
+#xcbchrzhhv .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2621,7 +2548,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#ywzvnyjugp) .gt_first_grand_summary_row {
+#xcbchrzhhv .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2631,11 +2558,11 @@ div.csl-indent {
   border-top-color: #D3D3D3;
 }
 
-:where(#ywzvnyjugp) .gt_striped {
+#xcbchrzhhv .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#ywzvnyjugp) .gt_table_body {
+#xcbchrzhhv .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2644,7 +2571,7 @@ div.csl-indent {
   border-bottom-color: #000000;
 }
 
-:where(#ywzvnyjugp) .gt_footnotes {
+#xcbchrzhhv .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2658,7 +2585,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#ywzvnyjugp) .gt_footnote {
+#xcbchrzhhv .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -2667,7 +2594,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#ywzvnyjugp) .gt_sourcenotes {
+#xcbchrzhhv .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2681,7 +2608,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#ywzvnyjugp) .gt_sourcenote {
+#xcbchrzhhv .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2689,73 +2616,73 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#ywzvnyjugp) .gt_left {
+#xcbchrzhhv .gt_left {
   text-align: left;
 }
 
-:where(#ywzvnyjugp) .gt_center {
+#xcbchrzhhv .gt_center {
   text-align: center;
 }
 
-:where(#ywzvnyjugp) .gt_right {
+#xcbchrzhhv .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#ywzvnyjugp) .gt_font_normal {
+#xcbchrzhhv .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#ywzvnyjugp) .gt_font_bold {
+#xcbchrzhhv .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#ywzvnyjugp) .gt_font_italic {
+#xcbchrzhhv .gt_font_italic {
   font-style: italic;
 }
 
-:where(#ywzvnyjugp) .gt_super {
+#xcbchrzhhv .gt_super {
   font-size: 65%;
 }
 
-:where(#ywzvnyjugp) .gt_footnote_marks {
+#xcbchrzhhv .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#ywzvnyjugp) .gt_asterisk {
+#xcbchrzhhv .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#ywzvnyjugp) .gt_indent_1 {
+#xcbchrzhhv .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#ywzvnyjugp) .gt_indent_2 {
+#xcbchrzhhv .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#ywzvnyjugp) .gt_indent_3 {
+#xcbchrzhhv .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#ywzvnyjugp) .gt_indent_4 {
+#xcbchrzhhv .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#ywzvnyjugp) .gt_indent_5 {
+#xcbchrzhhv .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
-<table class="gt_table"><caption>Table&nbsp;5:  Fixed effects parameter estimates and test statistics for response time in Experiment 2 </caption>
+<table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">Parameter</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">β</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">&beta;</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><em>SE</em></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><em>t</em></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">df</th>
@@ -2825,32 +2752,44 @@ div.csl-indent {
   
 </table>
 </div>
-</div>
-</div>
-</div>
-<p>There was a significant main effect of Stroop Block with faster response times in the Neutral condition (M = 1113.23, <em>SE</em> = 23.62, 95% CI = [1067.03, 1161.43]) than the Incongruent condition (M = 1219.44, <em>SE</em> = 26.67, 95% CI = [1167.36, 1273.84]). There was also a significant main effect of Language, with faster response times in English (M = 1133.00, <em>SE</em> = 24.21, 95% CI = [1085.67, 1182.39]) than Arabic (M = 1198.16, <em>SE</em> = 25.63, 95% CI = [1148.06, 1250.46]). There was also a significant main effect of Trial Type, with faster response times in the Repetition (M = 1141.51, <em>SE</em> = 23.42, 95% CI = [1095.56, 1189.38]) than the Switch trials (M = 1189.23, <em>SE</em> = 23.55, 95% CI = [1142.88, 1237.46]). Finally, there was a significant interaction between Language and Trial Type. Estimated marginal means for Trial Type within each Language are shown in <a href="#tbl-emmeans-arabic-language-trial-type-rt">Table&nbsp;6</a></p>
-<div class="cell">
+
+There was a significant main effect of Stroop Block with faster response
+times in the Neutral condition (M = 1113.23, *SE* = 23.62, 95% CI =
+\[1067.03, 1161.43\]) than the Incongruent condition (M = 1219.44, *SE*
+= 26.67, 95% CI = \[1167.36, 1273.84\]). There was also a significant
+main effect of Language, with faster response times in English (M =
+1133.00, *SE* = 24.21, 95% CI = \[1085.67, 1182.39\]) than Arabic (M =
+1198.16, *SE* = 25.63, 95% CI = \[1148.06, 1250.46\]). There was also a
+significant main effect of Trial Type, with faster response times in the
+Repetition (M = 1141.51, *SE* = 23.42, 95% CI = \[1095.56, 1189.38\])
+than the Switch trials (M = 1189.23, *SE* = 23.55, 95% CI = \[1142.88,
+1237.46\]). Finally, there was a significant interaction between
+Language and Trial Type. Estimated marginal means for Trial Type within
+each Language are shown in
+**?@tbl-emmeans-arabic-language-trial-type-rt**
+
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>arabic_language_trial_type_rt_emm <span class="sc">|&gt;</span> </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">95% CI</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">"["</span>, lower.CL, <span class="st">", "</span>, upper.CL, <span class="st">"]"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(lower.CL, upper.CL)) <span class="sc">|&gt;</span> </span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">apa_gt</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">condition =</span> <span class="fu">md</span>(<span class="st">"Condition"</span>),</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">emmean =</span> <span class="fu">md</span>(<span class="st">"Mean"</span>),</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">SE =</span> <span class="fu">md</span>(<span class="st">"*SE*"</span>)</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div id="tbl-emmeans-arabic-language-trial-type-rt" class="anchored">
 
-<div id="ltehiithhx" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+``` r
+arabic_language_trial_type_rt_emm |> 
+  mutate(`95% CI` = paste0("[", lower.CL, ", ", upper.CL, "]")) |> 
+  select(-c(lower.CL, upper.CL)) |> 
+  apa_gt() |> 
+  cols_label(
+    condition = md("Condition"),
+    emmean = md("Mean"),
+    SE = md("*SE*")
+  ) 
+```
+
+</details>
+<div id="yhpovcssvp" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#ltehiithhx) .gt_table {
+#yhpovcssvp .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2875,7 +2814,7 @@ div.csl-indent {
   border-left-color: #D3D3D3;
 }
 
-:where(#ltehiithhx) .gt_heading {
+#yhpovcssvp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2887,7 +2826,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#ltehiithhx) .gt_title {
+#yhpovcssvp .gt_title {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -2899,7 +2838,7 @@ div.csl-indent {
   border-bottom-width: 0;
 }
 
-:where(#ltehiithhx) .gt_subtitle {
+#yhpovcssvp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2911,13 +2850,13 @@ div.csl-indent {
   border-top-width: 0;
 }
 
-:where(#ltehiithhx) .gt_bottom_border {
+#yhpovcssvp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#ltehiithhx) .gt_col_headings {
+#yhpovcssvp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 3px;
   border-top-color: #000000;
@@ -2932,7 +2871,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#ltehiithhx) .gt_col_heading {
+#yhpovcssvp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2952,7 +2891,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-:where(#ltehiithhx) .gt_column_spanner_outer {
+#yhpovcssvp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2964,15 +2903,15 @@ div.csl-indent {
   padding-right: 4px;
 }
 
-:where(#ltehiithhx) .gt_column_spanner_outer:first-child {
+#yhpovcssvp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#ltehiithhx) .gt_column_spanner_outer:last-child {
+#yhpovcssvp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#ltehiithhx) .gt_column_spanner {
+#yhpovcssvp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 3px;
   border-bottom-color: #000000;
@@ -2984,7 +2923,7 @@ div.csl-indent {
   width: 100%;
 }
 
-:where(#ltehiithhx) .gt_group_heading {
+#yhpovcssvp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3009,7 +2948,7 @@ div.csl-indent {
   vertical-align: middle;
 }
 
-:where(#ltehiithhx) .gt_empty_group_heading {
+#yhpovcssvp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3024,15 +2963,15 @@ div.csl-indent {
   vertical-align: middle;
 }
 
-:where(#ltehiithhx) .gt_from_md > :first-child {
+#yhpovcssvp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#ltehiithhx) .gt_from_md > :last-child {
+#yhpovcssvp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#ltehiithhx) .gt_row {
+#yhpovcssvp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3051,7 +2990,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-:where(#ltehiithhx) .gt_stub {
+#yhpovcssvp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3064,7 +3003,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#ltehiithhx) .gt_stub_row_group {
+#yhpovcssvp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3078,11 +3017,11 @@ div.csl-indent {
   vertical-align: top;
 }
 
-:where(#ltehiithhx) .gt_row_group_first td {
+#yhpovcssvp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#ltehiithhx) .gt_summary_row {
+#yhpovcssvp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3092,16 +3031,16 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#ltehiithhx) .gt_first_summary_row {
+#yhpovcssvp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#ltehiithhx) .gt_first_summary_row.thick {
+#yhpovcssvp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#ltehiithhx) .gt_last_summary_row {
+#yhpovcssvp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3111,7 +3050,7 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-:where(#ltehiithhx) .gt_grand_summary_row {
+#yhpovcssvp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3121,7 +3060,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#ltehiithhx) .gt_first_grand_summary_row {
+#yhpovcssvp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3131,11 +3070,11 @@ div.csl-indent {
   border-top-color: #D3D3D3;
 }
 
-:where(#ltehiithhx) .gt_striped {
+#yhpovcssvp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#ltehiithhx) .gt_table_body {
+#yhpovcssvp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3144,7 +3083,7 @@ div.csl-indent {
   border-bottom-color: #000000;
 }
 
-:where(#ltehiithhx) .gt_footnotes {
+#yhpovcssvp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3158,7 +3097,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#ltehiithhx) .gt_footnote {
+#yhpovcssvp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -3167,7 +3106,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#ltehiithhx) .gt_sourcenotes {
+#yhpovcssvp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3181,7 +3120,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#ltehiithhx) .gt_sourcenote {
+#yhpovcssvp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3189,68 +3128,68 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#ltehiithhx) .gt_left {
+#yhpovcssvp .gt_left {
   text-align: left;
 }
 
-:where(#ltehiithhx) .gt_center {
+#yhpovcssvp .gt_center {
   text-align: center;
 }
 
-:where(#ltehiithhx) .gt_right {
+#yhpovcssvp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#ltehiithhx) .gt_font_normal {
+#yhpovcssvp .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#ltehiithhx) .gt_font_bold {
+#yhpovcssvp .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#ltehiithhx) .gt_font_italic {
+#yhpovcssvp .gt_font_italic {
   font-style: italic;
 }
 
-:where(#ltehiithhx) .gt_super {
+#yhpovcssvp .gt_super {
   font-size: 65%;
 }
 
-:where(#ltehiithhx) .gt_footnote_marks {
+#yhpovcssvp .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#ltehiithhx) .gt_asterisk {
+#yhpovcssvp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#ltehiithhx) .gt_indent_1 {
+#yhpovcssvp .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#ltehiithhx) .gt_indent_2 {
+#yhpovcssvp .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#ltehiithhx) .gt_indent_3 {
+#yhpovcssvp .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#ltehiithhx) .gt_indent_4 {
+#yhpovcssvp .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#ltehiithhx) .gt_indent_5 {
+#yhpovcssvp .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
-<table class="gt_table"><caption>Table&nbsp;6:  Estimated marginal means of Response Time for Trial Type by Language Variety in Experiment 2 </caption>
+<table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
@@ -3287,33 +3226,39 @@ div.csl-indent {
   
 </table>
 </div>
-</div>
-</div>
-</div>
-<p>Pairwise tests show that when the switch cost is present in Arabic (Ratio = 1.03, <em>SE</em> = 0.01, <em>t</em>(27.43) = 2.36, <em>p</em> = .026) and English (Ratio = 1.06, <em>SE</em> = 0.01, <em>t</em>(25.92) = 5.43, <em>p</em> = &lt;.001). However, the magnitude of effects was stronger in the English than Arabic trials (Ratio = 0.97, <em>SE</em> = 0.01, <em>t</em>(26.65) = -2.08, <em>p</em> = .048). All other effects were non-significant, with Bayes factors in support of the null hypothesis.</p>
-</section>
-<section id="accuracy-1" class="level3">
-<h3 class="anchored" data-anchor-id="accuracy-1">Accuracy</h3>
-<p>Fixed effects parameter estimates for accuracy models are shown in <a href="#tbl-param-arabic-accuracy">Table&nbsp;7</a>.</p>
-<div class="cell">
+
+Pairwise tests show that when the switch cost is present in Arabic
+(Ratio = 1.03, *SE* = 0.01, *t*(27.43) = 2.36, *p* = .026) and English
+(Ratio = 1.06, *SE* = 0.01, *t*(25.92) = 5.43, *p* = \<.001). However,
+the magnitude of effects was stronger in the English than Arabic trials
+(Ratio = 0.97, *SE* = 0.01, *t*(26.65) = -2.08, *p* = .048). All other
+effects were non-significant, with Bayes factors in support of the null
+hypothesis.
+
+### Accuracy
+
+Fixed effects parameter estimates for accuracy models are shown in
+**?@tbl-param-arabic-accuracy**.
+
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_parameters_accuracy</span>(</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  freq_results<span class="sc">$</span>accuracy_mixed_freq_table_est,</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  bayes_results<span class="sc">$</span><span class="st">`</span><span class="at">accuracy_bayes-factors</span><span class="st">`</span>,</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Arabic"</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> </span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">parameters_accuracy_gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div id="tbl-param-arabic-accuracy" class="anchored">
 
-<div id="ubqjpwgvfp" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+``` r
+bind_parameters_accuracy(
+  freq_results$accuracy_mixed_freq_table_est,
+  bayes_results$`accuracy_bayes-factors`,
+  "Arabic"
+) |> 
+  parameters_accuracy_gt()
+```
+
+</details>
+<div id="ipbtruorlz" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#ubqjpwgvfp) .gt_table {
+#ipbtruorlz .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -3338,7 +3283,7 @@ div.csl-indent {
   border-left-color: #D3D3D3;
 }
 
-:where(#ubqjpwgvfp) .gt_heading {
+#ipbtruorlz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3350,7 +3295,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#ubqjpwgvfp) .gt_title {
+#ipbtruorlz .gt_title {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -3362,7 +3307,7 @@ div.csl-indent {
   border-bottom-width: 0;
 }
 
-:where(#ubqjpwgvfp) .gt_subtitle {
+#ipbtruorlz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3374,13 +3319,13 @@ div.csl-indent {
   border-top-width: 0;
 }
 
-:where(#ubqjpwgvfp) .gt_bottom_border {
+#ipbtruorlz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#ubqjpwgvfp) .gt_col_headings {
+#ipbtruorlz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 3px;
   border-top-color: #000000;
@@ -3395,7 +3340,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#ubqjpwgvfp) .gt_col_heading {
+#ipbtruorlz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3415,7 +3360,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-:where(#ubqjpwgvfp) .gt_column_spanner_outer {
+#ipbtruorlz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3427,15 +3372,15 @@ div.csl-indent {
   padding-right: 4px;
 }
 
-:where(#ubqjpwgvfp) .gt_column_spanner_outer:first-child {
+#ipbtruorlz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#ubqjpwgvfp) .gt_column_spanner_outer:last-child {
+#ipbtruorlz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#ubqjpwgvfp) .gt_column_spanner {
+#ipbtruorlz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 3px;
   border-bottom-color: #000000;
@@ -3447,7 +3392,7 @@ div.csl-indent {
   width: 100%;
 }
 
-:where(#ubqjpwgvfp) .gt_group_heading {
+#ipbtruorlz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3472,7 +3417,7 @@ div.csl-indent {
   vertical-align: middle;
 }
 
-:where(#ubqjpwgvfp) .gt_empty_group_heading {
+#ipbtruorlz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3487,15 +3432,15 @@ div.csl-indent {
   vertical-align: middle;
 }
 
-:where(#ubqjpwgvfp) .gt_from_md > :first-child {
+#ipbtruorlz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#ubqjpwgvfp) .gt_from_md > :last-child {
+#ipbtruorlz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#ubqjpwgvfp) .gt_row {
+#ipbtruorlz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3514,7 +3459,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-:where(#ubqjpwgvfp) .gt_stub {
+#ipbtruorlz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3527,7 +3472,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#ubqjpwgvfp) .gt_stub_row_group {
+#ipbtruorlz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3541,11 +3486,11 @@ div.csl-indent {
   vertical-align: top;
 }
 
-:where(#ubqjpwgvfp) .gt_row_group_first td {
+#ipbtruorlz .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#ubqjpwgvfp) .gt_summary_row {
+#ipbtruorlz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3555,16 +3500,16 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#ubqjpwgvfp) .gt_first_summary_row {
+#ipbtruorlz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#ubqjpwgvfp) .gt_first_summary_row.thick {
+#ipbtruorlz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#ubqjpwgvfp) .gt_last_summary_row {
+#ipbtruorlz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3574,7 +3519,7 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-:where(#ubqjpwgvfp) .gt_grand_summary_row {
+#ipbtruorlz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3584,7 +3529,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#ubqjpwgvfp) .gt_first_grand_summary_row {
+#ipbtruorlz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3594,11 +3539,11 @@ div.csl-indent {
   border-top-color: #D3D3D3;
 }
 
-:where(#ubqjpwgvfp) .gt_striped {
+#ipbtruorlz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#ubqjpwgvfp) .gt_table_body {
+#ipbtruorlz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3607,7 +3552,7 @@ div.csl-indent {
   border-bottom-color: #000000;
 }
 
-:where(#ubqjpwgvfp) .gt_footnotes {
+#ipbtruorlz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3621,7 +3566,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#ubqjpwgvfp) .gt_footnote {
+#ipbtruorlz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -3630,7 +3575,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#ubqjpwgvfp) .gt_sourcenotes {
+#ipbtruorlz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3644,7 +3589,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#ubqjpwgvfp) .gt_sourcenote {
+#ipbtruorlz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3652,73 +3597,73 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#ubqjpwgvfp) .gt_left {
+#ipbtruorlz .gt_left {
   text-align: left;
 }
 
-:where(#ubqjpwgvfp) .gt_center {
+#ipbtruorlz .gt_center {
   text-align: center;
 }
 
-:where(#ubqjpwgvfp) .gt_right {
+#ipbtruorlz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#ubqjpwgvfp) .gt_font_normal {
+#ipbtruorlz .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#ubqjpwgvfp) .gt_font_bold {
+#ipbtruorlz .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#ubqjpwgvfp) .gt_font_italic {
+#ipbtruorlz .gt_font_italic {
   font-style: italic;
 }
 
-:where(#ubqjpwgvfp) .gt_super {
+#ipbtruorlz .gt_super {
   font-size: 65%;
 }
 
-:where(#ubqjpwgvfp) .gt_footnote_marks {
+#ipbtruorlz .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#ubqjpwgvfp) .gt_asterisk {
+#ipbtruorlz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#ubqjpwgvfp) .gt_indent_1 {
+#ipbtruorlz .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#ubqjpwgvfp) .gt_indent_2 {
+#ipbtruorlz .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#ubqjpwgvfp) .gt_indent_3 {
+#ipbtruorlz .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#ubqjpwgvfp) .gt_indent_4 {
+#ipbtruorlz .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#ubqjpwgvfp) .gt_indent_5 {
+#ipbtruorlz .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
-<table class="gt_table"><caption>Table&nbsp;7:  Fixed effects parameter estimates and test statistics for accuracy in Experiment 2 </caption>
+<table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">Parameter</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">β</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">&beta;</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><em>SE</em></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><em>z</em></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><em>p</em></th>
@@ -3786,65 +3731,94 @@ div.csl-indent {
   </tfoot>
 </table>
 </div>
-</div>
-</div>
-</div>
-<p>There was a significant main effect of Stroop Block with a small but significantly larger proportion of correct responses in the Neutral condition (M = 0.95, <em>SE</em> = 0.01, 95% CI = [0.94, 0.96]) than the Incongruent condition (M = 0.94, <em>SE</em> = 0.01, 95% CI = [0.92, 0.95]). There was also a significant main effect of Language, again with a small but significantly larger proportion of correct responses in English (M = 0.95, <em>SE</em> = 0.01, 95% CI = [0.94, 0.97]) than Arabic (M = 0.94, <em>SE</em> = 0.01, 95% CI = [0.91, 0.95]). There was also a significant main effect of Trial Type, with a larger proportion of correct responses for Repetition (M = 0.96, <em>SE</em> = 0.01, 95% CI = [0.94, 0.97]) than Switch trials (M = 0.93, <em>SE</em> = 0.01, 95% CI = [0.91, 0.95]). While all two-way interactions were non-significant and with Bayes factors in support of the null hypothesis, the Bayes factor was only reliable for the Language × Trial Type interaction. Finally, there was a significant 3-way interaction between Stroop Block, Language, and Trial Type. The pattern of results for this interaction is shown in <a href="#fig-arabic-accuracy">Figure&nbsp;1</a>.</p>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="fu">here</span>(<span class="st">"03_plots"</span>, <span class="st">"03_descriptive"</span>, <span class="st">"arabic_accuracy.png"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div id="fig-arabic-accuracy" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="../03_plots/03_descriptive/arabic_accuracy.png" class="img-fluid figure-img" alt="A raincloud plot showing the proportion of correct responses in English and Arabic. Performance is worst in Arabic for Incongruent Switch trials, followed by Neutral Switch trials. Performance is best in English for Neutral Reptition trials followed by Incongruent Repetition trials. All other conditions have equivalent performance within languages." width="1800"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;1: The proportion of correct responses by Language, Stroop Block, and Trial Type in Experiment 2</figcaption><p></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Pairwise tests show that in Arabic the switch cost is present for Neutral (O.R. = 0.59, <em>SE</em> = 0.09, <em>z</em> = -3.42, <em>p</em> = .001) and Incongruent (O.R. = 0.54, <em>SE</em> = 0.08, <em>z</em> = -4.23, <em>p</em> = &lt;.001) Stroop blocks. However, in English this effect is only present in Neutral (O.R. = 0.42, <em>SE</em> = 0.08, <em>z</em> = -4.56, <em>p</em> = &lt;.001) but not Incongruent (O.R. = 0.75, <em>SE</em> = 0.12, <em>z</em> = -1.77, <em>p</em> = .077) Stroop blocks.</p>
-</section>
-</section>
-</section>
-<section id="experiment-3" class="level1">
-<h1>Experiment 3</h1>
-<section id="participants-2" class="level2">
-<h2 class="anchored" data-anchor-id="participants-2">Participants</h2>
-<p>Fifty Chinese-English bilinguals were recruited. One participant was excluded due to a recording failure, leaving 46 (25 female, 20 male, 1 non-binary) participants with a mean age of 29.622 (<em>SD</em> = 8.922)). Following the experiment, participants were asked to complete a the same language background questionnaire and English and Chinese vocabulary tests based on lexical decision tasks as in Experiment 1.</p>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>descriptives<span class="sc">$</span>demo_summary <span class="sc">|&gt;</span> </span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    study <span class="sc">==</span> <span class="st">"chinese_stroop"</span>, </span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(parameter, <span class="st">"current_percent|lex_tale"</span>), </span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    statistic <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"mean"</span>, <span class="st">"sd"</span>)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> statistic, <span class="at">values_from =</span> value) <span class="sc">|&gt;</span> </span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.numeric, round_pad) <span class="sc">|&gt;</span> </span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">Parameter =</span> <span class="fu">case_when</span>(</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>      parameter <span class="sc">==</span> <span class="st">"current_percent_english"</span> <span class="sc">~</span> <span class="st">"English Current Use"</span>,</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>      parameter <span class="sc">==</span> <span class="st">"current_percent_english_pair"</span> <span class="sc">~</span> <span class="st">"Chinese Current Use"</span>,</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>      parameter <span class="sc">==</span> <span class="st">"lex_tale_english"</span> <span class="sc">~</span> <span class="st">"English LexTale"</span>,</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>      parameter <span class="sc">==</span> <span class="st">"lex_tale_english_pair"</span> <span class="sc">~</span> <span class="st">"Chinese LexTale"</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">Score =</span> <span class="fu">paste0</span>(mean, <span class="st">" ("</span>, sd, <span class="st">")"</span>)</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Parameter, Score) <span class="sc">|&gt;</span> </span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">apa_gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div id="tbl-chinese-demo" class="anchored">
 
-<div id="jygilwferx" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+There was a significant main effect of Stroop Block with a small but
+significantly larger proportion of correct responses in the Neutral
+condition (M = 0.95, *SE* = 0.01, 95% CI = \[0.94, 0.96\]) than the
+Incongruent condition (M = 0.94, *SE* = 0.01, 95% CI = \[0.92, 0.95\]).
+There was also a significant main effect of Language, again with a small
+but significantly larger proportion of correct responses in English (M =
+0.95, *SE* = 0.01, 95% CI = \[0.94, 0.97\]) than Arabic (M = 0.94, *SE*
+= 0.01, 95% CI = \[0.91, 0.95\]). There was also a significant main
+effect of Trial Type, with a larger proportion of correct responses for
+Repetition (M = 0.96, *SE* = 0.01, 95% CI = \[0.94, 0.97\]) than Switch
+trials (M = 0.93, *SE* = 0.01, 95% CI = \[0.91, 0.95\]). While all
+two-way interactions were non-significant and with Bayes factors in
+support of the null hypothesis, the Bayes factor was only reliable for
+the Language × Trial Type interaction. Finally, there was a significant
+3-way interaction between Stroop Block, Language, and Trial Type. The
+pattern of results for this interaction is shown in
+[Figure 1](#fig-arabic-accuracy).
+
+<details>
+<summary>Code</summary>
+
+``` r
+knitr::include_graphics(here("03_plots", "03_descriptive", "arabic_accuracy.png"))
+```
+
+</details>
+
+<figure>
+<img src="../03_plots/03_descriptive/arabic_accuracy.png"
+id="fig-arabic-accuracy"
+data-fig-alt="A raincloud plot showing the proportion of correct responses in English and Arabic. Performance is worst in Arabic for Incongruent Switch trials, followed by Neutral Switch trials. Performance is best in English for Neutral Reptition trials followed by Incongruent Repetition trials. All other conditions have equivalent performance within languages."
+alt="Figure 1: The proportion of correct responses by Language, Stroop Block, and Trial Type in Experiment 2" />
+<figcaption aria-hidden="true">Figure 1: The proportion of correct
+responses by Language, Stroop Block, and Trial Type in Experiment
+2</figcaption>
+</figure>
+
+Pairwise tests show that in Arabic the switch cost is present for
+Neutral (O.R. = 0.59, *SE* = 0.09, *z* = -3.42, *p* = .001) and
+Incongruent (O.R. = 0.54, *SE* = 0.08, *z* = -4.23, *p* = \<.001) Stroop
+blocks. However, in English this effect is only present in Neutral (O.R.
+= 0.42, *SE* = 0.08, *z* = -4.56, *p* = \<.001) but not Incongruent
+(O.R. = 0.75, *SE* = 0.12, *z* = -1.77, *p* = .077) Stroop blocks.
+
+# Experiment 3
+
+## Participants
+
+Fifty Chinese-English bilinguals were recruited. One participant was
+excluded due to a recording failure, leaving 46 (25 female, 20 male, 1
+non-binary) participants with a mean age of 29.622 (*SD* = 8.922)).
+Following the experiment, participants were asked to complete a the same
+language background questionnaire and English and Chinese vocabulary
+tests based on lexical decision tasks as in Experiment 1.
+
+<details>
+<summary>Code</summary>
+
+``` r
+descriptives$demo_summary |> 
+  filter(
+    study == "chinese_stroop", 
+    str_detect(parameter, "current_percent|lex_tale"), 
+    statistic %in% c("mean", "sd")
+  ) |> 
+  pivot_wider(names_from = statistic, values_from = value) |> 
+  mutate_if(is.numeric, round_pad) |> 
+  mutate(
+    Parameter = case_when(
+      parameter == "current_percent_english" ~ "English Current Use",
+      parameter == "current_percent_english_pair" ~ "Chinese Current Use",
+      parameter == "lex_tale_english" ~ "English LexTale",
+      parameter == "lex_tale_english_pair" ~ "Chinese LexTale"
+    ),
+    Score = paste0(mean, " (", sd, ")")
+  ) |> 
+  select(Parameter, Score) |> 
+  apa_gt()
+```
+
+</details>
+<div id="clvuirffna" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#jygilwferx) .gt_table {
+#clvuirffna .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -3869,7 +3843,7 @@ div.csl-indent {
   border-left-color: #D3D3D3;
 }
 
-:where(#jygilwferx) .gt_heading {
+#clvuirffna .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3881,7 +3855,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#jygilwferx) .gt_title {
+#clvuirffna .gt_title {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -3893,7 +3867,7 @@ div.csl-indent {
   border-bottom-width: 0;
 }
 
-:where(#jygilwferx) .gt_subtitle {
+#clvuirffna .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3905,13 +3879,13 @@ div.csl-indent {
   border-top-width: 0;
 }
 
-:where(#jygilwferx) .gt_bottom_border {
+#clvuirffna .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#jygilwferx) .gt_col_headings {
+#clvuirffna .gt_col_headings {
   border-top-style: solid;
   border-top-width: 3px;
   border-top-color: #000000;
@@ -3926,7 +3900,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#jygilwferx) .gt_col_heading {
+#clvuirffna .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3946,7 +3920,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-:where(#jygilwferx) .gt_column_spanner_outer {
+#clvuirffna .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3958,15 +3932,15 @@ div.csl-indent {
   padding-right: 4px;
 }
 
-:where(#jygilwferx) .gt_column_spanner_outer:first-child {
+#clvuirffna .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#jygilwferx) .gt_column_spanner_outer:last-child {
+#clvuirffna .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#jygilwferx) .gt_column_spanner {
+#clvuirffna .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 3px;
   border-bottom-color: #000000;
@@ -3978,7 +3952,7 @@ div.csl-indent {
   width: 100%;
 }
 
-:where(#jygilwferx) .gt_group_heading {
+#clvuirffna .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4003,7 +3977,7 @@ div.csl-indent {
   vertical-align: middle;
 }
 
-:where(#jygilwferx) .gt_empty_group_heading {
+#clvuirffna .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4018,15 +3992,15 @@ div.csl-indent {
   vertical-align: middle;
 }
 
-:where(#jygilwferx) .gt_from_md > :first-child {
+#clvuirffna .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#jygilwferx) .gt_from_md > :last-child {
+#clvuirffna .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#jygilwferx) .gt_row {
+#clvuirffna .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4045,7 +4019,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-:where(#jygilwferx) .gt_stub {
+#clvuirffna .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4058,7 +4032,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#jygilwferx) .gt_stub_row_group {
+#clvuirffna .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4072,11 +4046,11 @@ div.csl-indent {
   vertical-align: top;
 }
 
-:where(#jygilwferx) .gt_row_group_first td {
+#clvuirffna .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#jygilwferx) .gt_summary_row {
+#clvuirffna .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4086,16 +4060,16 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#jygilwferx) .gt_first_summary_row {
+#clvuirffna .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#jygilwferx) .gt_first_summary_row.thick {
+#clvuirffna .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#jygilwferx) .gt_last_summary_row {
+#clvuirffna .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4105,7 +4079,7 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-:where(#jygilwferx) .gt_grand_summary_row {
+#clvuirffna .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4115,7 +4089,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#jygilwferx) .gt_first_grand_summary_row {
+#clvuirffna .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4125,11 +4099,11 @@ div.csl-indent {
   border-top-color: #D3D3D3;
 }
 
-:where(#jygilwferx) .gt_striped {
+#clvuirffna .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#jygilwferx) .gt_table_body {
+#clvuirffna .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4138,7 +4112,7 @@ div.csl-indent {
   border-bottom-color: #000000;
 }
 
-:where(#jygilwferx) .gt_footnotes {
+#clvuirffna .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4152,7 +4126,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#jygilwferx) .gt_footnote {
+#clvuirffna .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -4161,7 +4135,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#jygilwferx) .gt_sourcenotes {
+#clvuirffna .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4175,7 +4149,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#jygilwferx) .gt_sourcenote {
+#clvuirffna .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4183,68 +4157,68 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#jygilwferx) .gt_left {
+#clvuirffna .gt_left {
   text-align: left;
 }
 
-:where(#jygilwferx) .gt_center {
+#clvuirffna .gt_center {
   text-align: center;
 }
 
-:where(#jygilwferx) .gt_right {
+#clvuirffna .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#jygilwferx) .gt_font_normal {
+#clvuirffna .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#jygilwferx) .gt_font_bold {
+#clvuirffna .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#jygilwferx) .gt_font_italic {
+#clvuirffna .gt_font_italic {
   font-style: italic;
 }
 
-:where(#jygilwferx) .gt_super {
+#clvuirffna .gt_super {
   font-size: 65%;
 }
 
-:where(#jygilwferx) .gt_footnote_marks {
+#clvuirffna .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#jygilwferx) .gt_asterisk {
+#clvuirffna .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#jygilwferx) .gt_indent_1 {
+#clvuirffna .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#jygilwferx) .gt_indent_2 {
+#clvuirffna .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#jygilwferx) .gt_indent_3 {
+#clvuirffna .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#jygilwferx) .gt_indent_4 {
+#clvuirffna .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#jygilwferx) .gt_indent_5 {
+#clvuirffna .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
-<table class="gt_table"><caption>Table&nbsp;8:  Mean percentages (SD) for language use and proficiency for each language for participants in Experiment 3 </caption>
+<table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
@@ -4266,32 +4240,39 @@ div.csl-indent {
   
 </table>
 </div>
-</div>
-</div>
-</div>
-<p>For accuracy and reaction time analyses, the first trial in each block and “recovery” trials following an error were excluded from the analyses. For reaction time analyses only, reaction times under 150ms, or reaction times over 2500ms or more than three standard deviations above the participant mean were discarded as outliers. Taking these criteria into account, a total of 15.54% and 30.91% of trials were excluded from the accuracy and reaction time analyses respectively.</p>
-<section id="response-time-2" class="level3">
-<h3 class="anchored" data-anchor-id="response-time-2">Response Time</h3>
-<p>Fixed effects parameter estimates for accuracy models are shown in <a href="#tbl-param-chinese-rt">Table&nbsp;9</a>.</p>
-<div class="cell">
+
+For accuracy and reaction time analyses, the first trial in each block
+and “recovery” trials following an error were excluded from the
+analyses. For reaction time analyses only, reaction times under 150ms,
+or reaction times over 2500ms or more than three standard deviations
+above the participant mean were discarded as outliers. Taking these
+criteria into account, a total of 15.54% and 30.91% of trials were
+excluded from the accuracy and reaction time analyses respectively.
+
+### Response Time
+
+Fixed effects parameter estimates for accuracy models are shown in
+**?@tbl-param-chinese-rt**.
+
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_parameters_rt</span>(</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  freq_results<span class="sc">$</span>rt_mixed_freq_table_est,</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  bayes_results<span class="sc">$</span><span class="st">`</span><span class="at">rt_bayes-factors</span><span class="st">`</span>,</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Chinese"</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> </span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">parameters_rt_gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div id="tbl-param-chinese-rt" class="anchored">
 
-<div id="fqkivcuqab" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+``` r
+bind_parameters_rt(
+  freq_results$rt_mixed_freq_table_est,
+  bayes_results$`rt_bayes-factors`,
+  "Chinese"
+) |> 
+  parameters_rt_gt()
+```
+
+</details>
+<div id="tijrhdqkbv" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#fqkivcuqab) .gt_table {
+#tijrhdqkbv .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -4316,7 +4297,7 @@ div.csl-indent {
   border-left-color: #D3D3D3;
 }
 
-:where(#fqkivcuqab) .gt_heading {
+#tijrhdqkbv .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4328,7 +4309,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#fqkivcuqab) .gt_title {
+#tijrhdqkbv .gt_title {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -4340,7 +4321,7 @@ div.csl-indent {
   border-bottom-width: 0;
 }
 
-:where(#fqkivcuqab) .gt_subtitle {
+#tijrhdqkbv .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4352,13 +4333,13 @@ div.csl-indent {
   border-top-width: 0;
 }
 
-:where(#fqkivcuqab) .gt_bottom_border {
+#tijrhdqkbv .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#fqkivcuqab) .gt_col_headings {
+#tijrhdqkbv .gt_col_headings {
   border-top-style: solid;
   border-top-width: 3px;
   border-top-color: #000000;
@@ -4373,7 +4354,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#fqkivcuqab) .gt_col_heading {
+#tijrhdqkbv .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4393,7 +4374,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-:where(#fqkivcuqab) .gt_column_spanner_outer {
+#tijrhdqkbv .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4405,15 +4386,15 @@ div.csl-indent {
   padding-right: 4px;
 }
 
-:where(#fqkivcuqab) .gt_column_spanner_outer:first-child {
+#tijrhdqkbv .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#fqkivcuqab) .gt_column_spanner_outer:last-child {
+#tijrhdqkbv .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#fqkivcuqab) .gt_column_spanner {
+#tijrhdqkbv .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 3px;
   border-bottom-color: #000000;
@@ -4425,7 +4406,7 @@ div.csl-indent {
   width: 100%;
 }
 
-:where(#fqkivcuqab) .gt_group_heading {
+#tijrhdqkbv .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4450,7 +4431,7 @@ div.csl-indent {
   vertical-align: middle;
 }
 
-:where(#fqkivcuqab) .gt_empty_group_heading {
+#tijrhdqkbv .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4465,15 +4446,15 @@ div.csl-indent {
   vertical-align: middle;
 }
 
-:where(#fqkivcuqab) .gt_from_md > :first-child {
+#tijrhdqkbv .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#fqkivcuqab) .gt_from_md > :last-child {
+#tijrhdqkbv .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#fqkivcuqab) .gt_row {
+#tijrhdqkbv .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4492,7 +4473,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-:where(#fqkivcuqab) .gt_stub {
+#tijrhdqkbv .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4505,7 +4486,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#fqkivcuqab) .gt_stub_row_group {
+#tijrhdqkbv .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4519,11 +4500,11 @@ div.csl-indent {
   vertical-align: top;
 }
 
-:where(#fqkivcuqab) .gt_row_group_first td {
+#tijrhdqkbv .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#fqkivcuqab) .gt_summary_row {
+#tijrhdqkbv .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4533,16 +4514,16 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#fqkivcuqab) .gt_first_summary_row {
+#tijrhdqkbv .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#fqkivcuqab) .gt_first_summary_row.thick {
+#tijrhdqkbv .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#fqkivcuqab) .gt_last_summary_row {
+#tijrhdqkbv .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4552,7 +4533,7 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-:where(#fqkivcuqab) .gt_grand_summary_row {
+#tijrhdqkbv .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4562,7 +4543,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#fqkivcuqab) .gt_first_grand_summary_row {
+#tijrhdqkbv .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4572,11 +4553,11 @@ div.csl-indent {
   border-top-color: #D3D3D3;
 }
 
-:where(#fqkivcuqab) .gt_striped {
+#tijrhdqkbv .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#fqkivcuqab) .gt_table_body {
+#tijrhdqkbv .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4585,7 +4566,7 @@ div.csl-indent {
   border-bottom-color: #000000;
 }
 
-:where(#fqkivcuqab) .gt_footnotes {
+#tijrhdqkbv .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4599,7 +4580,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#fqkivcuqab) .gt_footnote {
+#tijrhdqkbv .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -4608,7 +4589,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#fqkivcuqab) .gt_sourcenotes {
+#tijrhdqkbv .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4622,7 +4603,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#fqkivcuqab) .gt_sourcenote {
+#tijrhdqkbv .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4630,73 +4611,73 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#fqkivcuqab) .gt_left {
+#tijrhdqkbv .gt_left {
   text-align: left;
 }
 
-:where(#fqkivcuqab) .gt_center {
+#tijrhdqkbv .gt_center {
   text-align: center;
 }
 
-:where(#fqkivcuqab) .gt_right {
+#tijrhdqkbv .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#fqkivcuqab) .gt_font_normal {
+#tijrhdqkbv .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#fqkivcuqab) .gt_font_bold {
+#tijrhdqkbv .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#fqkivcuqab) .gt_font_italic {
+#tijrhdqkbv .gt_font_italic {
   font-style: italic;
 }
 
-:where(#fqkivcuqab) .gt_super {
+#tijrhdqkbv .gt_super {
   font-size: 65%;
 }
 
-:where(#fqkivcuqab) .gt_footnote_marks {
+#tijrhdqkbv .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#fqkivcuqab) .gt_asterisk {
+#tijrhdqkbv .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#fqkivcuqab) .gt_indent_1 {
+#tijrhdqkbv .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#fqkivcuqab) .gt_indent_2 {
+#tijrhdqkbv .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#fqkivcuqab) .gt_indent_3 {
+#tijrhdqkbv .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#fqkivcuqab) .gt_indent_4 {
+#tijrhdqkbv .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#fqkivcuqab) .gt_indent_5 {
+#tijrhdqkbv .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
-<table class="gt_table"><caption>Table&nbsp;9:  Fixed effects parameter estimates and test statistics for response time in Experiment 3 </caption>
+<table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">Parameter</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">β</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">&beta;</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><em>SE</em></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><em>t</em></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">df</th>
@@ -4766,33 +4747,45 @@ div.csl-indent {
   
 </table>
 </div>
-</div>
-</div>
-</div>
-<p>There was a significant main effect of Stroop Block with faster response times in the Neutral condition (M = 951.21, <em>SE</em> = 20.65, 95% CI = [ 910.83, 993.38]) than the Incongruent condition (M = 1133.02, <em>SE</em> = 25.48, 95% CI = [1083.30, 1185.03]). There was also a significant main effect of Language, with faster response times in Chinese (M = 1020.53, <em>SE</em> = 22.45, 95% CI = [ 976.66, 1066.36]) than English (M = 1056.06, <em>SE</em> = 23.22, 95% CI = [1010.70, 1103.47]). There was also a significant main effect of Trial Type, with faster response times in the Repetition (M = 996.40, <em>SE</em> = 20.45, 95% CI = [ 956.20, 1038.28]) than the Switch trials (M = 1081.64, <em>SE</em> = 23.17, 95% CI = [1036.25, 1129.01]). Finally, there was a significant two-way interaction between Language and Trial Type.</p>
-<p>Estimated marginal means for Trial Type within each Language are shown in <a href="#tbl-emmeans-chinese-language-trial-type-rt">Table&nbsp;10</a></p>
-<div class="cell">
+
+There was a significant main effect of Stroop Block with faster response
+times in the Neutral condition (M = 951.21, *SE* = 20.65, 95% CI = \[
+910.83, 993.38\]) than the Incongruent condition (M = 1133.02, *SE* =
+25.48, 95% CI = \[1083.30, 1185.03\]). There was also a significant main
+effect of Language, with faster response times in Chinese (M = 1020.53,
+*SE* = 22.45, 95% CI = \[ 976.66, 1066.36\]) than English (M = 1056.06,
+*SE* = 23.22, 95% CI = \[1010.70, 1103.47\]). There was also a
+significant main effect of Trial Type, with faster response times in the
+Repetition (M = 996.40, *SE* = 20.45, 95% CI = \[ 956.20, 1038.28\])
+than the Switch trials (M = 1081.64, *SE* = 23.17, 95% CI = \[1036.25,
+1129.01\]). Finally, there was a significant two-way interaction between
+Language and Trial Type.
+
+Estimated marginal means for Trial Type within each Language are shown
+in **?@tbl-emmeans-chinese-language-trial-type-rt**
+
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>chinese_language_trial_type_rt_emm <span class="sc">|&gt;</span> </span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">95% CI</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">"["</span>, lower.CL, <span class="st">", "</span>, upper.CL, <span class="st">"]"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(lower.CL, upper.CL)) <span class="sc">|&gt;</span> </span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">apa_gt</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">condition =</span> <span class="fu">md</span>(<span class="st">"Condition"</span>),</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">emmean =</span> <span class="fu">md</span>(<span class="st">"Mean"</span>),</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">SE =</span> <span class="fu">md</span>(<span class="st">"*SE*"</span>)</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div id="tbl-emmeans-chinese-language-trial-type-rt" class="anchored">
 
-<div id="ntwyhkrzdq" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+``` r
+chinese_language_trial_type_rt_emm |> 
+  mutate(`95% CI` = paste0("[", lower.CL, ", ", upper.CL, "]")) |> 
+  select(-c(lower.CL, upper.CL)) |> 
+  apa_gt() |> 
+  cols_label(
+    condition = md("Condition"),
+    emmean = md("Mean"),
+    SE = md("*SE*")
+  ) 
+```
+
+</details>
+<div id="uvxjylzlsl" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#ntwyhkrzdq) .gt_table {
+#uvxjylzlsl .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -4817,7 +4810,7 @@ div.csl-indent {
   border-left-color: #D3D3D3;
 }
 
-:where(#ntwyhkrzdq) .gt_heading {
+#uvxjylzlsl .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4829,7 +4822,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#ntwyhkrzdq) .gt_title {
+#uvxjylzlsl .gt_title {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -4841,7 +4834,7 @@ div.csl-indent {
   border-bottom-width: 0;
 }
 
-:where(#ntwyhkrzdq) .gt_subtitle {
+#uvxjylzlsl .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4853,13 +4846,13 @@ div.csl-indent {
   border-top-width: 0;
 }
 
-:where(#ntwyhkrzdq) .gt_bottom_border {
+#uvxjylzlsl .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#ntwyhkrzdq) .gt_col_headings {
+#uvxjylzlsl .gt_col_headings {
   border-top-style: solid;
   border-top-width: 3px;
   border-top-color: #000000;
@@ -4874,7 +4867,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#ntwyhkrzdq) .gt_col_heading {
+#uvxjylzlsl .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4894,7 +4887,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-:where(#ntwyhkrzdq) .gt_column_spanner_outer {
+#uvxjylzlsl .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4906,15 +4899,15 @@ div.csl-indent {
   padding-right: 4px;
 }
 
-:where(#ntwyhkrzdq) .gt_column_spanner_outer:first-child {
+#uvxjylzlsl .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#ntwyhkrzdq) .gt_column_spanner_outer:last-child {
+#uvxjylzlsl .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#ntwyhkrzdq) .gt_column_spanner {
+#uvxjylzlsl .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 3px;
   border-bottom-color: #000000;
@@ -4926,7 +4919,7 @@ div.csl-indent {
   width: 100%;
 }
 
-:where(#ntwyhkrzdq) .gt_group_heading {
+#uvxjylzlsl .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4951,7 +4944,7 @@ div.csl-indent {
   vertical-align: middle;
 }
 
-:where(#ntwyhkrzdq) .gt_empty_group_heading {
+#uvxjylzlsl .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4966,15 +4959,15 @@ div.csl-indent {
   vertical-align: middle;
 }
 
-:where(#ntwyhkrzdq) .gt_from_md > :first-child {
+#uvxjylzlsl .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#ntwyhkrzdq) .gt_from_md > :last-child {
+#uvxjylzlsl .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#ntwyhkrzdq) .gt_row {
+#uvxjylzlsl .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4993,7 +4986,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-:where(#ntwyhkrzdq) .gt_stub {
+#uvxjylzlsl .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5006,7 +4999,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#ntwyhkrzdq) .gt_stub_row_group {
+#uvxjylzlsl .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5020,11 +5013,11 @@ div.csl-indent {
   vertical-align: top;
 }
 
-:where(#ntwyhkrzdq) .gt_row_group_first td {
+#uvxjylzlsl .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#ntwyhkrzdq) .gt_summary_row {
+#uvxjylzlsl .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5034,16 +5027,16 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#ntwyhkrzdq) .gt_first_summary_row {
+#uvxjylzlsl .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#ntwyhkrzdq) .gt_first_summary_row.thick {
+#uvxjylzlsl .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#ntwyhkrzdq) .gt_last_summary_row {
+#uvxjylzlsl .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5053,7 +5046,7 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-:where(#ntwyhkrzdq) .gt_grand_summary_row {
+#uvxjylzlsl .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5063,7 +5056,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#ntwyhkrzdq) .gt_first_grand_summary_row {
+#uvxjylzlsl .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5073,11 +5066,11 @@ div.csl-indent {
   border-top-color: #D3D3D3;
 }
 
-:where(#ntwyhkrzdq) .gt_striped {
+#uvxjylzlsl .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#ntwyhkrzdq) .gt_table_body {
+#uvxjylzlsl .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5086,7 +5079,7 @@ div.csl-indent {
   border-bottom-color: #000000;
 }
 
-:where(#ntwyhkrzdq) .gt_footnotes {
+#uvxjylzlsl .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5100,7 +5093,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#ntwyhkrzdq) .gt_footnote {
+#uvxjylzlsl .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -5109,7 +5102,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#ntwyhkrzdq) .gt_sourcenotes {
+#uvxjylzlsl .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5123,7 +5116,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#ntwyhkrzdq) .gt_sourcenote {
+#uvxjylzlsl .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -5131,68 +5124,68 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#ntwyhkrzdq) .gt_left {
+#uvxjylzlsl .gt_left {
   text-align: left;
 }
 
-:where(#ntwyhkrzdq) .gt_center {
+#uvxjylzlsl .gt_center {
   text-align: center;
 }
 
-:where(#ntwyhkrzdq) .gt_right {
+#uvxjylzlsl .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#ntwyhkrzdq) .gt_font_normal {
+#uvxjylzlsl .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#ntwyhkrzdq) .gt_font_bold {
+#uvxjylzlsl .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#ntwyhkrzdq) .gt_font_italic {
+#uvxjylzlsl .gt_font_italic {
   font-style: italic;
 }
 
-:where(#ntwyhkrzdq) .gt_super {
+#uvxjylzlsl .gt_super {
   font-size: 65%;
 }
 
-:where(#ntwyhkrzdq) .gt_footnote_marks {
+#uvxjylzlsl .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#ntwyhkrzdq) .gt_asterisk {
+#uvxjylzlsl .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#ntwyhkrzdq) .gt_indent_1 {
+#uvxjylzlsl .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#ntwyhkrzdq) .gt_indent_2 {
+#uvxjylzlsl .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#ntwyhkrzdq) .gt_indent_3 {
+#uvxjylzlsl .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#ntwyhkrzdq) .gt_indent_4 {
+#uvxjylzlsl .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#ntwyhkrzdq) .gt_indent_5 {
+#uvxjylzlsl .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
-<table class="gt_table"><caption>Table&nbsp;10:  Estimated marginal means of Response Times for Trial Type by Language Variety in Experiment 3 </caption>
+<table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
@@ -5229,33 +5222,41 @@ div.csl-indent {
   
 </table>
 </div>
-</div>
-</div>
-</div>
-<p>Pairwise tests show that when the switch cost is present in Chinese (Ratio = 1.12, <em>SE</em> = 0.01, <em>t</em>(28.58) = 9.58, <em>p</em> = &lt;.001) and English (Ratio = 1.05, <em>SE</em> = 0.01, <em>t</em>(28.27) = 4.42, <em>p</em> = &lt;.001). However, the magnitude of effects was stronger in the Chinese than English trials (Ratio = 1.06, <em>SE</em> = 0.02, <em>t</em>(24.48) = 3.75, <em>p</em> = .001). All other effects were non-significant, with Bayes factors in support of the null hypothesis, apart from the Stroop × Language two-way interaction where the Bayes factor indicates insufficient evidence in support of either model.</p>
-</section>
-<section id="accuracy-2" class="level3">
-<h3 class="anchored" data-anchor-id="accuracy-2">Accuracy</h3>
-<p>Fixed effects parameter estimates for accuracy models are shown in <a href="#tbl-param-chinese-accuracy">Table&nbsp;11</a>.</p>
-<div class="cell">
+
+Pairwise tests show that when the switch cost is present in Chinese
+(Ratio = 1.12, *SE* = 0.01, *t*(28.58) = 9.58, *p* = \<.001) and English
+(Ratio = 1.05, *SE* = 0.01, *t*(28.27) = 4.42, *p* = \<.001). However,
+the magnitude of effects was stronger in the Chinese than English trials
+(Ratio = 1.06, *SE* = 0.02, *t*(24.48) = 3.75, *p* = .001). All other
+effects were non-significant, with Bayes factors in support of the null
+hypothesis, apart from the Stroop × Language two-way interaction where
+the Bayes factor indicates insufficient evidence in support of either
+model.
+
+### Accuracy
+
+Fixed effects parameter estimates for accuracy models are shown in
+**?@tbl-param-chinese-accuracy**.
+
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_parameters_accuracy</span>(</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  freq_results<span class="sc">$</span>accuracy_mixed_freq_table_est,</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  bayes_results<span class="sc">$</span><span class="st">`</span><span class="at">accuracy_bayes-factors</span><span class="st">`</span>,</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Chinese"</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> </span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">parameters_accuracy_gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div id="tbl-param-chinese-accuracy" class="anchored">
 
-<div id="kavemifqir" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+``` r
+bind_parameters_accuracy(
+  freq_results$accuracy_mixed_freq_table_est,
+  bayes_results$`accuracy_bayes-factors`,
+  "Chinese"
+) |> 
+  parameters_accuracy_gt()
+```
+
+</details>
+<div id="gfqcdfvbwc" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#kavemifqir) .gt_table {
+#gfqcdfvbwc .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -5280,7 +5281,7 @@ div.csl-indent {
   border-left-color: #D3D3D3;
 }
 
-:where(#kavemifqir) .gt_heading {
+#gfqcdfvbwc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -5292,7 +5293,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#kavemifqir) .gt_title {
+#gfqcdfvbwc .gt_title {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -5304,7 +5305,7 @@ div.csl-indent {
   border-bottom-width: 0;
 }
 
-:where(#kavemifqir) .gt_subtitle {
+#gfqcdfvbwc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -5316,13 +5317,13 @@ div.csl-indent {
   border-top-width: 0;
 }
 
-:where(#kavemifqir) .gt_bottom_border {
+#gfqcdfvbwc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#kavemifqir) .gt_col_headings {
+#gfqcdfvbwc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 3px;
   border-top-color: #000000;
@@ -5337,7 +5338,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#kavemifqir) .gt_col_heading {
+#gfqcdfvbwc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5357,7 +5358,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-:where(#kavemifqir) .gt_column_spanner_outer {
+#gfqcdfvbwc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5369,15 +5370,15 @@ div.csl-indent {
   padding-right: 4px;
 }
 
-:where(#kavemifqir) .gt_column_spanner_outer:first-child {
+#gfqcdfvbwc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#kavemifqir) .gt_column_spanner_outer:last-child {
+#gfqcdfvbwc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#kavemifqir) .gt_column_spanner {
+#gfqcdfvbwc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 3px;
   border-bottom-color: #000000;
@@ -5389,7 +5390,7 @@ div.csl-indent {
   width: 100%;
 }
 
-:where(#kavemifqir) .gt_group_heading {
+#gfqcdfvbwc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5414,7 +5415,7 @@ div.csl-indent {
   vertical-align: middle;
 }
 
-:where(#kavemifqir) .gt_empty_group_heading {
+#gfqcdfvbwc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -5429,15 +5430,15 @@ div.csl-indent {
   vertical-align: middle;
 }
 
-:where(#kavemifqir) .gt_from_md > :first-child {
+#gfqcdfvbwc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#kavemifqir) .gt_from_md > :last-child {
+#gfqcdfvbwc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#kavemifqir) .gt_row {
+#gfqcdfvbwc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5456,7 +5457,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-:where(#kavemifqir) .gt_stub {
+#gfqcdfvbwc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5469,7 +5470,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#kavemifqir) .gt_stub_row_group {
+#gfqcdfvbwc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5483,11 +5484,11 @@ div.csl-indent {
   vertical-align: top;
 }
 
-:where(#kavemifqir) .gt_row_group_first td {
+#gfqcdfvbwc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#kavemifqir) .gt_summary_row {
+#gfqcdfvbwc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5497,16 +5498,16 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#kavemifqir) .gt_first_summary_row {
+#gfqcdfvbwc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#kavemifqir) .gt_first_summary_row.thick {
+#gfqcdfvbwc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#kavemifqir) .gt_last_summary_row {
+#gfqcdfvbwc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5516,7 +5517,7 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-:where(#kavemifqir) .gt_grand_summary_row {
+#gfqcdfvbwc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5526,7 +5527,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#kavemifqir) .gt_first_grand_summary_row {
+#gfqcdfvbwc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5536,11 +5537,11 @@ div.csl-indent {
   border-top-color: #D3D3D3;
 }
 
-:where(#kavemifqir) .gt_striped {
+#gfqcdfvbwc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#kavemifqir) .gt_table_body {
+#gfqcdfvbwc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5549,7 +5550,7 @@ div.csl-indent {
   border-bottom-color: #000000;
 }
 
-:where(#kavemifqir) .gt_footnotes {
+#gfqcdfvbwc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5563,7 +5564,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#kavemifqir) .gt_footnote {
+#gfqcdfvbwc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -5572,7 +5573,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#kavemifqir) .gt_sourcenotes {
+#gfqcdfvbwc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5586,7 +5587,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#kavemifqir) .gt_sourcenote {
+#gfqcdfvbwc .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -5594,73 +5595,73 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#kavemifqir) .gt_left {
+#gfqcdfvbwc .gt_left {
   text-align: left;
 }
 
-:where(#kavemifqir) .gt_center {
+#gfqcdfvbwc .gt_center {
   text-align: center;
 }
 
-:where(#kavemifqir) .gt_right {
+#gfqcdfvbwc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#kavemifqir) .gt_font_normal {
+#gfqcdfvbwc .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#kavemifqir) .gt_font_bold {
+#gfqcdfvbwc .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#kavemifqir) .gt_font_italic {
+#gfqcdfvbwc .gt_font_italic {
   font-style: italic;
 }
 
-:where(#kavemifqir) .gt_super {
+#gfqcdfvbwc .gt_super {
   font-size: 65%;
 }
 
-:where(#kavemifqir) .gt_footnote_marks {
+#gfqcdfvbwc .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#kavemifqir) .gt_asterisk {
+#gfqcdfvbwc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#kavemifqir) .gt_indent_1 {
+#gfqcdfvbwc .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#kavemifqir) .gt_indent_2 {
+#gfqcdfvbwc .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#kavemifqir) .gt_indent_3 {
+#gfqcdfvbwc .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#kavemifqir) .gt_indent_4 {
+#gfqcdfvbwc .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#kavemifqir) .gt_indent_5 {
+#gfqcdfvbwc .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
-<table class="gt_table"><caption>Table&nbsp;11:  Fixed effects parameter estimates and test statistics for accuracy in Experiment 3 </caption>
+<table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">Parameter</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">β</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">&beta;</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><em>SE</em></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><em>z</em></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><em>p</em></th>
@@ -5728,33 +5729,42 @@ div.csl-indent {
   </tfoot>
 </table>
 </div>
-</div>
-</div>
-</div>
-<p>There was a significant main effect of Stroop Block with a larger proportion of correct responses in the Neutral condition (M = 0.95, <em>SE</em> = 0.01, 95% CI = [0.94, 0.96]) than the Incongruent condition (M = 0.86, <em>SE</em> = 0.02, 95% CI = [0.82, 0.89]). There was also a significant main effect of Trial Type, with a larger proportion of correct responses in the Repetition (M = 0.95, <em>SE</em> = 0.01, 95% CI = [0.93, 0.96]) than the Switch trials (M = 0.87, <em>SE</em> = 0.01, 95% CI = [0.84, 0.90]). Finally, there was also a significant 2-way interaction between Language and Trial Type.</p>
-<p>Estimated marginal means for Trial Type within each Language are shown in <a href="#tbl-emmeans-chinese-language-trial-type-accuracy">Table&nbsp;12</a></p>
-<div class="cell">
+
+There was a significant main effect of Stroop Block with a larger
+proportion of correct responses in the Neutral condition (M = 0.95, *SE*
+= 0.01, 95% CI = \[0.94, 0.96\]) than the Incongruent condition (M =
+0.86, *SE* = 0.02, 95% CI = \[0.82, 0.89\]). There was also a
+significant main effect of Trial Type, with a larger proportion of
+correct responses in the Repetition (M = 0.95, *SE* = 0.01, 95% CI =
+\[0.93, 0.96\]) than the Switch trials (M = 0.87, *SE* = 0.01, 95% CI =
+\[0.84, 0.90\]). Finally, there was also a significant 2-way interaction
+between Language and Trial Type.
+
+Estimated marginal means for Trial Type within each Language are shown
+in **?@tbl-emmeans-chinese-language-trial-type-accuracy**
+
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>chinese_language_trial_type_accuracy_emm <span class="sc">|&gt;</span> </span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">95% CI</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">"["</span>, asymp.LCL, <span class="st">", "</span>, asymp.UCL, <span class="st">"]"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(study, response, analysis, df, asymp.LCL, asymp.UCL)) <span class="sc">|&gt;</span> </span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">apa_gt</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">condition =</span> <span class="fu">md</span>(<span class="st">"Condition"</span>),</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">prob =</span> <span class="fu">md</span>(<span class="st">"Mean"</span>),</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">SE =</span> <span class="fu">md</span>(<span class="st">"*SE*"</span>)</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div id="tbl-emmeans-chinese-language-trial-type-accuracy" class="anchored">
 
-<div id="igjeexihoc" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+``` r
+chinese_language_trial_type_accuracy_emm |> 
+  mutate(`95% CI` = paste0("[", asymp.LCL, ", ", asymp.UCL, "]")) |> 
+  select(-c(study, response, analysis, df, asymp.LCL, asymp.UCL)) |> 
+  apa_gt() |> 
+  cols_label(
+    condition = md("Condition"),
+    prob = md("Mean"),
+    SE = md("*SE*")
+  ) 
+```
+
+</details>
+<div id="wdxkziwzqy" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#igjeexihoc) .gt_table {
+#wdxkziwzqy .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -5779,7 +5789,7 @@ div.csl-indent {
   border-left-color: #D3D3D3;
 }
 
-:where(#igjeexihoc) .gt_heading {
+#wdxkziwzqy .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -5791,7 +5801,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#igjeexihoc) .gt_title {
+#wdxkziwzqy .gt_title {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -5803,7 +5813,7 @@ div.csl-indent {
   border-bottom-width: 0;
 }
 
-:where(#igjeexihoc) .gt_subtitle {
+#wdxkziwzqy .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -5815,13 +5825,13 @@ div.csl-indent {
   border-top-width: 0;
 }
 
-:where(#igjeexihoc) .gt_bottom_border {
+#wdxkziwzqy .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#igjeexihoc) .gt_col_headings {
+#wdxkziwzqy .gt_col_headings {
   border-top-style: solid;
   border-top-width: 3px;
   border-top-color: #000000;
@@ -5836,7 +5846,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#igjeexihoc) .gt_col_heading {
+#wdxkziwzqy .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5856,7 +5866,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-:where(#igjeexihoc) .gt_column_spanner_outer {
+#wdxkziwzqy .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5868,15 +5878,15 @@ div.csl-indent {
   padding-right: 4px;
 }
 
-:where(#igjeexihoc) .gt_column_spanner_outer:first-child {
+#wdxkziwzqy .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#igjeexihoc) .gt_column_spanner_outer:last-child {
+#wdxkziwzqy .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#igjeexihoc) .gt_column_spanner {
+#wdxkziwzqy .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 3px;
   border-bottom-color: #000000;
@@ -5888,7 +5898,7 @@ div.csl-indent {
   width: 100%;
 }
 
-:where(#igjeexihoc) .gt_group_heading {
+#wdxkziwzqy .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5913,7 +5923,7 @@ div.csl-indent {
   vertical-align: middle;
 }
 
-:where(#igjeexihoc) .gt_empty_group_heading {
+#wdxkziwzqy .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -5928,15 +5938,15 @@ div.csl-indent {
   vertical-align: middle;
 }
 
-:where(#igjeexihoc) .gt_from_md > :first-child {
+#wdxkziwzqy .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#igjeexihoc) .gt_from_md > :last-child {
+#wdxkziwzqy .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#igjeexihoc) .gt_row {
+#wdxkziwzqy .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5955,7 +5965,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-:where(#igjeexihoc) .gt_stub {
+#wdxkziwzqy .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5968,7 +5978,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#igjeexihoc) .gt_stub_row_group {
+#wdxkziwzqy .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5982,11 +5992,11 @@ div.csl-indent {
   vertical-align: top;
 }
 
-:where(#igjeexihoc) .gt_row_group_first td {
+#wdxkziwzqy .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#igjeexihoc) .gt_summary_row {
+#wdxkziwzqy .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5996,16 +6006,16 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#igjeexihoc) .gt_first_summary_row {
+#wdxkziwzqy .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#igjeexihoc) .gt_first_summary_row.thick {
+#wdxkziwzqy .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#igjeexihoc) .gt_last_summary_row {
+#wdxkziwzqy .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6015,7 +6025,7 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-:where(#igjeexihoc) .gt_grand_summary_row {
+#wdxkziwzqy .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -6025,7 +6035,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#igjeexihoc) .gt_first_grand_summary_row {
+#wdxkziwzqy .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6035,11 +6045,11 @@ div.csl-indent {
   border-top-color: #D3D3D3;
 }
 
-:where(#igjeexihoc) .gt_striped {
+#wdxkziwzqy .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#igjeexihoc) .gt_table_body {
+#wdxkziwzqy .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -6048,7 +6058,7 @@ div.csl-indent {
   border-bottom-color: #000000;
 }
 
-:where(#igjeexihoc) .gt_footnotes {
+#wdxkziwzqy .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -6062,7 +6072,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#igjeexihoc) .gt_footnote {
+#wdxkziwzqy .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -6071,7 +6081,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#igjeexihoc) .gt_sourcenotes {
+#wdxkziwzqy .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -6085,7 +6095,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-:where(#igjeexihoc) .gt_sourcenote {
+#wdxkziwzqy .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -6093,68 +6103,68 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-:where(#igjeexihoc) .gt_left {
+#wdxkziwzqy .gt_left {
   text-align: left;
 }
 
-:where(#igjeexihoc) .gt_center {
+#wdxkziwzqy .gt_center {
   text-align: center;
 }
 
-:where(#igjeexihoc) .gt_right {
+#wdxkziwzqy .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#igjeexihoc) .gt_font_normal {
+#wdxkziwzqy .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#igjeexihoc) .gt_font_bold {
+#wdxkziwzqy .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#igjeexihoc) .gt_font_italic {
+#wdxkziwzqy .gt_font_italic {
   font-style: italic;
 }
 
-:where(#igjeexihoc) .gt_super {
+#wdxkziwzqy .gt_super {
   font-size: 65%;
 }
 
-:where(#igjeexihoc) .gt_footnote_marks {
+#wdxkziwzqy .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#igjeexihoc) .gt_asterisk {
+#wdxkziwzqy .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#igjeexihoc) .gt_indent_1 {
+#wdxkziwzqy .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#igjeexihoc) .gt_indent_2 {
+#wdxkziwzqy .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#igjeexihoc) .gt_indent_3 {
+#wdxkziwzqy .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#igjeexihoc) .gt_indent_4 {
+#wdxkziwzqy .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#igjeexihoc) .gt_indent_5 {
+#wdxkziwzqy .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
-<table class="gt_table"><caption>Table&nbsp;12:  Estimated marginal means of Accuracy for Trial Type by Language Variety in Experiment 3 </caption>
+<table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
@@ -6186,364 +6196,405 @@ div.csl-indent {
   
 </table>
 </div>
+
+Pairwise tests show that when the switch cost is present in Chinese
+(O.R. = 0.32, *SE* = 0.04, *z* = -9.04, *p* = \<.001) and English (O.R.
+= 0.49, *SE* = 0.06, *z* = -5.68, *p* = \<.001). However, the magnitude
+of effects was stronger in the Chinese than English trials (O.R. = 0.66,
+*SE* = 0.12, *z* = -2.35, *p* = .019). All other effects were
+non-significant. Here, Bayes factors were only reliably in support of
+the null hypothesis for the two-way interaction of Stroop × Trial Type
+and the three-way interaction of Stroop × Language × Trial Type. The
+main effect of Language had insufficient evidence in favour of either
+model, while the two-way interaction of Stroop × Language, while in
+support of the null hypothesis, was sensitive to the prior specification
+and thus must be interpreted with caution.
+
+# References
+
+<div id="refs" class="references csl-bib-body hanging-indent"
+line-spacing="2">
+
+<div id="ref-barr2013random" class="csl-entry">
+
+Barr, D. J., Levy, R., Scheepers, C., & Tily, H. J. (2013). Random
+effects structure for confirmatory hypothesis testing: Keep it maximal.
+*Journal of Memory and Language*, *68*(3), 255–278.
+
 </div>
+
+<div id="ref-lme4" class="csl-entry">
+
+Bates, D., Mächler, M., Bolker, B., & Walker, S. (2015). Fitting linear
+mixed-effects models using <span class="nocase">lme4</span>. *Journal of
+Statistical Software*, *67*(1), 1–48.
+<https://doi.org/10.18637/jss.v067.i01>
+
 </div>
+
+<div id="ref-brms-a" class="csl-entry">
+
+Bürkner, P.-C. (2017). <span class="nocase">brms</span>: An R package
+for Bayesian multilevel models using Stan. *Journal of Statistical
+Software*, *80*(1), 1–28. <https://doi.org/10.18637/jss.v080.i01>
+
 </div>
-<p>Pairwise tests show that when the switch cost is present in Chinese (O.R. = 0.32, <em>SE</em> = 0.04, <em>z</em> = -9.04, <em>p</em> = &lt;.001) and English (O.R. = 0.49, <em>SE</em> = 0.06, <em>z</em> = -5.68, <em>p</em> = &lt;.001). However, the magnitude of effects was stronger in the Chinese than English trials (O.R. = 0.66, <em>SE</em> = 0.12, <em>z</em> = -2.35, <em>p</em> = .019). All other effects were non-significant. Here, Bayes factors were only reliably in support of the null hypothesis for the two-way interaction of Stroop × Trial Type and the three-way interaction of Stroop × Language × Trial Type. The main effect of Language had insufficient evidence in favour of either model, while the two-way interaction of Stroop × Language, while in support of the null hypothesis, was sensitive to the prior specification and thus must be interpreted with caution.</p>
-</section>
-</section>
-</section>
-<section id="references" class="level1">
-<h1>References</h1>
-<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
-<div id="ref-barr2013random" class="csl-entry" role="doc-biblioentry">
-Barr, D. J., Levy, R., Scheepers, C., &amp; Tily, H. J. (2013). Random effects structure for confirmatory hypothesis testing: Keep it maximal. <em>Journal of Memory and Language</em>, <em>68</em>(3), 255–278.
+
+<div id="ref-brms-b" class="csl-entry">
+
+Bürkner, P.-C. (2018). Advanced Bayesian multilevel modeling with the R
+package <span class="nocase">brms</span>. *The R Journal*, *10*(1),
+395–411. <https://doi.org/10.32614/RJ-2018-017>
+
 </div>
-<div id="ref-lme4" class="csl-entry" role="doc-biblioentry">
-Bates, D., Mächler, M., Bolker, B., &amp; Walker, S. (2015). Fitting linear mixed-effects models using <span class="nocase">lme4</span>. <em>Journal of Statistical Software</em>, <em>67</em>(1), 1–48. <a href="https://doi.org/10.18637/jss.v067.i01">https://doi.org/10.18637/jss.v067.i01</a>
+
+<div id="ref-bayesplot-a" class="csl-entry">
+
+Gabry, J., & Mahr, T. (2022). *Bayesplot: Plotting for bayesian models*.
+<https://mc-stan.org/bayesplot/>
+
 </div>
-<div id="ref-brms-a" class="csl-entry" role="doc-biblioentry">
-Bürkner, P.-C. (2017). <span class="nocase">brms</span>: An <span>R</span> package for <span>Bayesian</span> multilevel models using <span>Stan</span>. <em>Journal of Statistical Software</em>, <em>80</em>(1), 1–28. <a href="https://doi.org/10.18637/jss.v080.i01">https://doi.org/10.18637/jss.v080.i01</a>
+
+<div id="ref-bayesplot-b" class="csl-entry">
+
+Gabry, J., Simpson, D., Vehtari, A., Betancourt, M., & Gelman, A.
+(2019). Visualization in bayesian workflow. *J. R. Stat. Soc. A*, *182*,
+389–402. <https://doi.org/10.1111/rssa.12378>
+
 </div>
-<div id="ref-brms-b" class="csl-entry" role="doc-biblioentry">
-Bürkner, P.-C. (2018). Advanced <span>Bayesian</span> multilevel modeling with the <span>R</span> package <span class="nocase">brms</span>. <em>The R Journal</em>, <em>10</em>(1), 395–411. <a href="https://doi.org/10.32614/RJ-2018-017">https://doi.org/10.32614/RJ-2018-017</a>
+
+<div id="ref-kirk2018can" class="csl-entry">
+
+Kirk, N. W., Kempe, V., Scott-Brown, K. C., Philipp, A., & Declerck, M.
+(2018). Can monolinguals be like bilinguals? Evidence from dialect
+switching. *Cognition*, *170*, 164–178.
+
 </div>
-<div id="ref-bayesplot-a" class="csl-entry" role="doc-biblioentry">
-Gabry, J., &amp; Mahr, T. (2022). <em>Bayesplot: Plotting for bayesian models</em>. <a href="https://mc-stan.org/bayesplot/">https://mc-stan.org/bayesplot/</a>
+
+<div id="ref-lmerTest" class="csl-entry">
+
+Kuznetsova, A., Brockhoff, P. B., & Christensen, R. H. B. (2017). <span
+class="nocase">lmerTest</span> package: Tests in linear mixed effects
+models. *Journal of Statistical Software*, *82*(13), 1–26.
+<https://doi.org/10.18637/jss.v082.i13>
+
 </div>
-<div id="ref-bayesplot-b" class="csl-entry" role="doc-biblioentry">
-Gabry, J., Simpson, D., Vehtari, A., Betancourt, M., &amp; Gelman, A. (2019). Visualization in bayesian workflow. <em>J. R. Stat. Soc. A</em>, <em>182</em>, 389–402. <a href="https://doi.org/10.1111/rssa.12378">https://doi.org/10.1111/rssa.12378</a>
+
+<div id="ref-lemhofer2012introducing" class="csl-entry">
+
+Lemhöfer, K., & Broersma, M. (2012). Introducing LexTALE: A quick and
+valid lexical test for advanced learners of english. *Behavior Research
+Methods*, *44*(2), 325–343.
+
 </div>
-<div id="ref-kirk2018can" class="csl-entry" role="doc-biblioentry">
-Kirk, N. W., Kempe, V., Scott-Brown, K. C., Philipp, A., &amp; Declerck, M. (2018). Can monolinguals be like bilinguals? Evidence from dialect switching. <em>Cognition</em>, <em>170</em>, 164–178.
+
+<div id="ref-emmeans" class="csl-entry">
+
+Lenth, R. V. (2022). *Emmeans: Estimated marginal means, aka
+least-squares means*. <https://CRAN.R-project.org/package=emmeans>
+
 </div>
-<div id="ref-lmerTest" class="csl-entry" role="doc-biblioentry">
-Kuznetsova, A., Brockhoff, P. B., &amp; Christensen, R. H. B. (2017). <span class="nocase">lmerTest</span> package: Tests in linear mixed effects models. <em>Journal of Statistical Software</em>, <em>82</em>(13), 1–26. <a href="https://doi.org/10.18637/jss.v082.i13">https://doi.org/10.18637/jss.v082.i13</a>
+
+<div id="ref-liu2019symmetries" class="csl-entry">
+
+Liu, C., Jiao, L., Wang, Z., Wang, M., Wang, R., & Wu, Y. J. (2019).
+Symmetries of bilingual language switch costs in conflicting versus
+non-conflicting contexts. *Bilingualism: Language and Cognition*,
+*22*(3), 624–636.
+
 </div>
-<div id="ref-lemhofer2012introducing" class="csl-entry" role="doc-biblioentry">
-Lemhöfer, K., &amp; Broersma, M. (2012). Introducing LexTALE: A quick and valid lexical test for advanced learners of english. <em>Behavior Research Methods</em>, <em>44</em>(2), 325–343.
+
+<div id="ref-bayestestR" class="csl-entry">
+
+Makowski, D., Ben-Shachar, M. S., & Lüdecke, D. (2019). bayestestR:
+Describing effects and their uncertainty, existence and significance
+within the bayesian framework. *Journal of Open Source Software*,
+*4*(40), 1541. <https://doi.org/10.21105/joss.01541>
+
 </div>
-<div id="ref-emmeans" class="csl-entry" role="doc-biblioentry">
-Lenth, R. V. (2022). <em>Emmeans: Estimated marginal means, aka least-squares means</em>. <a href="https://CRAN.R-project.org/package=emmeans">https://CRAN.R-project.org/package=emmeans</a>
+
+<div id="ref-here" class="csl-entry">
+
+Müller, K. (2020). *Here: A simpler way to find your files*.
+<https://CRAN.R-project.org/package=here>
+
 </div>
-<div id="ref-liu2019symmetries" class="csl-entry" role="doc-biblioentry">
-Liu, C., Jiao, L., Wang, Z., Wang, M., Wang, R., &amp; Wu, Y. J. (2019). Symmetries of bilingual language switch costs in conflicting versus non-conflicting contexts. <em>Bilingualism: Language and Cognition</em>, <em>22</em>(3), 624–636.
+
+<div id="ref-nicenboim2016statistical" class="csl-entry">
+
+Nicenboim, B., & Vasishth, S. (2016). Statistical methods for linguistic
+research: Foundational ideas—part II. *Language and Linguistics
+Compass*, *10*(11), 591–613.
+
 </div>
-<div id="ref-bayestestR" class="csl-entry" role="doc-biblioentry">
-Makowski, D., Ben-Shachar, M. S., &amp; Lüdecke, D. (2019). bayestestR: Describing effects and their uncertainty, existence and significance within the bayesian framework. <em>Journal of Open Source Software</em>, <em>4</em>(40), 1541. <a href="https://doi.org/10.21105/joss.01541">https://doi.org/10.21105/joss.01541</a>
+
+<div id="ref-R-base" class="csl-entry">
+
+R Core Team. (2022). *R: A language and environment for statistical
+computing*. R Foundation for Statistical Computing.
+<https://www.R-project.org/>
+
 </div>
-<div id="ref-here" class="csl-entry" role="doc-biblioentry">
-Müller, K. (2020). <em>Here: A simpler way to find your files</em>. <a href="https://CRAN.R-project.org/package=here">https://CRAN.R-project.org/package=here</a>
+
+<div id="ref-afex" class="csl-entry">
+
+Singmann, H., Bolker, B., Westfall, J., Aust, F., & Ben-Shachar, M. S.
+(2022). *Afex: Analysis of factorial experiments*.
+<https://CRAN.R-project.org/package=afex>
+
 </div>
-<div id="ref-nicenboim2016statistical" class="csl-entry" role="doc-biblioentry">
-Nicenboim, B., &amp; Vasishth, S. (2016). Statistical methods for linguistic research: Foundational ideas—part II. <em>Language and Linguistics Compass</em>, <em>10</em>(11), 591–613.
+
+<div id="ref-vasishth2016statistical" class="csl-entry">
+
+Vasishth, S., & Nicenboim, B. (2016). Statistical methods for linguistic
+research: Foundational ideas–part i. *Language and Linguistics Compass*,
+*10*(8), 349–369.
+
 </div>
-<div id="ref-R-base" class="csl-entry" role="doc-biblioentry">
-R Core Team. (2022). <em>R: A language and environment for statistical computing</em>. R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>
+
+<div id="ref-tidyverse" class="csl-entry">
+
+Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L. D.,
+François, R., Grolemund, G., Hayes, A., Henry, L., Hester, J., Kuhn, M.,
+Pedersen, T. L., Miller, E., Bache, S. M., Müller, K., Ooms, J.,
+Robinson, D., Seidel, D. P., Spinu, V., … Yutani, H. (2019). Welcome to
+the <span class="nocase">tidyverse</span>. *Journal of Open Source
+Software*, *4*(43), 1686. <https://doi.org/10.21105/joss.01686>
+
 </div>
-<div id="ref-afex" class="csl-entry" role="doc-biblioentry">
-Singmann, H., Bolker, B., Westfall, J., Aust, F., &amp; Ben-Shachar, M. S. (2022). <em>Afex: Analysis of factorial experiments</em>. <a href="https://CRAN.R-project.org/package=afex">https://CRAN.R-project.org/package=afex</a>
+
 </div>
-<div id="ref-vasishth2016statistical" class="csl-entry" role="doc-biblioentry">
-Vasishth, S., &amp; Nicenboim, B. (2016). Statistical methods for linguistic research: Foundational ideas–part i. <em>Language and Linguistics Compass</em>, <em>10</em>(8), 349–369.
-</div>
-<div id="ref-tidyverse" class="csl-entry" role="doc-biblioentry">
-Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L. D., François, R., Grolemund, G., Hayes, A., Henry, L., Hester, J., Kuhn, M., Pedersen, T. L., Miller, E., Bache, S. M., Müller, K., Ooms, J., Robinson, D., Seidel, D. P., Spinu, V., … Yutani, H. (2019). Welcome to the <span class="nocase">tidyverse</span>. <em>Journal of Open Source Software</em>, <em>4</em>(43), 1686. <a href="https://doi.org/10.21105/joss.01686">https://doi.org/10.21105/joss.01686</a>
-</div>
-</div>
-</section>
-<section id="appendices" class="level1">
-<h1>Appendices</h1>
-<section id="appendix-a.-frequentist-model-specification" class="level2">
-<h2 class="anchored" data-anchor-id="appendix-a.-frequentist-model-specification">Appendix A. Frequentist Model Specification</h2>
-<p>Where models did not converge we took the strategy of removing correlations between random effects before removing first three-way, then two-way interactions, before removing main effects. This criteria was applied to random effects for items before participants under the assumption that, with carefully developed items, variance will be greater in participants than items such that estimates for these random effects will be larger. All models used the bobyqa optimiser.</p>
-<p>Following this criteria, the final R formulae were used:</p>
-<section id="experiment-1-1" class="level3">
-<h3 class="anchored" data-anchor-id="experiment-1-1">Experiment 1</h3>
-<section id="reaction-time" class="level4">
-<h4 class="anchored" data-anchor-id="reaction-time">Reaction Time</h4>
-<pre><code>log_rt ~ stroop * language * trial_type + 
-  (1 + stroop + language + trial_type + stroop:language + trial_type:language | 
-  subject_id) + 
-  (1 + trial_type | word_colour)</code></pre>
-</section>
-<section id="accuracy-3" class="level4">
-<h4 class="anchored" data-anchor-id="accuracy-3">Accuracy</h4>
-<pre><code>correct ~ stroop * trial_type * language +
-  (1 + stroop + trial_type + language || subject_id) + 
-  (1 | word_colour)</code></pre>
-</section>
-</section>
-<section id="experiment-2-1" class="level3">
-<h3 class="anchored" data-anchor-id="experiment-2-1">Experiment 2</h3>
-<section id="reaction-time-1" class="level4">
-<h4 class="anchored" data-anchor-id="reaction-time-1">Reaction Time</h4>
-<pre><code>log_rt ~ stroop * language * trial_type + 
-  (1 + stroop + language + trial_type + stroop:language + trial_type:language || 
-  subject_id) + 
-  (1 + trial_type | word_colour)</code></pre>
-</section>
-<section id="accuracy-4" class="level4">
-<h4 class="anchored" data-anchor-id="accuracy-4">Accuracy</h4>
-<pre><code>correct ~ stroop * trial_type * language +
-  (1 | subject_id)</code></pre>
-</section>
-</section>
-<section id="experiment-3-1" class="level3">
-<h3 class="anchored" data-anchor-id="experiment-3-1">Experiment 3</h3>
-<section id="reaction-time-2" class="level4">
-<h4 class="anchored" data-anchor-id="reaction-time-2">Reaction Time</h4>
-<pre><code>log_rt ~ stroop * language * trial_type + 
-  (1 + stroop + language + trial_type + stroop:language + trial_type:language || 
-  subject_id) + 
-  (1 + trial_type | word_colour)</code></pre>
-</section>
-<section id="accuracy-5" class="level4">
-<h4 class="anchored" data-anchor-id="accuracy-5">Accuracy</h4>
-<pre><code>correct ~ stroop * trial_type * language +
-  (1 + stroop + language | subject_id) + 
-  (1 + trial_type | word_colour)</code></pre>
-</section>
-</section>
-</section>
-<section id="appendix-b.-bayesian-model-specification" class="level2">
-<h2 class="anchored" data-anchor-id="appendix-b.-bayesian-model-specification">Appendix B. Bayesian Model Specification</h2>
-<section id="model-priors" class="level3">
-<h3 class="anchored" data-anchor-id="model-priors">Model Priors</h3>
-<p>All models used the maximal random effects structure. For each experiment five models were fitted for response time and accuracy models respectively with priors varying across models for the precision of main effects and interactions for the fixed effects.</p>
-<section id="reaction-time-3" class="level4">
-<h4 class="anchored" data-anchor-id="reaction-time-3">Reaction Time</h4>
-<p>We began with setting priors for a single model in each Experiment with priors based on findings from <span class="citation" data-cites="liu2019symmetries">(<a href="#ref-liu2019symmetries" role="doc-biblioref">Liu et al., 2019</a>)</span>. The grand mean in Experiment 1 of Liu et al.&nbsp;is 1036.75ms (approx 6.9 on log scale). Thus, for our intercept we used a prior with a range of 800 - 1200ms, <span class="math inline">\(Normal(6.9, 0.1)\)</span>. Liu et al.&nbsp;found strong effects of Language (i.e.&nbsp;with a <span class="math inline">\(\eta_{p}^{2}\)</span> of 0.4). The biggest difference between languages was around 100ms. Thus, for language we used a prior with a range of -220ms to 220ms, <span class="math inline">\(Normal(0, 0.05)\)</span>. While Liu found effects of Stroop half as big as those for language, we assume that an effect at least as big as that of Language should be found for the effect Stroop blocks, so the same prior is used here. Trial type was not calculated in Liu et al., so we again assume the same prior for this main effect. All interactions as in Liu are at least half the size of the main effects, so we make the same assumption in our priors, setting all interactions to have priors of <span class="math inline">\(Normal(0, 0.025)\)</span>.</p>
-<p>We then varied priors around this baseline to evaluate their impact on fixed effect parameter estimates and Bayes factors. We varied main effects with <em>SD</em>s from 0.01, 0.025, 0.05, 0.075, 0.1, and with interactions with <em>SD</em>s from 0.005, 0.01, 0.025, 0.05, 0.075. We chose the final model for reporting where parameter estimates and Bayes factors were relatively stable. This is model 4 for each experiment and outcome. Finally, all models had the same priors for the remaining terms. We used a <span class="math inline">\(Normal(0, 0.1)\)</span> prior for all group-level (random) effects with an <span class="math inline">\(LKJ(2)\)</span> prior for the correlations between group-level effects, which regularises correlations to put less weight on correlations of 0 and 1. Finally, we used a <span class="math inline">\(Normal(0, 0.15)\)</span> prior for the sigma term.</p>
-</section>
-<section id="accuracy-6" class="level4">
-<h4 class="anchored" data-anchor-id="accuracy-6">Accuracy</h4>
-<p>Again, we began with setting priors for a single model in each Experiment with priors based on findings from <span class="citation" data-cites="liu2019symmetries">(<a href="#ref-liu2019symmetries" role="doc-biblioref">Liu et al., 2019</a>)</span>. In Experiment 1 of Liu et al.&nbsp;(2019) there is a very high grand mean accuracy of .93 (a logit of approximately 2.6). We thus use a prior with an approximate range of 2.2–3 logits, <span class="math inline">\(Normal(2.6, 0.2)\)</span>. Liu et al.&nbsp;found relatively strong Stroop effects of around 2% across conditions. This equates to the difference between an inverse logit of .93 and .91, i.e.&nbsp;a logit of 0.27. We thus set all main effects to allow for effects twice as large as that found in Liu et al.&nbsp;either side of 0, i.e.&nbsp;with a prior of <span class="math inline">\(Normal(0, 0.27)\)</span>. Given scores are assumed to be close to ceiling we allowed for broader priors on interaction effects when compared to the reaction time models, allowing for interaction effects around 1/3 as large as main effects, <span class="math inline">\(Normal(0., 0.18)\)</span>.</p>
-<p>We again varied priors around this baseline to evaluate their impact on fixed effect parameter estimates and Bayes factors. We varied main effects with <em>SD</em>s from 0.09, 0.18, 0.27, 0.36, 0.45, and with interactions with <em>SD</em>s from 0.045, 0.09, 0.18, 0.27, 0.36. We chose the final model for reporting where parameter estimates and Bayes factors were relatively stable. This is model 4 for each experiment and outcome. Finally, all models had the same priors for the remaining terms. We used a <span class="math inline">\(Normal(0, 0.5)\)</span> prior for all group-level (random) effects, exluding the intercept for by-participant effects which had a broader prior of <span class="math inline">\(Normal(0, 2)\)</span>. We also used an <span class="math inline">\(LKJ(2)\)</span> prior for the correlations between group-level effects, which regularises correlations to put less weight on correlations of 0 and 1.</p>
-</section>
-</section>
-<section id="sensitivity-of-parameter-estimates" class="level3">
-<h3 class="anchored" data-anchor-id="sensitivity-of-parameter-estimates">Sensitivity of Parameter Estimates</h3>
-<p>The following plot shows how sensitive parameter estimates are to the prior specification. Note that only priors that differ across models are highlighted in the plots below.</p>
-<section id="reaction-time-4" class="level4">
-<h4 class="anchored" data-anchor-id="reaction-time-4">Reaction Time</h4>
-<div class="cell">
+
+# Appendices
+
+## Appendix A. Frequentist Model Specification
+
+Where models did not converge we took the strategy of removing
+correlations between random effects before removing first three-way,
+then two-way interactions, before removing main effects. This criteria
+was applied to random effects for items before participants under the
+assumption that, with carefully developed items, variance will be
+greater in participants than items such that estimates for these random
+effects will be larger. All models used the bobyqa optimiser.
+
+Following this criteria, the final R formulae were used:
+
+### Experiment 1
+
+#### Reaction Time
+
+    log_rt ~ stroop * language * trial_type + 
+      (1 + stroop + language + trial_type + stroop:language + trial_type:language | 
+      subject_id) + 
+      (1 + trial_type | word_colour)
+
+#### Accuracy
+
+    correct ~ stroop * trial_type * language +
+      (1 + stroop + trial_type + language || subject_id) + 
+      (1 | word_colour)
+
+### Experiment 2
+
+#### Reaction Time
+
+    log_rt ~ stroop * language * trial_type + 
+      (1 + stroop + language + trial_type + stroop:language + trial_type:language || 
+      subject_id) + 
+      (1 + trial_type | word_colour)
+
+#### Accuracy
+
+    correct ~ stroop * trial_type * language +
+      (1 | subject_id)
+
+### Experiment 3
+
+#### Reaction Time
+
+    log_rt ~ stroop * language * trial_type + 
+      (1 + stroop + language + trial_type + stroop:language + trial_type:language || 
+      subject_id) + 
+      (1 + trial_type | word_colour)
+
+#### Accuracy
+
+    correct ~ stroop * trial_type * language +
+      (1 + stroop + language | subject_id) + 
+      (1 + trial_type | word_colour)
+
+## Appendix B. Bayesian Model Specification
+
+### Model Priors
+
+All models used the maximal random effects structure. For each
+experiment five models were fitted for response time and accuracy models
+respectively with priors varying across models for the precision of main
+effects and interactions for the fixed effects.
+
+#### Reaction Time
+
+We began with setting priors for a single model in each Experiment with
+priors based on findings from (Liu et al., 2019). The grand mean in
+Experiment 1 of Liu et al. is 1036.75ms (approx 6.9 on log scale). Thus,
+for our intercept we used a prior with a range of 800 - 1200ms,
+$Normal(6.9, 0.1)$. Liu et al. found strong effects of Language
+(i.e. with a $\eta_{p}^{2}$ of 0.4). The biggest difference between
+languages was around 100ms. Thus, for language we used a prior with a
+range of -220ms to 220ms, $Normal(0, 0.05)$. While Liu found effects of
+Stroop half as big as those for language, we assume that an effect at
+least as big as that of Language should be found for the effect Stroop
+blocks, so the same prior is used here. Trial type was not calculated in
+Liu et al., so we again assume the same prior for this main effect. All
+interactions as in Liu are at least half the size of the main effects,
+so we make the same assumption in our priors, setting all interactions
+to have priors of $Normal(0, 0.025)$.
+
+We then varied priors around this baseline to evaluate their impact on
+fixed effect parameter estimates and Bayes factors. We varied main
+effects with *SD*s from 0.01, 0.025, 0.05, 0.075, 0.1, and with
+interactions with *SD*s from 0.005, 0.01, 0.025, 0.05, 0.075. We chose
+the final model for reporting where parameter estimates and Bayes
+factors were relatively stable. This is model 4 for each experiment and
+outcome. Finally, all models had the same priors for the remaining
+terms. We used a $Normal(0, 0.1)$ prior for all group-level (random)
+effects with an $LKJ(2)$ prior for the correlations between group-level
+effects, which regularises correlations to put less weight on
+correlations of 0 and 1. Finally, we used a $Normal(0, 0.15)$ prior for
+the sigma term.
+
+#### Accuracy
+
+Again, we began with setting priors for a single model in each
+Experiment with priors based on findings from (Liu et al., 2019). In
+Experiment 1 of Liu et al. (2019) there is a very high grand mean
+accuracy of .93 (a logit of approximately 2.6). We thus use a prior with
+an approximate range of 2.2–3 logits, $Normal(2.6, 0.2)$. Liu et
+al. found relatively strong Stroop effects of around 2% across
+conditions. This equates to the difference between an inverse logit of
+.93 and .91, i.e. a logit of 0.27. We thus set all main effects to allow
+for effects twice as large as that found in Liu et al. either side of 0,
+i.e. with a prior of $Normal(0, 0.27)$. Given scores are assumed to be
+close to ceiling we allowed for broader priors on interaction effects
+when compared to the reaction time models, allowing for interaction
+effects around 1/3 as large as main effects, $Normal(0., 0.18)$.
+
+We again varied priors around this baseline to evaluate their impact on
+fixed effect parameter estimates and Bayes factors. We varied main
+effects with *SD*s from 0.09, 0.18, 0.27, 0.36, 0.45, and with
+interactions with *SD*s from 0.045, 0.09, 0.18, 0.27, 0.36. We chose the
+final model for reporting where parameter estimates and Bayes factors
+were relatively stable. This is model 4 for each experiment and outcome.
+Finally, all models had the same priors for the remaining terms. We used
+a $Normal(0, 0.5)$ prior for all group-level (random) effects, exluding
+the intercept for by-participant effects which had a broader prior of
+$Normal(0, 2)$. We also used an $LKJ(2)$ prior for the correlations
+between group-level effects, which regularises correlations to put less
+weight on correlations of 0 and 1.
+
+### Sensitivity of Parameter Estimates
+
+The following plot shows how sensitive parameter estimates are to the
+prior specification. Note that only priors that differ across models are
+highlighted in the plots below.
+
+#### Reaction Time
+
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="fu">here</span>(<span class="st">"03_plots"</span>, <span class="st">"02_sensitivity-checks"</span>, <span class="st">"02_bayesian"</span>, <span class="st">"rt_fixef.png"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+``` r
+knitr::include_graphics(here("03_plots", "02_sensitivity-checks", "02_bayesian", "rt_fixef.png"))
+```
+
 </details>
-<div class="cell-output-display">
-<div id="fig-prior-fixef-rt" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="../03_plots/02_sensitivity-checks/02_bayesian/rt_fixef.png" class="img-fluid figure-img" alt="Plots showing how fixed effect parameter estimates change across Bayesian models with different prior specifications for the reaction time outcome. Parameter estimates are typically stable between the 3rd and 5th models." width="1800"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;2: Sensitivity of fixed effect parameter estimates to prior specification in the Bayesian models for reaction time across studies.</figcaption><p></p>
+
+<figure>
+<img src="../03_plots/02_sensitivity-checks/02_bayesian/rt_fixef.png"
+id="fig-prior-fixef-rt"
+data-fig-alt="Plots showing how fixed effect parameter estimates change across Bayesian models with different prior specifications for the reaction time outcome. Parameter estimates are typically stable between the 3rd and 5th models."
+alt="Figure 2: Sensitivity of fixed effect parameter estimates to prior specification in the Bayesian models for reaction time across studies." />
+<figcaption aria-hidden="true">Figure 2: Sensitivity of fixed effect
+parameter estimates to prior specification in the Bayesian models for
+reaction time across studies.</figcaption>
 </figure>
-</div>
-</div>
-</div>
-</section>
-<section id="accuracy-7" class="level4">
-<h4 class="anchored" data-anchor-id="accuracy-7">Accuracy</h4>
-<div class="cell">
+
+#### Accuracy
+
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="fu">here</span>(<span class="st">"03_plots"</span>, <span class="st">"02_sensitivity-checks"</span>, <span class="st">"02_bayesian"</span>, <span class="st">"accuracy_fixef.png"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+``` r
+knitr::include_graphics(here("03_plots", "02_sensitivity-checks", "02_bayesian", "accuracy_fixef.png"))
+```
+
 </details>
-<div class="cell-output-display">
-<div id="fig-prior-fixef-accuracy" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="../03_plots/02_sensitivity-checks/02_bayesian/accuracy_fixef.png" class="img-fluid figure-img" alt="Plots showing how fixed effect parameter estimates change across Bayesian models with different prior specifications for the accuracy outcome. Parameter estimates are typically stable between the 3rd and 5th models." width="1800"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3: Sensitivity of fixed effect parameter estimates to prior specification in the Bayesian models for accuracy across studies.</figcaption><p></p>
+
+<figure>
+<img
+src="../03_plots/02_sensitivity-checks/02_bayesian/accuracy_fixef.png"
+id="fig-prior-fixef-accuracy"
+data-fig-alt="Plots showing how fixed effect parameter estimates change across Bayesian models with different prior specifications for the accuracy outcome. Parameter estimates are typically stable between the 3rd and 5th models."
+alt="Figure 3: Sensitivity of fixed effect parameter estimates to prior specification in the Bayesian models for accuracy across studies." />
+<figcaption aria-hidden="true">Figure 3: Sensitivity of fixed effect
+parameter estimates to prior specification in the Bayesian models for
+accuracy across studies.</figcaption>
 </figure>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="sensitivity-of-bayes-factors" class="level3">
-<h3 class="anchored" data-anchor-id="sensitivity-of-bayes-factors">Sensitivity of Bayes Factors</h3>
-<p>Similarly, we show how prior specification affects the direction and magnitude of Bayes factors across models and studies. Here , the grey band shows the region where insuffient evidence is found for the null and alternative hypotheses. Values above this band show evidence in support of the null hypothesis. Values below this line show evidence in support of the alternative hypothesis.</p>
-<section id="reaction-time-5" class="level4">
-<h4 class="anchored" data-anchor-id="reaction-time-5">Reaction Time</h4>
-<div class="cell">
+
+### Sensitivity of Bayes Factors
+
+Similarly, we show how prior specification affects the direction and
+magnitude of Bayes factors across models and studies. Here , the grey
+band shows the region where insuffient evidence is found for the null
+and alternative hypotheses. Values above this band show evidence in
+support of the null hypothesis. Values below this line show evidence in
+support of the alternative hypothesis.
+
+#### Reaction Time
+
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="fu">here</span>(<span class="st">"03_plots"</span>, <span class="st">"02_sensitivity-checks"</span>, <span class="st">"02_bayesian"</span>, <span class="st">"rt_bayes-factors.png"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+``` r
+knitr::include_graphics(here("03_plots", "02_sensitivity-checks", "02_bayesian", "rt_bayes-factors.png"))
+```
+
 </details>
-<div class="cell-output-display">
-<div id="fig-prior-bf-rt" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="../03_plots/02_sensitivity-checks/02_bayesian/rt_bayes-factors.png" class="img-fluid figure-img" alt="Plots showing how Bayes factors change across Bayesian models with different prior specifications for the response time outcome. Conclusions are often consistent between the 3rd and 5th models." width="1800"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;4: Sensitivity of Bayes factors to prior specification in the Bayesian models for response times across studies.</figcaption><p></p>
+
+<figure>
+<img
+src="../03_plots/02_sensitivity-checks/02_bayesian/rt_bayes-factors.png"
+id="fig-prior-bf-rt"
+data-fig-alt="Plots showing how Bayes factors change across Bayesian models with different prior specifications for the response time outcome. Conclusions are often consistent between the 3rd and 5th models."
+alt="Figure 4: Sensitivity of Bayes factors to prior specification in the Bayesian models for response times across studies." />
+<figcaption aria-hidden="true">Figure 4: Sensitivity of Bayes factors to
+prior specification in the Bayesian models for response times across
+studies.</figcaption>
 </figure>
-</div>
-</div>
-</div>
-</section>
-<section id="accuracy-8" class="level4">
-<h4 class="anchored" data-anchor-id="accuracy-8">Accuracy</h4>
-<div class="cell">
+
+#### Accuracy
+
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="fu">here</span>(<span class="st">"03_plots"</span>, <span class="st">"02_sensitivity-checks"</span>, <span class="st">"02_bayesian"</span>, <span class="st">"accuracy_bayes-factors.png"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+``` r
+knitr::include_graphics(here("03_plots", "02_sensitivity-checks", "02_bayesian", "accuracy_bayes-factors.png"))
+```
+
 </details>
-<div class="cell-output-display">
-<div id="fig-prior-bf-accuracy" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="../03_plots/02_sensitivity-checks/02_bayesian/accuracy_bayes-factors.png" class="img-fluid figure-img" alt="Plots showing how Bayes factors change across Bayesian models with different prior specifications for the accuracy outcome. Conclusions are often consistent between the 3rd and 5th models." width="1800"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;5: Sensitivity of Bayes factors to prior specification in the Bayesian models for accuracy across studies.</figcaption><p></p>
+
+<figure>
+<img
+src="../03_plots/02_sensitivity-checks/02_bayesian/accuracy_bayes-factors.png"
+id="fig-prior-bf-accuracy"
+data-fig-alt="Plots showing how Bayes factors change across Bayesian models with different prior specifications for the accuracy outcome. Conclusions are often consistent between the 3rd and 5th models."
+alt="Figure 5: Sensitivity of Bayes factors to prior specification in the Bayesian models for accuracy across studies." />
+<figcaption aria-hidden="true">Figure 5: Sensitivity of Bayes factors to
+prior specification in the Bayesian models for accuracy across
+studies.</figcaption>
 </figure>
-</div>
-</div>
-</div>
-</section>
-</section>
-</section>
-</section>
 
-
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>For frequentist models fitted in lme4 this requires first transforming response times to their natural log before fitting. For Bayesian models fitted in brms response times are fitted directly using a lognormal family.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main>
-<!-- /main column -->
-<script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
-    }
-  });
-  clipboard.on('success', function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  });
-  function tippyHover(el, contentFn) {
-    const config = {
-      allowHTML: true,
-      content: contentFn,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start'
-    };
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      return note.innerHTML;
-    });
-  }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
-      });
-    }
-  }
-});
-</script>
-</div> <!-- /content -->
-
-
-
-</body></html>
+[^1]: For frequentist models fitted in lme4 this requires first
+    transforming response times to their natural log before fitting. For
+    Bayesian models fitted in brms response times are fitted directly
+    using a lognormal family.
