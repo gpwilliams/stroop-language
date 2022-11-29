@@ -19,3 +19,7 @@ write_csv(demo_filtered, here("01_data", "03_filtered", "demographics.csv"))
 # number of participant numbers and trials along with number of exclusions
 write_csv(participant_numbers, here("04_analysis", "01_data-checks", "participant_numbers.csv"))
 write_csv(trial_numbers, here("04_analysis", "01_data-checks", "trial_numbers.csv"))
+
+# additional exclusions ----
+
+write_csv(underage_subjects, here("04_analysis", "01_data-checks", "additional_exclusions.csv"))

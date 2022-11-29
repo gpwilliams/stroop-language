@@ -1,9 +1,3 @@
-options(
-  emmeans = list(
-    lmer.df = "satterthwaite"
-  )
-)
-
 # RT ----
 
 # update reference grid to allow calculation of rt on raw scale
@@ -22,7 +16,8 @@ rt_grid <- expand.grid(
     formula("~stroop"), 
     formula("~language"),
     formula("~trial_type"),
-    formula("~language*trial_type")
+    formula("~trial_type|language"),
+    formula("~trial_type|stroop*language")
   )
 )
 
@@ -36,6 +31,13 @@ rt_pairs <- map(
   ~pairs(.x)
 )
 
+# get formulae that contain a bar (for grouped pairs)
+grouped_pairs_index_rt <- grep("\\|", rt_grid$formula)
+
+# make difference in differences for grouped pairwise tests
+rt_pairs_diffs <- rt_pairs[grouped_pairs_index_rt] |> 
+  map(~pairs(.x, by = NULL, adjust = "tukey"))
+  
 ## response scale ----
 
 rt_emms_resp <- map(
@@ -48,6 +50,9 @@ rt_pairs_resp <- map(
   ~pairs(.x)
 )
 
+rt_pairs_diffs_resp <- rt_pairs_resp[grouped_pairs_index_rt] |> 
+  map(~pairs(.x, by = NULL, adjust = "tukey"))
+
 # Accuracy
 
 accuracy_grid <- expand.grid(
@@ -56,7 +61,8 @@ accuracy_grid <- expand.grid(
     formula("~stroop"), 
     formula("~language"),
     formula("~trial_type"),
-    formula("~language*trial_type")
+    formula("~trial_type|language"),
+    formula("~trial_type|stroop*language")
   )
 )
 
@@ -70,6 +76,13 @@ accuracy_pairs <- map(
   ~pairs(.x)
 )
 
+# get formulae that contain a bar (for grouped pairs)
+grouped_pairs_index_accuracy <- grep("\\|", accuracy_grid$formula)
+
+# make difference in differences for grouped pairwise tests
+accuracy_pairs_diffs <- accuracy_pairs[grouped_pairs_index_accuracy] |> 
+  map(~pairs(.x, by = NULL, adjust = "tukey"))
+
 ## response scale ----
 
 accuracy_emms_resp <- map(
@@ -81,3 +94,6 @@ accuracy_pairs_resp <- map(
   accuracy_emms_resp,
   ~pairs(.x)
 )
+
+accuracy_pairs_diffs_resp <- accuracy_pairs_resp[grouped_pairs_index_accuracy] |> 
+  map(~pairs(.x, by = NULL, adjust = "tukey"))

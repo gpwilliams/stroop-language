@@ -3,7 +3,7 @@
 # In Liu et al. there's a very high grand mean accuracy of .93, this is
 # qlogis(.93), or a logit of approximately 2.6
 # Liu et al. found relatively strong block effects of around 2% difference
-# this is qlogis(.95) - qlogis(.93), a logit of .36
+# this is qlogis(.93) - qlogis(.91), a logit of .27
 # as with rection times we will assume this effect for all main effects,
 # and one half as large for all interactions (.18)
 

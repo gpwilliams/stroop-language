@@ -17,8 +17,9 @@ na_counts <- demo |>
   pivot_longer(!study)
 
 gender_counts <- demo |> 
+  mutate(gender = factor(gender)) |> 
   group_by(study) |>
-  count(gender)
+  count(gender, .drop = FALSE)
 
 demo_summary <- demo |> 
   filter(age >= 18) |> 

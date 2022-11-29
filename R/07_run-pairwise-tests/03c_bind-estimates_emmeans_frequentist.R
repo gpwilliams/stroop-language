@@ -1,6 +1,9 @@
 bound_emmeans <- list(
   rt_emms = bind_emmeans(rt_emms),
-  rt_emms_resp = bind_emmeans(rt_emms_resp),
+  rt_emms_resp = bind_emmeans(
+    rt_emms_resp |> 
+      map( ~ .x |> as_tibble() |> rename(emmean = response))
+  ),
   accuracy_emms = bind_emmeans(accuracy_emms),
   accuracy_emms_resp = bind_emmeans(accuracy_emms_resp)
 )

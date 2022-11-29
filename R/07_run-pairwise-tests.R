@@ -4,6 +4,16 @@ library(tidyverse)
 library(here)
 library(broom.mixed)
 library(emmeans)
+library(bayesplot)
+
+# set emmeans options ----
+
+options(
+  emmeans = list(
+    lmer.df = "satterthwaite",
+    lmerTest.limit = 8450
+  )
+)
 
 # set plotting theme ----
 
