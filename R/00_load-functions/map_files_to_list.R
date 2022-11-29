@@ -1,8 +1,7 @@
 map_files_to_list <- function(
   file_path, 
   file_type = ".rds", 
-  pattern = "*",
-  read_function = readr::read_rds
+  pattern = "*"
   ) {
   
   # get full path
@@ -11,6 +10,14 @@ map_files_to_list <- function(
     full.names = TRUE,
     pattern = paste0(pattern, file_type)
   )
+  
+  if(file_type == ".rds") {
+    read_function <- readr::read_rds
+  } 
+  if(file_type == ".csv") {
+    read_function <- readr::read_csv
+  }
+  
   # read files
   files <- purrr::map(full_file_path, read_function)
   # add names to list
