@@ -1,0 +1,702 @@
+---
+title: "Results"
+author: "Dr Glenn Williams"
+format:
+  html:
+    code-fold: true
+editor: source
+toc: true
+number-sections: false
+execute:
+  warning: false
+  message: false
+bibliography: citations.bib
+csl: apa.csl
+---
+
+```{r setup}
+#| message: false
+
+# load packages ----
+
+library(tidyverse)
+library(here)
+library(gt)
+library(english)
+
+# set options ----
+
+options(scipen = 999)
+
+# functions ----
+
+list.files(here("R", "00_load-functions"), full.names = TRUE) |> 
+  purrr::walk(source)
+
+# process data ----
+
+# data summaries
+performance_exclusions <- read_csv(here("01_data", "01_raw", "performance_exclusions.csv"))
+data_checks <- map_files_to_list(here("04_analysis", "01_data-checks"), file_type = ".csv")
+descriptives <- map_files_to_list(here("04_analysis", "02_descriptives"), file_type = ".csv")
+
+# models and model products
+freq_results <- map_files_to_list(
+  here("04_analysis", "04_model-predictions", "01_frequentist"),
+  file_type = ".csv"
+)
+
+# add indicator of consistent results for ANOVA and mixed models
+freq_results$rt_mixed_freq_table_est <- left_join(
+  freq_results$rt_mixed_freq_table_est,
+  freq_results$rt_anova_freq_table |> 
+  select(Study, Parameter, p_value) |> 
+  rename(p_anova = p_value),
+  by = c("Study", "Parameter")
+) |> 
+  mutate(
+    p_inconsistent = case_when(
+      is.na(p_anova) ~ NA, # not in ANOVA model
+      p_value & p_anova < .05 ~ FALSE, # consistent
+      p_value & p_anova > .05 ~ FALSE, # consistent
+      TRUE ~ TRUE # default, inconsistent
+    )
+  ) |> 
+  select(-p_anova)
+
+freq_results$accuracy_mixed_freq_table_est <- left_join(
+  freq_results$accuracy_mixed_freq_table_est,
+  freq_results$accuracy_anova_freq_table |> 
+  select(Study, Parameter, p_value) |> 
+  rename(p_anova = p_value),
+  by = c("Study", "Parameter")
+) |> 
+  mutate(
+    p_inconsistent = case_when(
+      is.na(p_anova) ~ NA, # not in ANOVA model
+      p_value < .05 & p_anova < .05 ~ FALSE, # consistent
+      p_value > .05 & p_anova > .05 ~ FALSE, # consistent
+      TRUE ~ TRUE # default, inconsistent
+    )
+  ) |> 
+  select(-p_anova)
+
+# make df into a single column for ANOVA tables
+freq_results[c(
+  "accuracy_anova_freq_table", 
+  "rt_anova_freq_table",
+  "rt_mixed_freq_table_anova"
+)] <- freq_results[c(
+  "accuracy_anova_freq_table", 
+  "rt_anova_freq_table",
+  "rt_mixed_freq_table_anova"
+)] |>
+  map( 
+    ~ .x |> 
+      mutate(df = paste0("[", num_df, ", ", round(den_df), "]")) |> 
+      select(-c(num_df, den_df))
+  )
+
+# make df label consistent across all tables
+freq_results["accuracy_mixed_freq_table_anova"] <- 
+  freq_results["accuracy_mixed_freq_table_anova"] |>
+  map( 
+    ~ .x |> 
+      mutate(df = as.character(chi_df)) |> 
+      select(-chi_df)
+  )
+
+# make all parameter names consistent
+# fix printing of p-values for APA formatting
+freq_results <- freq_results |> 
+  map( 
+    ~ .x |> 
+      mutate(p_value = papa(p_value, asterisk = FALSE)) |> 
+      mutate_if(is.numeric, round_pad) |> 
+      mutate( # fix inconsistent ordering
+       Parameter = case_when(
+          Parameter == "(Intercept)" ~ "Intercept",
+          Parameter == "Trial Type × Language" ~ "Language × Trial Type",
+          Parameter == "Stroop × Trial Type × Language" ~ "Stroop × Language × Trial Type",
+          TRUE ~ Parameter
+        )
+      ) |> 
+      arrange( # sort to specific order across data sets
+        Study,
+        Measure,
+        factor(
+          Parameter,
+          levels = c(
+            "Intercept",
+            "Stroop",
+            "Language",
+            "Trial Type",
+            "Stroop × Language",
+            "Stroop × Trial Type",
+            "Language × Trial Type",
+            "Stroop × Language × Trial Type"
+          ))
+      )
+  )
+
+# load bayesian data
+bayes_results <- map_files_to_list(
+  here("04_analysis", "04_model-predictions", "02_bayesian"),
+  file_type = ".csv"
+)
+
+# compute bayes factors in support of the null hypothesis
+# find when bayes factors are inconsistent across models 3-5
+# due to prior sensitivity
+# fix printing of Bayes factors to limit max values
+# fix printing of parameter names for consistency
+bayes_results[grep('bayes-factors', names(bayes_results))] <- 
+  bayes_results[grep('bayes-factors', names(bayes_results))] |> 
+  map(
+    ~ .x |> 
+      mutate(BF = 1/BF) |> # make BF into evidence for null
+      rename(BF_01 = BF) |> # rename to make this clear
+      select(Study, Prior_Model, Parameter, BF_01) |> 
+      pivot_wider(names_from = Prior_Model, values_from = BF_01) |> 
+      mutate(
+        prior_sensitive = case_when(
+          `3` <= 1/3 & `4` <= 1/3 & `5` <= 1/3 ~ FALSE, # all negative
+          `3` >= 3 & `4` >= 3 & `5` >= 3 ~ FALSE, # all positive
+          `3` <= 3 & `3` >= 1/3 & `4` <= 3 & `3` >= 1/3 & `4` <= 3 & `5` >= 1/3 ~ FALSE, # all insensitive
+        TRUE ~ TRUE
+        )
+      ) |> 
+      rename(BF_01 = `4`) |>  # keep model 4
+      select(Study, Parameter, BF_01, prior_sensitive) |> 
+      mutate(
+        BF_01 = case_when(
+          BF_01 > 1000 ~ ">1000",
+          BF_01 < 1/1000 ~ "<0.001",
+          TRUE ~ round_pad(BF_01, digits = 3, nsmall = 2)
+        ),
+        Parameter = case_when(
+          Parameter == "Trial Type × Language" ~ "Language × Trial Type",
+          Parameter == "Stroop × Trial Type × Language" ~ "Stroop × Language × Trial Type",
+          TRUE ~ Parameter
+        )
+      ) |> 
+      mutate_if(is.numeric, round_pad) 
+  )
+
+# fix printing for all values
+bayes_results <- bayes_results |> 
+    map( ~ .x |>  mutate_if(is.numeric, round_pad))
+
+# get pairwise tests, fix p-values for printing, round numbers
+pairwise_tests <- map_files_to_list(
+  here("04_analysis", "05_pairwise-tests"),
+  file_type = ".csv"
+) 
+
+pairwise_tests_plots <- pairwise_tests
+
+# fix printing of pairwise tests
+pairwise_tests[grep('pairs', names(pairwise_tests))] <- 
+  pairwise_tests[grep('pairs', names(pairwise_tests))] |> 
+    map( 
+    ~ .x |> 
+      rename(p_value = p.value) |> 
+      mutate(p_value = papa(p_value, asterisk = FALSE))
+  )
+
+pairwise_tests <- pairwise_tests |> 
+  map( ~ .x |> mutate_if(is.numeric, round_pad))
+```
+
+# Experiment 1
+
+## Participants
+
+`r report_participant_numbers(data_checks$participant_numbers, "dutch_stroop")` Dutch-English bilinguals were recruited. `r report_recording_failure(performance_exclusions, "dutch_stroop")` participant was excluded due to a recording failure and `r report_under_age(data_checks$additional_exclusions, "dutch_stroop")` participant was removed due to being under-age, leaving `r report_participant_counts(descriptives$gender_counts, "dutch_stroop")` participants with a mean age of `r report_participant_age(descriptives$demo_summary, "dutch_stroop")`. Following the experiment, participants were asked to complete a language background questionnaire [cf. @kirk2018can], and English and Dutch vocabulary tests based on lexical decision tasks [i.e., LexTale, @lemhofer2012introducing, see @tbl-dutch-demo].
+
+```{r tbl-dutch-demo}
+#| label: tbl-dutch-demo
+#| tbl-cap: Mean percentages (SD) for language use and proficiency for each language for participants in Experiment 1
+descriptives$demo_summary |> 
+  filter(
+    study == "dutch_stroop", 
+    str_detect(parameter, "current_percent|lex_tale"), 
+    statistic %in% c("mean", "sd")
+  ) |> 
+  pivot_wider(names_from = statistic, values_from = value) |> 
+  mutate_if(is.numeric, round_pad) |> 
+  mutate(
+    Parameter = case_when(
+      parameter == "current_percent_english" ~ "English Current Use",
+      parameter == "current_percent_english_pair" ~ "Dutch Current Use",
+      parameter == "lex_tale_english" ~ "English LexTale",
+      parameter == "lex_tale_english_pair" ~ "Dutch LexTale"
+    ),
+    Score = paste0(mean, " (", sd, ")")
+  ) |> 
+  select(Parameter, Score) |> 
+  apa_gt()
+```
+
+## Analysis
+
+We used R [@R-base] and the R-packages tidyverse [@tidyverse], here [@here], and bayesplot [@bayesplot-a; @bayesplot-b] for data preparation, analysis, and presentation. A
+
+For accuracy and reaction time analyses, the first trial in each block and "recovery" trials following an error were excluded from the analyses. For reaction time analyses only, reaction times under 150ms, or reaction times over 2500ms or more than three standard deviations above the participant mean were discarded as outliers. Taking these criteria into account, a total of `r report_dropped_trial_numbers_accuracy(data_checks$trial_numbers, "dutch_stroop")`% and `r report_dropped_trial_numbers_rt(data_checks$trial_numbers, "dutch_stroop")`% of trials were excluded from the accuracy and reaction time analyses respectively.
+
+For each study we performed separate frequentist and Bayesian analyses for both the accuracy and response time dependent variables. For the frequentist analyses, we modelled the data with linear mixed effects models fitted using the lme4 R-package [@lme4]. We used the afex R-package [@afex] to fit models with nested fixed effects, evaluating the statistical significance of main effects and interactions using likelihood-ratio tests. For the parameter estimates of each model, statistical significance is evaluated using *p*-values approximated using the Satterthwaite method implemented in the lmerTest R-package [@lmerTest]. Significant interactions were further investigated using estimated marginal means and pairwise tests calculated using the emmeans R-package [@emmeans]. We fitted Bayesian equivalents to the frequentist multilevel models using the brms R-package [@brms-a; @brms-b]. Bayes Factors were calculated using the Savage-Dickey approximation using the bayestestR R-package [@bayestestR].
+
+Given the lower bound and skewed nature of response times, this outcome was modelled using linear mixed effects models assuming a log-normal distribution[^1]. Given accuracy scores are binary, this outcome were modelled using generalised linear mixed effects models assuming a binomial distribution with a logit link function.
+
+[^1]: For frequentist models fitted in lme4 this requires first transforming response times to their natural log before fitting. For Bayesian models fitted in brms response times are fitted directly using a lognormal family.
+
+All models used sum-coded (-1, 1) fixed effects of Stroop Block (Neutral or Incongruent), Trial Type (Repetition or Switch), and Language (English or Dutch). Models contained crossed random effects of participants and items, using the maximal random effects structure justified by the design that allows for model convergence [@barr2013random]. One advantage of Bayesian analyses is that with relatively informative priors the maximal random effects structure can be fitted without convergence problems [@vasishth2016statistical; @nicenboim2016statistical], meaning that no simplification to random effects was needed. For a description of the random effects in each frequentist model, see Appendix A. For a description of priors in each Bayesian model and how these affect parameter estimates and Bayes factors, see Appendix B. Finally, while the mixed effects models form the basis of our conclusions, for direct comparison to Liu et al. [-@liu2019symmetries], we also analysed the data aggregated by participant using ANOVAs. Unless otherwise stated, Bayes factors are consistent across different prior specifications from the prior sensitivity analysis. Similarly, unless otherwise stated *p*-values are consistent across across mixed-effects models and by-participants ANOVAs.
+
+### Response Time
+
+Fixed effects parameter estimates for response time models are shown in @tbl-param-dutch-rt.
+
+```{r tbl-param-dutch-rt}
+#| label: tbl-param-dutch-rt
+#| tbl-cap: Fixed effects parameter estimates and test statistics for response time in Experiment 1
+bind_parameters_rt(
+  freq_results$rt_mixed_freq_table_est,
+  bayes_results$`rt_bayes-factors`,
+  "Dutch"
+) |> 
+  parameters_rt_gt()
+```
+
+```{r dutch-rt-emms}
+#| include: false
+dutch_stroop_rt_emm <- pairwise_tests$rt_emms_resp |> 
+  filter(study == "dutch", analysis == "stroop")
+
+dutch_trial_type_rt_emm <- pairwise_tests$rt_emms_resp |> 
+  filter(study == "dutch", analysis == "trial-type")
+```
+
+There was a significant main effect of Stroop Block with faster response times in the Neutral condition `r make_descriptives_sentence(dutch_stroop_rt_emm, "Neutral", "emmean", "lower.CL", "upper.CL")` than the Incongruent condition `r make_descriptives_sentence(dutch_stroop_rt_emm, "Incongruent", "emmean", "lower.CL", "upper.CL")`. There was also a significant main effect of Trial Type, with faster response times for Repetition `r make_descriptives_sentence(dutch_trial_type_rt_emm, "Repetition", "emmean", "lower.CL", "upper.CL")` than for Switch trials `r make_descriptives_sentence(dutch_trial_type_rt_emm, "Switch", "emmean", "lower.CL", "upper.CL")`. All other effects were non-significant, with Bayes factors \> 3, indicating the data are at least 3 times more likely under the null model than the alternative model.
+
+### Accuracy
+
+Fixed effects parameter estimates for accuracy models are shown in @tbl-param-dutch-accuracy.
+
+```{r tbl-param-dutch-accuracy}
+#| label: tbl-param-dutch-accuracy
+#| tbl-cap: Fixed effects parameter estimates and test statistics for accuracy in Experiment 1
+bind_parameters_accuracy(
+  freq_results$accuracy_mixed_freq_table_est,
+  bayes_results$`accuracy_bayes-factors`,
+  "Dutch"
+) |>
+  parameters_accuracy_gt()
+```
+
+```{r dutch-accuracy-emm}
+#| include: false
+dutch_stroop_accuracy_emm <- pairwise_tests$accuracy_emms_resp |> 
+  filter(study == "dutch", analysis == "stroop")
+
+dutch_trial_type_accuracy_emm <- pairwise_tests$accuracy_emms_resp |> 
+  filter(study == "dutch", analysis == "trial-type")
+```
+
+There was a significant main effect of Stroop Block with a larger proportion of correct answers in the Neutral condition `r make_descriptives_sentence(dutch_stroop_accuracy_emm, "Neutral", "prob", "asymp.LCL", "asymp.UCL")` than the Incongruent condition `r make_descriptives_sentence(dutch_stroop_accuracy_emm, "Incongruent", "prob", "asymp.LCL", "asymp.UCL")`. There was also a significant main effect of Trial Type, with a larger proportion of correct answers for Repetition `r make_descriptives_sentence(dutch_trial_type_accuracy_emm, "Repetition", "prob", "asymp.LCL", "asymp.UCL")` than for Switch trials `r make_descriptives_sentence(dutch_trial_type_accuracy_emm, "Switch", "prob", "asymp.LCL", "asymp.UCL")`. All other effects were non-significant. Of these, only the Language × Trial Type interaction provided reliable evidence in support of the null hypothesis that was insensitive to prior specification. Crucially, while the main effect of Language is non-significant in the mixed effects model, this effect is significant in the by-subjects ANOVA, likely indicating that by-subject ANOVAs underestimate by-item variance and thus suffer from an inflated type-I error rate.
+
+# Experiment 2
+
+## Participants
+
+`r report_participant_numbers(data_checks$participant_numbers, "arabic_stroop")` Arabic-English bilinguals were recruited. `r report_recording_failure(performance_exclusions, "arabic_stroop")` participant was excluded due to a recording failure, leaving `r report_participant_counts(descriptives$gender_counts, "arabic_stroop")` participants with a mean age of `r report_participant_age(descriptives$demo_summary, "arabic_stroop")`). Following the experiment, participants were asked to complete a the same language background questionnaire and English and Chinese vocabulary tests based on lexical decision tasks as in Experiment 1.
+
+```{r tbl-arabic-demo}
+#| label: tbl-arabic-demo
+#| tbl-cap: Mean percentages (SD) for language use and proficiency for each language for participants in Experiment 2
+descriptives$demo_summary |> 
+  filter(
+    study == "arabic_stroop", 
+    str_detect(parameter, "current_percent|lex_tale"), 
+    statistic %in% c("mean", "sd")
+  ) |> 
+  pivot_wider(names_from = statistic, values_from = value) |> 
+  mutate_if(is.numeric, round_pad) |> 
+  mutate(
+    Parameter = case_when(
+      parameter == "current_percent_english" ~ "English Current Use",
+      parameter == "current_percent_english_pair" ~ "Arabic Current Use",
+      parameter == "lex_tale_english" ~ "English LexTale",
+      parameter == "lex_tale_english_pair" ~ "Arabic LexTale"
+    ),
+    Score = paste0(mean, " (", sd, ")")
+  ) |> 
+  select(Parameter, Score) |> 
+  apa_gt()
+```
+
+We used the same analytical techniques in study 2 as we did for study 1. For accuracy and reaction time analyses, the first trial in each block and "recovery" trials following an error were excluded from the analyses. For reaction time analyses only, reaction times under 150ms, or reaction times over 2500ms or more than three standard deviations above the participant mean were discarded as outliers. Taking these criteria into account, a total of `r report_dropped_trial_numbers_accuracy(data_checks$trial_numbers, "arabic_stroop")`% and `r report_dropped_trial_numbers_rt(data_checks$trial_numbers, "arabic_stroop")`% of trials were excluded from the accuracy and reaction time analyses respectively.
+
+### Response Time
+
+Fixed effects parameter estimates for accuracy models are shown in @tbl-param-arabic-rt.
+
+```{r tbl-param-arabic-rt}
+#| label: tbl-param-arabic-rt
+#| tbl-cap: Fixed effects parameter estimates and test statistics for response time in Experiment 2
+bind_parameters_rt(
+  freq_results$rt_mixed_freq_table_est,
+  bayes_results$`rt_bayes-factors`,
+  "Arabic"
+) |> 
+  parameters_rt_gt()
+```
+
+```{r arabic-rt-emm}
+#| include: false
+arabic_stroop_rt_emm <- pairwise_tests$rt_emms_resp |> 
+  filter(study == "arabic", analysis == "stroop")
+
+arabic_language_rt_emm <- pairwise_tests$rt_emms_resp |> 
+  filter(study == "arabic", analysis == "language")
+
+arabic_trial_type_rt_emm <- pairwise_tests$rt_emms_resp |> 
+  filter(study == "arabic", analysis == "trial-type")
+
+arabic_language_trial_type_rt_emm <- pairwise_tests$rt_emms_resp |> 
+  filter(study == "arabic", analysis == "trial-type-groupedby-language") |> 
+  select(-c(study, response, analysis))
+
+arabic_language_trial_type_rt_pairs <- pairwise_tests$rt_pairs_resp |> 
+  filter(study == "arabic", analysis == "trial-type-groupedby-language") |> 
+  select(-c(study, response, analysis))
+
+arabic_language_trial_type_rt_pairs_diffs <- pairwise_tests$rt_pairs_diffs_resp |> 
+  filter(study == "arabic", analysis == "trial-type-groupedby-language")
+```
+
+There was a significant main effect of Stroop Block with faster response times in the Neutral condition `r make_descriptives_sentence(arabic_stroop_rt_emm, "Neutral", "emmean", "lower.CL", "upper.CL")` than the Incongruent condition `r make_descriptives_sentence(arabic_stroop_rt_emm, "Incongruent", "emmean", "lower.CL", "upper.CL")`. There was also a significant main effect of Language, with faster response times in English `r make_descriptives_sentence(arabic_language_rt_emm, "English", "emmean", "lower.CL", "upper.CL")` than Arabic `r make_descriptives_sentence(arabic_language_rt_emm, "Arabic", "emmean", "lower.CL", "upper.CL")`. There was also a significant main effect of Trial Type, with faster response times in the Repetition `r make_descriptives_sentence(arabic_trial_type_rt_emm, "Repetition", "emmean", "lower.CL", "upper.CL")` than the Switch trials `r make_descriptives_sentence(arabic_trial_type_rt_emm, "Switch", "emmean", "lower.CL", "upper.CL")`. Finally, there was a significant interaction between Language and Trial Type. Estimated marginal means for Trial Type within each Language are shown in @tbl-emmeans-arabic-language-trial-type-rt
+
+```{r tbl-emmeans-arabic-language-trial-type-rt}
+#| label: tbl-emmeans-arabic-language-trial-type-rt
+#| tbl-cap: Estimated marginal means of Response Time for Trial Type by Language Variety in Experiment 2
+arabic_language_trial_type_rt_emm |> 
+  mutate(`95% CI` = paste0("[", lower.CL, ", ", upper.CL, "]")) |> 
+  select(-c(lower.CL, upper.CL)) |> 
+  apa_gt() |> 
+  cols_label(
+    condition = md("Condition"),
+    emmean = md("Mean"),
+    SE = md("*SE*")
+  ) 
+```
+
+Pairwise tests show that when the switch cost is present in Arabic `r make_pairwise_sentence(arabic_language_trial_type_rt_pairs |> filter(language == "Arabic"), "Switch / Repetition", "ratio")` and English `r make_pairwise_sentence(arabic_language_trial_type_rt_pairs |> filter(language == "English"), "Switch / Repetition", "ratio")`. However, the magnitude of effects was stronger in the English than Arabic trials `r make_pairwise_sentence(arabic_language_trial_type_rt_pairs_diffs, "(Switch / Repetition Arabic) / (Switch / Repetition English)", "ratio")`. All other effects were non-significant, with Bayes factors in support of the null hypothesis.
+
+### Accuracy
+
+Fixed effects parameter estimates for accuracy models are shown in @tbl-param-arabic-accuracy.
+
+```{r tbl-param-arabic-accuracy}
+#| label: tbl-param-arabic-accuracy
+#| tbl-cap: Fixed effects parameter estimates and test statistics for accuracy in Experiment 2
+bind_parameters_accuracy(
+  freq_results$accuracy_mixed_freq_table_est,
+  bayes_results$`accuracy_bayes-factors`,
+  "Arabic"
+) |> 
+  parameters_accuracy_gt()
+```
+
+```{r arabic-accuracy-emm}
+#| include: false
+arabic_stroop_accuracy_emm <- pairwise_tests$accuracy_emms_resp |> 
+  filter(study == "arabic", analysis == "stroop")
+
+arabic_trial_type_accuracy_emm <- pairwise_tests$accuracy_emms_resp |> 
+  filter(study == "arabic", analysis == "trial-type")
+
+arabic_language_accuracy_emm <- pairwise_tests$accuracy_emms_resp |> 
+  filter(study == "arabic", analysis == "language")
+
+arabic_three_way_emm <- pairwise_tests$accuracy_emms_resp |> 
+  filter(study == "arabic", analysis == "stroop-by-language-by-trial-type")
+
+arabic_three_way_pairs <- pairwise_tests$accuracy_pairs_resp |> 
+  filter(study == "arabic", analysis == "trial-type-groupedby-stroop-by-language")
+
+arabic_three_way_pairs_diffs <- pairwise_tests$accuracy_pairs_diffs_resp |> 
+    filter(study == "arabic", analysis == "trial-type-groupedby-stroop-by-language")
+```
+
+There was a significant main effect of Stroop Block with a small but significantly larger proportion of correct responses in the Neutral condition `r make_descriptives_sentence(arabic_stroop_accuracy_emm, "Neutral", "prob", "asymp.LCL", "asymp.UCL")` than the Incongruent condition `r make_descriptives_sentence(arabic_stroop_accuracy_emm, "Incongruent", "prob", "asymp.LCL", "asymp.UCL")`. There was also a significant main effect of Language, again with a small but significantly larger proportion of correct responses in English `r make_descriptives_sentence(arabic_language_accuracy_emm, "English", "prob", "asymp.LCL", "asymp.UCL")` than Arabic `r make_descriptives_sentence(arabic_language_accuracy_emm, "Arabic", "prob", "asymp.LCL", "asymp.UCL")`. There was also a significant main effect of Trial Type, with a larger proportion of correct responses for Repetition `r make_descriptives_sentence(arabic_trial_type_accuracy_emm, "Repetition", "prob", "asymp.LCL", "asymp.UCL")` than Switch trials `r make_descriptives_sentence(arabic_trial_type_accuracy_emm, "Switch", "prob", "asymp.LCL", "asymp.UCL")`. While all two-way interactions were non-significant and with Bayes factors in support of the null hypothesis, the Bayes factor was only reliable for the Language × Trial Type interaction. Finally, there was a significant 3-way interaction between Stroop Block, Language, and Trial Type. The pattern of results for this interaction is shown in @fig-arabic-accuracy.
+
+```{r fig-arabic-accuracy}
+#| label: fig-arabic-accuracy
+#| fig-cap: "The proportion of correct responses by Language, Stroop Block, and Trial Type in Experiment 2"
+#| fig-alt: "A raincloud plot showing the proportion of correct responses in English and Arabic. Performance is worst in Arabic for Incongruent Switch trials, followed by Neutral Switch trials. Performance is best in English for Neutral Reptition trials followed by Incongruent Repetition trials. All other conditions have equivalent performance within languages."
+knitr::include_graphics(here("03_plots", "03_descriptive", "arabic_accuracy.png"))
+```
+
+Pairwise tests show that in Arabic the switch cost is present for Neutral `r make_pairwise_sentence(arabic_three_way_pairs |> filter(language == "Arabic", stroop == "Neutral"), "Switch / Repetition", "odds.ratio")` and Incongruent `r make_pairwise_sentence(arabic_three_way_pairs |> filter(language == "Arabic", stroop == "Incongruent"), "Switch / Repetition", "odds.ratio")` Stroop blocks. However, in English this effect is only present in Neutral `r make_pairwise_sentence(arabic_three_way_pairs |> filter(language == "English", stroop == "Neutral"), "Switch / Repetition", "odds.ratio")` but not Incongruent `r make_pairwise_sentence(arabic_three_way_pairs |> filter(language == "English", stroop == "Incongruent"), "Switch / Repetition", "odds.ratio")` Stroop blocks.
+
+# Experiment 3
+
+## Participants
+
+`r report_participant_numbers(data_checks$participant_numbers, "chinese_stroop")` Chinese-English bilinguals were recruited. `r report_recording_failure(performance_exclusions, "chinese_stroop")` participant was excluded due to a recording failure, leaving `r report_participant_counts(descriptives$gender_counts, "chinese_stroop")` participants with a mean age of `r report_participant_age(descriptives$demo_summary, "chinese_stroop")`). Following the experiment, participants were asked to complete a the same language background questionnaire and English and Chinese vocabulary tests based on lexical decision tasks as in Experiment 1.
+
+```{r tbl-chinese-demo}
+#| label: tbl-chinese-demo
+#| tbl-cap: Mean percentages (SD) for language use and proficiency for each language for participants in Experiment 3
+descriptives$demo_summary |> 
+  filter(
+    study == "chinese_stroop", 
+    str_detect(parameter, "current_percent|lex_tale"), 
+    statistic %in% c("mean", "sd")
+  ) |> 
+  pivot_wider(names_from = statistic, values_from = value) |> 
+  mutate_if(is.numeric, round_pad) |> 
+  mutate(
+    Parameter = case_when(
+      parameter == "current_percent_english" ~ "English Current Use",
+      parameter == "current_percent_english_pair" ~ "Chinese Current Use",
+      parameter == "lex_tale_english" ~ "English LexTale",
+      parameter == "lex_tale_english_pair" ~ "Chinese LexTale"
+    ),
+    Score = paste0(mean, " (", sd, ")")
+  ) |> 
+  select(Parameter, Score) |> 
+  apa_gt()
+```
+
+For accuracy and reaction time analyses, the first trial in each block and "recovery" trials following an error were excluded from the analyses. For reaction time analyses only, reaction times under 150ms, or reaction times over 2500ms or more than three standard deviations above the participant mean were discarded as outliers. Taking these criteria into account, a total of `r report_dropped_trial_numbers_accuracy(data_checks$trial_numbers, "chinese_stroop")`% and `r report_dropped_trial_numbers_rt(data_checks$trial_numbers, "chinese_stroop")`% of trials were excluded from the accuracy and reaction time analyses respectively.
+
+### Response Time
+
+Fixed effects parameter estimates for accuracy models are shown in @tbl-param-chinese-rt.
+
+```{r tbl-param-chinese-rt}
+#| label: tbl-param-chinese-rt
+#| tbl-cap: Fixed effects parameter estimates and test statistics for response time in Experiment 3
+bind_parameters_rt(
+  freq_results$rt_mixed_freq_table_est,
+  bayes_results$`rt_bayes-factors`,
+  "Chinese"
+) |> 
+  parameters_rt_gt()
+```
+
+```{r chinese-rt-emm}
+#| include: false
+chinese_stroop_rt_emm <- pairwise_tests$rt_emms_resp |> 
+  filter(study == "chinese", analysis == "stroop")
+
+chinese_language_rt_emm <- pairwise_tests$rt_emms_resp |> 
+  filter(study == "chinese", analysis == "language")
+
+chinese_trial_type_rt_emm <- pairwise_tests$rt_emms_resp |> 
+  filter(study == "chinese", analysis == "trial-type")
+
+chinese_language_trial_type_rt_emm <- pairwise_tests$rt_emms_resp |> 
+  filter(study == "chinese", analysis == "trial-type-groupedby-language") |> 
+  select(-c(study, response, analysis))
+
+chinese_language_trial_type_rt_pairs <- pairwise_tests$rt_pairs_resp |> 
+  filter(study == "chinese", analysis == "trial-type-groupedby-language") |> 
+  select(-c(study, response, analysis))
+
+chinese_language_trial_type_rt_pairs_diffs <- pairwise_tests$rt_pairs_diffs_resp |> 
+  filter(study == "chinese", analysis == "trial-type-groupedby-language")
+```
+
+There was a significant main effect of Stroop Block with faster response times in the Neutral condition `r make_descriptives_sentence(chinese_stroop_rt_emm, "Neutral", "emmean", "lower.CL", "upper.CL")` than the Incongruent condition `r make_descriptives_sentence(chinese_stroop_rt_emm, "Incongruent", "emmean", "lower.CL", "upper.CL")`. There was also a significant main effect of Language, with faster response times in Chinese `r make_descriptives_sentence(chinese_language_rt_emm, "Chinese", "emmean", "lower.CL", "upper.CL")` than English `r make_descriptives_sentence(chinese_language_rt_emm, "English", "emmean", "lower.CL", "upper.CL")`. There was also a significant main effect of Trial Type, with faster response times in the Repetition `r make_descriptives_sentence(chinese_trial_type_rt_emm, "Repetition", "emmean", "lower.CL", "upper.CL")` than the Switch trials `r make_descriptives_sentence(chinese_trial_type_rt_emm, "Switch", "emmean", "lower.CL", "upper.CL")`. Finally, there was a significant two-way interaction between Language and Trial Type.
+
+Estimated marginal means for Trial Type within each Language are shown in @tbl-emmeans-chinese-language-trial-type-rt
+
+```{r tbl-emmeans-chinese-language-trial-type-rt}
+#| label: tbl-emmeans-chinese-language-trial-type-rt
+#| tbl-cap: Estimated marginal means of Response Times for Trial Type by Language Variety in Experiment 3
+chinese_language_trial_type_rt_emm |> 
+  mutate(`95% CI` = paste0("[", lower.CL, ", ", upper.CL, "]")) |> 
+  select(-c(lower.CL, upper.CL)) |> 
+  apa_gt() |> 
+  cols_label(
+    condition = md("Condition"),
+    emmean = md("Mean"),
+    SE = md("*SE*")
+  ) 
+```
+
+Pairwise tests show that when the switch cost is present in Chinese `r make_pairwise_sentence(chinese_language_trial_type_rt_pairs |> filter(language == "Chinese"), "Switch / Repetition", "ratio")` and English `r make_pairwise_sentence(chinese_language_trial_type_rt_pairs |> filter(language == "English"), "Switch / Repetition", "ratio")`. However, the magnitude of effects was stronger in the Chinese than English trials `r make_pairwise_sentence(chinese_language_trial_type_rt_pairs_diffs, "(Switch / Repetition Chinese) / (Switch / Repetition English)", "ratio")`. All other effects were non-significant, with Bayes factors in support of the null hypothesis, apart from the Stroop × Language two-way interaction where the Bayes factor indicates insufficient evidence in support of either model.
+
+### Accuracy
+
+Fixed effects parameter estimates for accuracy models are shown in @tbl-param-chinese-accuracy.
+
+```{r tbl-param-chinese-accuracy}
+#| label: tbl-param-chinese-accuracy
+#| tbl-cap: Fixed effects parameter estimates and test statistics for accuracy in Experiment 3
+bind_parameters_accuracy(
+  freq_results$accuracy_mixed_freq_table_est,
+  bayes_results$`accuracy_bayes-factors`,
+  "Chinese"
+) |> 
+  parameters_accuracy_gt()
+```
+
+```{r chinese-accuracy-emm}
+#| include: false
+chinese_stroop_accuracy_emm <- pairwise_tests$accuracy_emms_resp |> 
+  filter(study == "chinese", analysis == "stroop")
+
+chinese_trial_type_accuracy_emm <- pairwise_tests$accuracy_emms_resp |> 
+  filter(study == "chinese", analysis == "trial-type")
+
+chinese_language_trial_type_accuracy_emm <- pairwise_tests$accuracy_emms_resp |> 
+  filter(study == "chinese", analysis == "trial-type-groupedby-language")
+
+chinese_language_trial_type_accuracy_pairs <- pairwise_tests$accuracy_pairs_resp |> 
+  filter(study == "chinese", analysis == "trial-type-groupedby-language")
+
+chinese_language_trial_type_accuracy_pairs_diffs <- pairwise_tests$accuracy_pairs_diffs_resp |> 
+  filter(study == "chinese", analysis == "trial-type-groupedby-language")
+```
+
+There was a significant main effect of Stroop Block with a larger proportion of correct responses in the Neutral condition `r make_descriptives_sentence(chinese_stroop_accuracy_emm, "Neutral", "prob", "asymp.LCL", "asymp.UCL")` than the Incongruent condition `r make_descriptives_sentence(chinese_stroop_accuracy_emm, "Incongruent", "prob", "asymp.LCL", "asymp.UCL")`. There was also a significant main effect of Trial Type, with a larger proportion of correct responses in the Repetition `r make_descriptives_sentence(chinese_trial_type_accuracy_emm, "Repetition", "prob", "asymp.LCL", "asymp.UCL")` than the Switch trials `r make_descriptives_sentence(chinese_trial_type_accuracy_emm, "Switch", "prob", "asymp.LCL", "asymp.UCL")`. Finally, there was also a significant 2-way interaction between Language and Trial Type.
+
+Estimated marginal means for Trial Type within each Language are shown in @tbl-emmeans-chinese-language-trial-type-accuracy
+
+```{r tbl-emmeans-chinese-language-trial-type-accuracy}
+#| label: tbl-emmeans-chinese-language-trial-type-accuracy
+#| tbl-cap: Estimated marginal means of Accuracy for Trial Type by Language Variety in Experiment 3
+chinese_language_trial_type_accuracy_emm |> 
+  mutate(`95% CI` = paste0("[", asymp.LCL, ", ", asymp.UCL, "]")) |> 
+  select(-c(study, response, analysis, df, asymp.LCL, asymp.UCL)) |> 
+  apa_gt() |> 
+  cols_label(
+    condition = md("Condition"),
+    prob = md("Mean"),
+    SE = md("*SE*")
+  ) 
+```
+
+Pairwise tests show that when the switch cost is present in Chinese `r make_pairwise_sentence(chinese_language_trial_type_accuracy_pairs |> filter(language == "Chinese"), "Switch / Repetition", "odds.ratio")` and English `r make_pairwise_sentence(chinese_language_trial_type_accuracy_pairs |> filter(language == "English"), "Switch / Repetition", "odds.ratio")`. However, the magnitude of effects was stronger in the Chinese than English trials `r make_pairwise_sentence(chinese_language_trial_type_accuracy_pairs_diffs, "(Switch / Repetition Chinese) / (Switch / Repetition English)", "odds.ratio")`. All other effects were non-significant. Here, Bayes factors were only reliably in support of the null hypothesis for the two-way interaction of Stroop × Trial Type and the three-way interaction of Stroop × Language × Trial Type. The main effect of Language had insufficient evidence in favour of either model, while the two-way interaction of Stroop × Language, while in support of the null hypothesis, was sensitive to the prior specification and thus must be interpreted with caution.
+
+# References
+
+::: {#refs}
+:::
+
+# Appendices
+
+## Appendix A. Frequentist Model Specification
+
+Where models did not converge we took the strategy of removing correlations between random effects before removing first three-way, then two-way interactions, before removing main effects. This criteria was applied to random effects for items before participants under the assumption that, with carefully developed items, variance will be greater in participants than items such that estimates for these random effects will be larger. All models used the bobyqa optimiser.
+
+Following this criteria, the final R formulae were used:
+
+### Experiment 1
+
+#### Reaction Time
+
+    log_rt ~ stroop * language * trial_type + 
+      (1 + stroop + language + trial_type + stroop:language + trial_type:language | 
+      subject_id) + 
+      (1 + trial_type | word_colour)
+
+#### Accuracy
+
+    correct ~ stroop * trial_type * language +
+      (1 + stroop + trial_type + language || subject_id) + 
+      (1 | word_colour)
+
+### Experiment 2
+
+#### Reaction Time
+
+    log_rt ~ stroop * language * trial_type + 
+      (1 + stroop + language + trial_type + stroop:language + trial_type:language || 
+      subject_id) + 
+      (1 + trial_type | word_colour)
+
+#### Accuracy
+
+    correct ~ stroop * trial_type * language +
+      (1 | subject_id)
+
+### Experiment 3
+
+#### Reaction Time
+
+    log_rt ~ stroop * language * trial_type + 
+      (1 + stroop + language + trial_type + stroop:language + trial_type:language || 
+      subject_id) + 
+      (1 + trial_type | word_colour)
+
+#### Accuracy
+
+    correct ~ stroop * trial_type * language +
+      (1 + stroop + language | subject_id) + 
+      (1 + trial_type | word_colour)
+
+## Appendix B. Bayesian Model Specification
+
+### Model Priors
+
+All models used the maximal random effects structure. For each experiment five models were fitted for response time and accuracy models respectively with priors varying across models for the precision of main effects and interactions for the fixed effects.
+
+#### Reaction Time
+
+We began with setting priors for a single model in each Experiment with priors based on findings from [@liu2019symmetries]. The grand mean in Experiment 1 of Liu et al. is 1036.75ms (approx 6.9 on log scale). Thus, for our intercept we used a prior with a range of 800 - 1200ms, $Normal(6.9, 0.1)$. Liu et al. found strong effects of Language (i.e. with a $\eta_{p}^{2}$ of 0.4). The biggest difference between languages was around 100ms. Thus, for language we used a prior with a range of -220ms to 220ms, $Normal(0, 0.05)$. While Liu found effects of Stroop half as big as those for language, we assume that an effect at least as big as that of Language should be found for the effect Stroop blocks, so the same prior is used here. Trial type was not calculated in Liu et al., so we again assume the same prior for this main effect. All interactions as in Liu are at least half the size of the main effects, so we make the same assumption in our priors, setting all interactions to have priors of $Normal(0, 0.025)$. 
+
+We then varied priors around this baseline to evaluate their impact on fixed effect parameter estimates and Bayes factors. We varied main effects with *SD*s from 0.01, 0.025, 0.05, 0.075, 0.1, and with interactions with *SD*s from 0.005, 0.01, 0.025, 0.05, 0.075. We chose the final model for reporting where parameter estimates and Bayes factors were relatively stable. This is model 4 for each experiment and outcome. Finally, all models had the same priors for the remaining terms. We used a $Normal(0, 0.1)$ prior for all group-level (random) effects with an $LKJ(2)$ prior for the correlations between group-level effects, which regularises correlations to put less weight on correlations of 0 and 1. Finally, we used a $Normal(0, 0.15)$ prior for the sigma term.
+
+#### Accuracy
+
+Again, we began with setting priors for a single model in each Experiment with priors based on findings from [@liu2019symmetries]. In Experiment 1 of Liu et al. (2019) there is a very high grand mean accuracy of .93 (a logit of approximately 2.6). We thus use a prior with an approximate range of 2.2–3 logits, $Normal(2.6, 0.2)$. Liu et al. found relatively strong Stroop effects of around 2% across conditions. This equates to the difference between an inverse logit of .93 and .91, i.e. a logit of 0.27. We thus set all main effects to allow for effects twice as large as that found in Liu et al. either side of 0, i.e. with a prior of $Normal(0, 0.27)$. Given scores are assumed to be close to ceiling we allowed for broader priors on interaction effects when compared to the reaction time models, allowing for interaction effects around 1/3 as large as main effects, $Normal(0., 0.18)$. 
+
+We again varied priors around this baseline to evaluate their impact on fixed effect parameter estimates and Bayes factors. We varied main effects with *SD*s from 0.09, 0.18, 0.27, 0.36, 0.45, and with interactions with *SD*s from 0.045, 0.09, 0.18, 0.27, 0.36. We chose the final model for reporting where parameter estimates and Bayes factors were relatively stable. This is model 4 for each experiment and outcome. Finally, all models had the same priors for the remaining terms. We used a $Normal(0, 0.5)$ prior for all group-level (random) effects, exluding the intercept for by-participant effects which had a broader prior of $Normal(0, 2)$. We also used an $LKJ(2)$ prior for the correlations between group-level effects, which regularises correlations to put less weight on correlations of 0 and 1.
+
+### Sensitivity of Parameter Estimates
+
+The following plot shows how sensitive parameter estimates are to the prior specification. Note that only priors that differ across models are highlighted in the plots below.
+
+#### Reaction Time
+
+```{r fig-prior-fixef-rt}
+#| label: fig-prior-fixef-rt
+#| fig-cap: "Sensitivity of fixed effect parameter estimates to prior specification in the Bayesian models for reaction time across studies."
+#| fig-alt: "Plots showing how fixed effect parameter estimates change across Bayesian models with different prior specifications for the reaction time outcome. Parameter estimates are typically stable between the 3rd and 5th models."
+knitr::include_graphics(here("03_plots", "02_sensitivity-checks", "02_bayesian", "rt_fixef.png"))
+```
+
+#### Accuracy
+
+```{r fig-prior-fixef-accuracy}
+#| label: fig-prior-fixef-accuracy
+#| fig-cap: "Sensitivity of fixed effect parameter estimates to prior specification in the Bayesian models for accuracy across studies."
+#| fig-alt: "Plots showing how fixed effect parameter estimates change across Bayesian models with different prior specifications for the accuracy outcome. Parameter estimates are typically stable between the 3rd and 5th models."
+knitr::include_graphics(here("03_plots", "02_sensitivity-checks", "02_bayesian", "accuracy_fixef.png"))
+```
+
+### Sensitivity of Bayes Factors
+
+Similarly, we show how prior specification affects the direction and magnitude of Bayes factors across models and studies. Here , the grey band shows the region where insuffient evidence is found for the null and alternative hypotheses. Values above this band show evidence in support of the null hypothesis. Values below this line show evidence in support of the alternative hypothesis.
+
+#### Reaction Time
+
+```{r fig-prior-bf-rt}
+#| label: fig-prior-bf-rt
+#| fig-cap: "Sensitivity of Bayes factors to prior specification in the Bayesian models for response times across studies."
+#| fig-alt: "Plots showing how Bayes factors change across Bayesian models with different prior specifications for the response time outcome. Conclusions are often consistent between the 3rd and 5th models."
+knitr::include_graphics(here("03_plots", "02_sensitivity-checks", "02_bayesian", "rt_bayes-factors.png"))
+```
+
+#### Accuracy
+
+```{r fig-prior-bf-accuracy}
+#| label: fig-prior-bf-accuracy
+#| fig-cap: "Sensitivity of Bayes factors to prior specification in the Bayesian models for accuracy across studies."
+#| fig-alt: "Plots showing how Bayes factors change across Bayesian models with different prior specifications for the accuracy outcome. Conclusions are often consistent between the 3rd and 5th models."
+knitr::include_graphics(here("03_plots", "02_sensitivity-checks", "02_bayesian", "accuracy_bayes-factors.png"))
+```
