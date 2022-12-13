@@ -3,7 +3,7 @@
 agg_models_rt <- map(
   .x = agg_rt$data,
   ~afex::aov_4(
-    mean_log_rt ~ stroop*language + (1 + stroop * language | subject_id),
+    switch_cost_rt ~ stroop*language + (1 + stroop * language | subject_id),
     data = .
   )
 )

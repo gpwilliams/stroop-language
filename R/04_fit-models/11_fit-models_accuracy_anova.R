@@ -3,7 +3,7 @@
 agg_models_accuracy <- map(
   .x = agg_accuracy$data,
   ~afex::aov_4(
-    mean_correct ~ stroop*language + (1 + stroop * language | subject_id),
+    switch_cost_correct ~ stroop*language + (1 + stroop * language | subject_id),
     data = .
   )
 )

@@ -196,6 +196,15 @@ report_recording_failure <- function(.performance_exclusions, .study) {
     str_to_sentence()
 }
 
+report_performance_exclusions <- function(.performance_exclusions, .study) {
+  .performance_exclusions |> 
+    filter(study == .study, reason != "recording failure") |> 
+    summarise(n = n()) |> 
+    pull(n) |> 
+    english()
+}
+
+
 report_under_age <- function(.additional_exclusions, .study) {
   .additional_exclusions |> 
     filter(study == .study, reason == "under age") |> 
