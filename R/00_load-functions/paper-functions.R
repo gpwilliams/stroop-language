@@ -60,10 +60,29 @@ make_pairwise_sentence <- function(.data, .contrast, .outcome = "ratio") {
   }
 }
 
+make_anova_sentence <- function(.data, .study, .parameter) {
+  .data <- .data |> 
+    filter(Study == .study, Parameter == .parameter) |> 
+    mutate(
+      f = stringr::str_trim(f),
+      df = chartr("[]", "()", df),
+      ges = case_when(
+        ges == "0.00" ~ "< .01",
+        TRUE ~ paste0("= ", ges)
+      ),
+      p_value = case_when(
+        p_value == "< .001" ~ p_value,
+        TRUE ~ paste0("= ", p_value)
+      ),
+      text = glue::glue("(F{.data$df} = {.data$f}, $\\eta_{{G}}^{{2}}$ {.data$ges}, *p* {.data$p_value})")
+    )
+  .data$text
+}
+
 bind_parameters_rt <- function(.freq, .bayes, .study) {
   accuracy_freq <- .freq |>
     filter(Study == .study, effect == "fixed") |> 
-    select(Parameter, estimate, std.error, statistic, df, p_value, p_inconsistent)
+    select(Parameter, estimate, std.error, statistic, df, p_value)
   
   accuracy_bayes <- .bayes |> 
     filter(Study == .study) |> 
@@ -76,7 +95,7 @@ bind_parameters_rt <- function(.freq, .bayes, .study) {
 bind_parameters_accuracy <- function(.freq, .bayes, .study) {
   accuracy_freq <- .freq |>
     filter(Study == .study, effect == "fixed") |> 
-    select(c(Parameter, estimate, std.error, statistic, p_value, p_inconsistent))
+    select(c(Parameter, estimate, std.error, statistic, p_value))
   
   accuracy_bayes <- .bayes |> 
     filter(Study == .study) |> 
@@ -130,15 +149,6 @@ parameters_rt_gt <- function(x) {
     ) |> 
     tab_footnote(
       footnote = md(
-        "Indicates *p*-values where conclusion differ between the mixed effects model and by-participants ANOVA."
-      ),
-      locations = cells_body(
-        columns = p_value,
-        rows = p_inconsistent
-      )
-    ) |> 
-    tab_footnote(
-      footnote = md(
         "Indicates Bayes factors where conclusions are sensitive to prior specification."
       ),
       locations = cells_body(
@@ -146,7 +156,7 @@ parameters_rt_gt <- function(x) {
         rows = prior_sensitive
       )
     ) |> 
-    cols_hide(columns = c(prior_sensitive, p_inconsistent))
+    cols_hide(columns = prior_sensitive)
 }
 
 parameters_accuracy_gt <- function(x) {
@@ -160,15 +170,6 @@ parameters_accuracy_gt <- function(x) {
     ) |> 
     tab_footnote(
       footnote = md(
-        "Indicates *p*-values where conclusion differ between the mixed effects model and by-participants ANOVA."
-      ),
-      locations = cells_body(
-        columns = p_value,
-        rows = p_inconsistent
-      )
-    ) |> 
-    tab_footnote(
-      footnote = md(
         "Indicates Bayes factors where conclusions are sensitive to prior specification."
       ),
       locations = cells_body(
@@ -176,14 +177,14 @@ parameters_accuracy_gt <- function(x) {
         rows = prior_sensitive
       )
     ) |> 
-    cols_hide(columns = c(prior_sensitive, p_inconsistent))
+    cols_hide(columns = prior_sensitive)
 }
 
 report_participant_numbers <- function(.participant_numbers, .study) {
   .participant_numbers |> 
     filter(study == .study) |> 
     pull(original) |> 
-    english() |> 
+    english::english() |> 
     str_to_sentence()
 }
 
@@ -201,7 +202,7 @@ report_performance_exclusions <- function(.performance_exclusions, .study) {
     filter(study == .study, reason != "recording failure") |> 
     summarise(n = n()) |> 
     pull(n) |> 
-    english()
+    english::english()
 }
 
 
@@ -210,7 +211,7 @@ report_under_age <- function(.additional_exclusions, .study) {
     filter(study == .study, reason == "under age") |> 
     summarise(n = n()) |>
     pull(n) |> 
-    english()
+    english::english()
 }
 
 report_participant_counts <- function(.participant_numbers, .study) {

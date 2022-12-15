@@ -26,7 +26,7 @@ papa_engine <- function(num,
     rounded_pval <- round(num, digits)
     rounded_formatted_pval <- format(rounded_pval, nsmall = nsmall)
     if (rounded_pval < tolerance) {
-      output_pval <- paste0("<", tolerance)
+      output_pval <- paste0("< ", tolerance)
     } else {
       output_pval <- rounded_formatted_pval
     }
@@ -38,9 +38,9 @@ papa_engine <- function(num,
       # if number is less than tolerance (default of .001)
       if (rounded_pval < tolerance) {
         if (asterisk == TRUE) {
-          paste0(gsub("<0", "<", output_pval), "***")
+          paste0(gsub("< 0", "< ", output_pval), "***")
         } else {
-          gsub("<0", "<", output_pval)
+          gsub("< 0", "< ", output_pval)
         }
       } else {
         # if number isn't less than tolerance (default of .001)
