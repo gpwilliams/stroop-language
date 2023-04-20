@@ -17,39 +17,39 @@ chinese,accuracy,trial-type,Switch,1.9234456977404966,0.13145813110659527,Inf,1.
 chinese,accuracy,trial-type,Repetition,2.8455639251395795,0.13652621439718965,Inf,2.577977461975494,3.113150388303665
 dutch,accuracy,trial-type,Switch,2.709857758117594,0.17480557139414915,Inf,2.3672451338881166,3.0524703823470714
 dutch,accuracy,trial-type,Repetition,3.017561073634484,0.17736686772966206,Inf,2.669928400833667,3.3651937464353012
-arabic,accuracy,trial-type-groupedby-language,Arabic Switch,2.3939619672702883,0.16203317457451655,Inf,2.0763827808035447,2.711541153737032
+arabic,accuracy,trial-type-groupedby-language,Arabic Switch,2.393961967270288,0.16203317457451655,Inf,2.076382780803544,2.7115411537370315
 arabic,accuracy,trial-type-groupedby-language,Arabic Repetition,2.9723067843551974,0.17037870278363196,Inf,2.6383706631666244,3.3062429055437703
-arabic,accuracy,trial-type-groupedby-language,English Switch,2.7636434978027653,0.16687370984782376,Inf,2.4365770365344437,3.090709959071087
-arabic,accuracy,trial-type-groupedby-language,English Repetition,3.3357743588105593,0.17760111808175164,Inf,2.9876825637562807,3.683866153864838
-chinese,accuracy,trial-type-groupedby-language,Chinese Switch,1.731402468960472,0.14860414965564012,Inf,1.4401436876822171,2.022661250238727
+arabic,accuracy,trial-type-groupedby-language,English Switch,2.7636434978027653,0.16687370984782374,Inf,2.4365770365344437,3.090709959071087
+arabic,accuracy,trial-type-groupedby-language,English Repetition,3.3357743588105597,0.17760111808175164,Inf,2.987682563756281,3.6838661538648383
+chinese,accuracy,trial-type-groupedby-language,Chinese Switch,1.7314024689604721,0.14860414965564012,Inf,1.4401436876822173,2.022661250238727
 chinese,accuracy,trial-type-groupedby-language,Chinese Repetition,2.8606019455199485,0.16019790010569984,Inf,2.5466198309138317,3.1745840601260653
-chinese,accuracy,trial-type-groupedby-language,English Switch,2.115488926520521,0.15339059621979062,Inf,1.8148488823626054,2.416128970678436
+chinese,accuracy,trial-type-groupedby-language,English Switch,2.115488926520521,0.15339059621979065,Inf,1.8148488823626054,2.416128970678436
 chinese,accuracy,trial-type-groupedby-language,English Repetition,2.8305259047592104,0.15901503504146755,Inf,2.5188621630775594,3.1421896464408614
-dutch,accuracy,trial-type-groupedby-language,Dutch Switch,2.566465160953823,0.19259388738705363,Inf,2.188988078032635,2.943942243875011
+dutch,accuracy,trial-type-groupedby-language,Dutch Switch,2.5664651609538236,0.19259388738705363,Inf,2.1889880780326356,2.9439422438750116
 dutch,accuracy,trial-type-groupedby-language,Dutch Repetition,2.9283930122402477,0.1968197270115526,Inf,2.5426334358505995,3.314152588629896
-dutch,accuracy,trial-type-groupedby-language,English Switch,2.8532503552813644,0.19589917801838838,Inf,2.4692950217643226,3.237205688798406
-dutch,accuracy,trial-type-groupedby-language,English Repetition,3.1067291350287207,0.20020441498588076,Inf,2.7143356921104833,3.499122577946958
-arabic,accuracy,trial-type-groupedby-stroop-by-language,Incongruent Arabic Switch,2.2738173349386344,0.17346518029139193,Inf,1.933831828995759,2.6138028408815095
+dutch,accuracy,trial-type-groupedby-language,English Switch,2.8532503552813644,0.19589917801838835,Inf,2.4692950217643226,3.237205688798406
+dutch,accuracy,trial-type-groupedby-language,English Repetition,3.1067291350287203,0.20020441498588076,Inf,2.714335692110483,3.4991225779469577
+arabic,accuracy,trial-type-groupedby-stroop-by-language,Incongruent Arabic Switch,2.2738173349386335,0.17346518029139193,Inf,1.9338318289957581,2.6138028408815086
 arabic,accuracy,trial-type-groupedby-stroop-by-language,Incongruent Arabic Repetition,2.8976591987869442,0.18802499742254755,Inf,2.5291369756455144,3.266181421928374
 arabic,accuracy,trial-type-groupedby-stroop-by-language,Neutral Arabic Switch,2.5141065996019423,0.17683361497934083,Inf,2.167519082986412,2.8606941162174726
-arabic,accuracy,trial-type-groupedby-stroop-by-language,Neutral Arabic Repetition,3.046954369923451,0.19202549946918937,Inf,2.6705913068505245,3.4233174329963774
+arabic,accuracy,trial-type-groupedby-stroop-by-language,Neutral Arabic Repetition,3.0469543699234505,0.19202549946918934,Inf,2.670591306850524,3.423317432996377
 arabic,accuracy,trial-type-groupedby-stroop-by-language,Incongruent English Switch,2.747396730214305,0.18421877765294287,Inf,2.386334560738545,3.1084588996900653
-arabic,accuracy,trial-type-groupedby-stroop-by-language,Incongruent English Repetition,3.034914291461772,0.19055328606716432,Inf,2.661436713634372,3.408391869289172
+arabic,accuracy,trial-type-groupedby-stroop-by-language,Incongruent English Repetition,3.0349142914617726,0.19055328606716432,Inf,2.6614367136343726,3.4083918692891726
 arabic,accuracy,trial-type-groupedby-stroop-by-language,Neutral English Switch,2.7798902653912254,0.18332950979829546,Inf,2.4205710288831837,3.139209501899267
 arabic,accuracy,trial-type-groupedby-stroop-by-language,Neutral English Repetition,3.636634426159347,0.21393998218548355,Inf,3.2173197662226585,4.055949086096035
 chinese,accuracy,trial-type-groupedby-stroop-by-language,Incongruent Chinese Switch,1.1479249793527404,0.1736068145160508,Inf,0.8076618754305555,1.4881880832749252
 chinese,accuracy,trial-type-groupedby-stroop-by-language,Incongruent Chinese Repetition,2.217144960990996,0.1796258193930271,Inf,1.8650848242871665,2.5692050976948253
-chinese,accuracy,trial-type-groupedby-stroop-by-language,Neutral Chinese Switch,2.314879958568204,0.16806961558337086,Inf,1.9854695651293053,2.6442903520071024
-chinese,accuracy,trial-type-groupedby-stroop-by-language,Neutral Chinese Repetition,3.5040589300489016,0.20028285317289604,Inf,3.1115117511091017,3.8966061089887014
-chinese,accuracy,trial-type-groupedby-stroop-by-language,Incongruent English Switch,1.6416899410705896,0.17968044825372853,Inf,1.289522733767269,1.9938571483739103
-chinese,accuracy,trial-type-groupedby-stroop-by-language,Incongruent English Repetition,2.2868238028665893,0.1784988538501136,Inf,1.9369724780386879,2.6366751276944904
+chinese,accuracy,trial-type-groupedby-stroop-by-language,Neutral Chinese Switch,2.3148799585682043,0.16806961558337086,Inf,1.9854695651293057,2.644290352007103
+chinese,accuracy,trial-type-groupedby-stroop-by-language,Neutral Chinese Repetition,3.504058930048901,0.200282853172896,Inf,3.1115117511091013,3.896606108988701
+chinese,accuracy,trial-type-groupedby-stroop-by-language,Incongruent English Switch,1.6416899410705894,0.17968044825372853,Inf,1.2895227337672688,1.99385714837391
+chinese,accuracy,trial-type-groupedby-stroop-by-language,Incongruent English Repetition,2.286823802866589,0.1784988538501136,Inf,1.9369724780386874,2.63667512769449
 chinese,accuracy,trial-type-groupedby-stroop-by-language,Neutral English Switch,2.589287911970452,0.17672393453120858,Inf,2.242915365083069,2.935660458857835
-chinese,accuracy,trial-type-groupedby-stroop-by-language,Neutral English Repetition,3.3742280066518315,0.1956266936100417,Inf,2.9908067327614978,3.7576492805421653
+chinese,accuracy,trial-type-groupedby-stroop-by-language,Neutral English Repetition,3.374228006651832,0.1956266936100417,Inf,2.9908067327614982,3.7576492805421657
 dutch,accuracy,trial-type-groupedby-stroop-by-language,Incongruent Dutch Switch,2.280762106362639,0.22985785015151378,Inf,1.8302489985018675,2.7312752142234102
-dutch,accuracy,trial-type-groupedby-stroop-by-language,Incongruent Dutch Repetition,2.6860900632696505,0.23622130625352336,Inf,2.223104810631739,3.149075315907562
+dutch,accuracy,trial-type-groupedby-stroop-by-language,Incongruent Dutch Repetition,2.686090063269651,0.23622130625352333,Inf,2.2231048106317393,3.1490753159075626
 dutch,accuracy,trial-type-groupedby-stroop-by-language,Neutral Dutch Switch,2.8521682155450074,0.22341624391496814,Inf,2.414280423910454,3.290056007179561
-dutch,accuracy,trial-type-groupedby-stroop-by-language,Neutral Dutch Repetition,3.170695961210845,0.23055565247353216,Inf,2.718815185930589,3.622576736491101
+dutch,accuracy,trial-type-groupedby-stroop-by-language,Neutral Dutch Repetition,3.1706959612108454,0.23055565247353216,Inf,2.7188151859305894,3.6225767364911015
 dutch,accuracy,trial-type-groupedby-stroop-by-language,Incongruent English Switch,2.654268044170485,0.2351230282112985,Inf,2.193435376940345,3.115100711400625
-dutch,accuracy,trial-type-groupedby-stroop-by-language,Incongruent English Repetition,2.636093016433748,0.2343156708518092,Inf,2.1768427405508604,3.0953432923166355
-dutch,accuracy,trial-type-groupedby-stroop-by-language,Neutral English Switch,3.0522326663922432,0.22846486688607753,Inf,2.604449755562794,3.5000155772216925
-dutch,accuracy,trial-type-groupedby-stroop-by-language,Neutral English Repetition,3.5773652536236935,0.24360057142079905,Inf,3.09991690702555,4.054813600221837
+dutch,accuracy,trial-type-groupedby-stroop-by-language,Incongruent English Repetition,2.6360930164337484,0.23431567085180924,Inf,2.176842740550861,3.095343292316636
+dutch,accuracy,trial-type-groupedby-stroop-by-language,Neutral English Switch,3.0522326663922428,0.22846486688607753,Inf,2.6044497555627935,3.500015577221692
+dutch,accuracy,trial-type-groupedby-stroop-by-language,Neutral English Repetition,3.577365253623693,0.24360057142079905,Inf,3.0999169070255497,4.054813600221836

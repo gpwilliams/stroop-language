@@ -7,11 +7,13 @@ format:
     page-layout: full
 editor: source
 toc: true
-number-sections: false
+number-sections: true
 execute:
   warning: false
   message: false
 bibliography: citations.bib
+nocite: |
+  @clark1973language, @quene2008examples, @baayen2008mixed, @barr2013random, @schad2022data, @baayen2008analyzing, @draheim2019reaction, @paap2016role
 csl: apa.csl
 ---
 
@@ -116,6 +118,13 @@ freq_results <- freq_results |>
       )
   )
 
+# strip text on tests that aren't reported in a table (ANOVAs only)
+freq_results$rt_anova_freq_table <- freq_results$rt_anova_freq_table |> 
+  mutate_if(is.character, str_trim)
+freq_results$accuracy_anova_freq_table <- 
+  freq_results$accuracy_anova_freq_table |> 
+  mutate_if(is.character, str_trim)
+
 # load bayesian data
 bayes_results <- map_files_to_list(
   here("04_analysis", "04_model-predictions", "02_bayesian"),
@@ -184,13 +193,31 @@ pairwise_tests[grep('pairs', names(pairwise_tests))] <-
 
 pairwise_tests <- pairwise_tests |> 
   map( ~ .x |> mutate_if(is.numeric, round_pad))
+
+# get additional analyses using pooled results
+pooled_models <- map_files_to_list(
+  here("04_analysis", "06_additional-analyses", "01_models"),
+  file_type = ".rds"
+) 
+
+pooled_emms <- map_files_to_list(
+  here("04_analysis", "06_additional-analyses", "02_pairwise-tests"),
+  file_type = ".csv"
+) 
+
+simulation_summaries <- map_files_to_list(
+  here("04_analysis", "08_simulation-summary"),
+  file_type = ".csv"
+) 
 ```
 
 # Experiment 1
 
-The hypothesis, sample size, and analyses of all experiments presented here were pre-registered (Experiment 1: [https://osf.io/ruc4x/](https://osf.io/ruc4x/); Experiment 2: [https://osf.io/emz5v/](https://osf.io/emz5v/); Experiment 3: [https://osf.io/q9dwc/](https://osf.io/q9dwc/)). The experiments received approval by Abertay University’s ethics committee (EMS3231).
+## Method
 
-## Participants
+The hypothesis, sample size, and analyses of all experiments presented here were pre-registered (Experiment 1: [https://osf.io/ruc4x/](https://osf.io/ruc4x/); Experiment 2: [https://osf.io/emz5v/](https://osf.io/emz5v/); Experiment 3: [https://osf.io/q9dwc/](https://osf.io/q9dwc/)). All data and analysis code is available at [https://osf.io/ruc4x/](https://osf.io/ruc4x/). Additionally, all experimental materials are available as Gorilla Open Materials ([https://app.gorilla.sc/openmaterials/513829](https://app.gorilla.sc/openmaterials/513829)). The experiments received approval by Abertay University’s ethics committee (EMS3231).
+
+### Participants
 
 `r report_participant_numbers(data_checks$participant_numbers, "dutch_stroop")`[^1] Dutch-English bilinguals were recruited. `r report_recording_failure(performance_exclusions, "dutch_stroop")` participant was excluded due to a recording failure and `r report_under_age(data_checks$additional_exclusions, "dutch_stroop")` participant was removed due to being under-age, leaving `r report_participant_counts(descriptives$gender_counts, "dutch_stroop")` participants with a mean age of `r report_participant_age(descriptives$demo_summary, "dutch_stroop")`. Following the experiment, participants were asked to complete a language background questionnaire [cf. @kirk2018can], and English and Dutch vocabulary tests based on lexical decision tasks [i.e., LexTale, @lemhofer2012introducing, see @tbl-dutch-demo].
 
@@ -198,7 +225,7 @@ The hypothesis, sample size, and analyses of all experiments presented here were
 
 ```{r tbl-dutch-demo}
 #| label: tbl-dutch-demo
-#| tbl-cap: Mean percentages (SD) for language use and proficiency for each language for participants in Experiment 1
+#| tbl-cap: Overview of the demographic information (SD in brackets) for participants in Experiment 1. Language use corresponds to the percentage of daily use for each language, while vocabulary scores indicate the averaged percentage of correct responses to words and nonwords in the LexTale lexical decision task.
 descriptives$demo_summary |> 
   filter(
     study == "dutch_stroop", 
@@ -211,30 +238,44 @@ descriptives$demo_summary |>
     Parameter = case_when(
       parameter == "current_percent_english" ~ "English Current Use",
       parameter == "current_percent_english_pair" ~ "Dutch Current Use",
-      parameter == "lex_tale_english" ~ "English LexTale",
-      parameter == "lex_tale_english_pair" ~ "Dutch LexTale"
+      parameter == "lex_tale_english" ~ "English Vocabulary Test",
+      parameter == "lex_tale_english_pair" ~ "Dutch Vocabulary Test"
     ),
-    Score = paste0(mean, " (", sd, ")")
+    Percent = paste0(mean, " (", sd, ")")
   ) |> 
-  select(Parameter, Score) |> 
+  select(Parameter, Percent) |> 
   apa_gt()
 ```
 
-## Outliers
+### Stimuli
 
-Error trials and trials where no or another extraneous sound were detected were excluded from RT analyses, as were “recovery” trials following an error trial. For accuracy and reaction time analyses, the first trial in each block and "recovery" trials following an error were excluded from the analyses. For reaction time analyses only, reaction times under 150ms, or reaction times over 2500ms or more than three standard deviations above the participant mean were discarded as outliers. Taking these criteria into account, a total of `r report_dropped_trial_numbers_accuracy(data_checks$trial_numbers, "dutch_stroop")`% and `r report_dropped_trial_numbers_rt(data_checks$trial_numbers, "dutch_stroop")`% of trials were excluded from the accuracy and reaction time analyses respectively. 
+Three color words were used (pink/roze, yellow/geel, and purple/paars) and three non-color words were used (rabbit/konijn, monkey/aap, duck/eend) from the same semantic group (i.e., animals), similar to the color words. All six words were non-cognates. These two groups of words had a similar number of letters in English (color: 5.3; non-color: 5.3) and in Dutch (color: 4.3; non-color: 4.3), and a similar word frequency in English [color: 24.9\; non-color: 26.4\; @brysbaert2009moving] and in Dutch [color: 10.9\; non-color: 18.8\; @keuleers2010subtlex].
 
-## Analysis
+Even though naming of the ink color was in the same language as the language of the written word, we also included a shape cue (circle for Dutch and square for English) around each word that informed the participants which language to use.
 
-We used R [@R-base] and the R-packages tidyverse [@tidyverse], here [@here], and bayesplot [@bayesplot-a; @bayesplot-b] for data preparation, analysis, and presentation. For each study we performed separate frequentist and Bayesian[^2] analyses for both the accuracy and response time dependent variables. For the frequentist analyses, we modelled the data with multilevel models fitted using the lme4 R-package [@lme4]. We used the afex R-package [@afex] to fit models with nested fixed effects, evaluating the statistical significance of main effects and interactions using likelihood-ratio tests. For the parameter estimates of each model, statistical significance is evaluated using *p*-values approximated using the Satterthwaite method implemented in the lmerTest R-package [@lmerTest]. Significant interactions were further investigated using estimated marginal means and pairwise tests calculated using the emmeans R-package [@emmeans]. We fitted Bayesian equivalents to the frequentist multilevel models using the brms R-package [@brms-a; @brms-b]. Bayes Factors were calculated using the Savage-Dickey approximation using the bayestestR R-package [@bayestestR].
+### Procedure
+
+This experiment was conducted online with Gorilla Experiment Builder [[http://gorilla.sc](http://gorilla.sc), for a review, see @anwyl2020gorilla], and was limited to participants using a PC desktop or laptop device. After providing consent and a microphone check, instructions were provided on screen, indicating to the participants that they would be shown words but had to name the ink color of said words based on the language cue. This was followed by a demonstration of the experiment for 12 trials, and a practice block of 8 trials. 
+
+The main experiment consisted of two experimental blocks of 121 trials each: A Stroop neutral block with non-color words and a Stroop incongruent block with color words. The order of these blocks was counterbalanced across participants. Two pseudo-randomized sequence list, counterbalanced across participants, were used to make sure that an equal number of trials in each block consisted of Dutch and English, as well as an equal rate of switch vs repetition trials across languages (30 trials of each language x trial type combination per block). An additional filler trial was included at the beginning of each block to provide a reference point from which the next trial could be categorised as either a switch or repetition trial. 
+
+Each trial started with a fixation cross in the center of the screen (250ms). This was followed by the simultaneous presentation of the word and cue shape (2500 ms) during which the participants’ vocal responses were captured. A blank screen followed, lasting for 500ms before the onset of the next trial. 
+
+### Accuracy Coding and Response Time Extraction
+
+The accuracy coding method was adapted from Declerck et al. [-@declerck2021there], which includes uploading the individual audio files into an accuracy coding task on Gorilla Experiment Builder (a version of this can be found as Open Materials on the Gorilla Experiment Builder Platform: [https://app.gorilla.sc/openmaterials/513829](https://app.gorilla.sc/openmaterials/513829)). There each trial was categorized as either Correct (correct color name produced in the target language), Incorrect Color (response given was the wrong color name), Incorrect Language (response given was produced in the wrong language) and No/Other Sound (when no response was detected or extraneous background noise was detected that would interfere with response time detection). Finally, all individual audio files were uploaded to Chronset system [@roux2017chronset] which then provided the response times for all trials separately.
+
+Error trials and trials where no or another extraneous sound were detected were excluded from RT analyses, as were “recovery” trials following an error trial. For accuracy and response time analyses, the first trial in each block and "recovery" trials following an error were excluded from the analyses. For response time analyses only, response times under 150ms, or response times over 2500ms or more than three standard deviations above the participant mean were discarded as outliers. Taking these criteria into account, a total of `r report_dropped_trial_numbers_accuracy(data_checks$trial_numbers, "dutch_stroop")`% and `r report_dropped_trial_numbers_rt(data_checks$trial_numbers, "dutch_stroop")`% of trials were excluded from the accuracy and response time analyses respectively. 
+
+We used R [@R-base] and the R-packages tidyverse [@tidyverse], here [@here], and bayesplot [@bayesplot-a; @bayesplot-b] for data preparation, analysis, and presentation. For each study we performed separate frequentist and Bayesian[^2] analyses for both the accuracy and response time dependent variables. For the frequentist analyses, we modelled the data with multilevel models fitted using the lme4 R-package [@lme4]. We used the afex R-package [@afex] to fit models with nested fixed effects, evaluating the statistical significance of main effects and interactions using likelihood-ratio tests. For the parameter estimates of each model, statistical significance is evaluated using *p*-values approximated using the Satterthwaite method implemented in the lmerTest R-package [@lmerTest]. Significant interactions were further investigated using estimated marginal means and pairwise tests calculated using the emmeans R-package [@emmeans]. We fitted Bayesian equivalents to the frequentist multilevel models using the brms R-package [@brms-a; @brms-b]. Bayes Factors were calculated using the Savage-Dickey approximation using the bayestestR R-package [@bayestestR]. Here, the change in the prior probability to the posterior probability of the point null is estimated, providing a measure of the relative evidence in support of the point-null hypothesis for each parameter (i.e. BF~01~). For example, a BF~01~ of 5 suggests that the point-null hypothesis is 5 times more likely than the alternative hypothesis, while BF~01~ of 0.2 suggests that the alternative hypothesis is 5 times more likely than the point-null hypothesis. @raftery1995bayesian highlights some thresholds for evidence, with Bayes factors equal to 1 providing no evidence, between 1 and 3 as weak evidence, and more than 3, 20, and 150 as positive, strong, and very strong respectively.
 
 [^2]: Bayesian analyses are included primarily to interpret the interaction between Language, Stroop Block, and Trial Type as per our pre-registered analyses for Experiments 2 and 3. For completeness, we report Bayes factors for all parameters and for Experiment 1.
 
-Given the lower bound and skewed nature of response times, this outcome was modelled using linear mixed effects models assuming a log-normal distribution[^3]. Given accuracy scores are binary, this outcome was modelled using generalised linear mixed effects models assuming a binomial distribution with a logit link function. All models used sum-coded (-1, 1) fixed effects of Stroop Block (Neutral or Incongruent), Trial Type (Repetition or Switch), and Language (English or Dutch). Models contained crossed random effects of participants and items, using the maximal random effects structure justified by the design that allows for model convergence [@barr2013random]. One advantage of Bayesian analyses is that with relatively informative priors the maximal random effects structure can be fitted without convergence problems [@vasishth2016statistical; @nicenboim2016statistical], meaning that no simplification to random effects was needed. For a description of the random effects in each frequentist model, see Appendix A. For a description of priors in each Bayesian model and how these affect parameter estimates and Bayes factors, see Appendix B. Unless otherwise stated, Bayes factors are consistent across different prior specifications from the prior sensitivity analysis. Finally, while the mixed effects models form the basis of our conclusions, for direct comparison to Liu et al. [-@liu2019symmetries], we also analysed the data aggregated by participant using ANOVAs evaluating the effect of Stroop Block and Language directly on switch costs (i.e. Switch trials - Non-Switch trials). 
+Given the lower bound and skewed nature of response times, this outcome was modelled using linear mixed effects models assuming a log-normal distribution[^3]. Given accuracy scores are binary, this outcome was modelled using generalized linear mixed effects models assuming a binomial distribution with a logit link function. All models used sum-coded (-1, 1) fixed effects of Stroop Block (Neutral or Incongruent), Trial Type (Repetition or Switch), and Language (English or Dutch). Models contained crossed random effects of participants and items, using the maximal random effects structure justified by the design that allows for model convergence [@barr2013random]. One advantage of Bayesian analyses is that with relatively informative priors the maximal random effects structure can be fitted without convergence problems [@vasishth2016statistical; @nicenboim2016statistical], meaning that no simplification to random effects was needed. For a description of the random effects in each frequentist model, see @sec-appendix-a. For a description of priors in each Bayesian model and how these affect parameter estimates and Bayes factors, see @sec-appendix-b. Unless otherwise stated, Bayes factors are consistent across different prior specifications from the prior sensitivity analysis. As the mean accuracy rate was `r data_checks$accuracy_summary |> filter(study == "dutch_stroop") |> pull(mean) * 100`% for Experiment 1, `r data_checks$accuracy_summary |> filter(study == "arabic_stroop") |> pull(mean) * 100`% for Experiment 2, and `r data_checks$accuracy_summary |> filter(study == "chinese_stroop") |> pull(mean) * 100`% for Experiment 3, as per our pre-registered analysis plans, we include analyses based on both response times and accuracy rates. Finally, while the mixed effects models form the basis of our conclusions, for a more direct comparison to Liu et al. [-@liu2019symmetries], we also analyzed the data using ANOVAs evaluating the effect of Stroop Block and Language directly on switch costs (i.e. Switch trials - Non-Switch trials) aggregated by participant.
 
 [^3]: For frequentist models fitted in lme4 this requires first transforming response times to their natural log before fitting. For Bayesian models fitted in brms response times are fitted directly using a lognormal family.
 
-For Experiment 1, response times and the accuracies are shown in each Language split by Stroop Block and Trial Type in @fig-dutch-plot.
+## Results
 
 ```{r fig-dutch-plot}
 #| label: fig-dutch-plot
@@ -245,7 +286,20 @@ knitr::include_graphics(here("03_plots", "03_descriptive", "dutch_patchwork.png"
 
 ### Response Time
 
-Fixed effects parameter estimates for response time models are shown in @tbl-param-dutch-rt.
+```{r dutch-rt-emms}
+#| include: false
+dutch_stroop_rt_emm <- pairwise_tests$rt_emms_resp |> 
+  filter(study == "dutch", analysis == "stroop")
+
+dutch_trial_type_rt_emm <- pairwise_tests$rt_emms_resp |> 
+  filter(study == "dutch", analysis == "trial-type")
+
+dutch_stroop_rt_emm_anova <- pairwise_tests$anova_rt_emms |> 
+  mutate_if(is.character, str_trim) |> 
+  filter(study == "dutch", analysis == "stroop")
+```
+
+There was a significant main effect of Stroop Block with faster response times in the Neutral condition `r make_descriptives_sentence(dutch_stroop_rt_emm, "Neutral", "emmean", "lower.CL", "upper.CL")` than the Incongruent condition `r gsub('.{1}$', ';', make_descriptives_sentence(dutch_stroop_rt_emm, "Incongruent", "emmean", "lower.CL", "upper.CL"))` see @fig-dutch-plot and @tbl-param-dutch-rt). There was also a significant main effect of Trial Type, with faster response times for Repetition `r make_descriptives_sentence(dutch_trial_type_rt_emm, "Repetition", "emmean", "lower.CL", "upper.CL")` than for Switch trials `r make_descriptives_sentence(dutch_trial_type_rt_emm, "Switch", "emmean", "lower.CL", "upper.CL")`. All other effects were non-significant, with Bayes factors in support of the null hypothesis.
 
 ```{r tbl-param-dutch-rt}
 #| label: tbl-param-dutch-rt
@@ -258,22 +312,20 @@ bind_parameters_rt(
   parameters_rt_gt()
 ```
 
-```{r dutch-rt-emms}
-#| include: false
-dutch_stroop_rt_emm <- pairwise_tests$rt_emms_resp |> 
-  filter(study == "dutch", analysis == "stroop")
-
-dutch_trial_type_rt_emm <- pairwise_tests$rt_emms_resp |> 
-  filter(study == "dutch", analysis == "trial-type")
-```
-
-There was a significant main effect of Stroop Block with faster response times in the Neutral condition `r make_descriptives_sentence(dutch_stroop_rt_emm, "Neutral", "emmean", "lower.CL", "upper.CL")` than the Incongruent condition `r make_descriptives_sentence(dutch_stroop_rt_emm, "Incongruent", "emmean", "lower.CL", "upper.CL")`. There was also a significant main effect of Trial Type, with faster response times for Repetition `r make_descriptives_sentence(dutch_trial_type_rt_emm, "Repetition", "emmean", "lower.CL", "upper.CL")` than for Switch trials `r make_descriptives_sentence(dutch_trial_type_rt_emm, "Switch", "emmean", "lower.CL", "upper.CL")`. All other effects were non-significant, with Bayes factors \> 3, indicating the data are at least 3 times more likely under the null model than the alternative model. 
-
-The ANOVA showed a main effect of Stroop Block `r make_anova_sentence(freq_results$rt_anova_freq_table, "Dutch", "Stroop")` and Language `r make_anova_sentence(freq_results$rt_anova_freq_table, "Dutch", "Language")`, but no interaction between Stroop Block and Language (*p* > .05). 
+The ANOVA showed a main effect of Stroop Block `r make_anova_sentence(freq_results$rt_anova_freq_table, "Dutch", "Stroop")` on switch costs, with larger switch costs in the Incongruent condition `r make_descriptives_sentence(dutch_stroop_rt_emm_anova, "Incongruent", "emmean", "lower.CL", "upper.CL")` relative to the Neutral condition `r make_descriptives_sentence(dutch_stroop_rt_emm_anova, "Neutral", "emmean", "lower.CL", "upper.CL")`. However, no significant main effect of Language or interaction between Stroop Block and Language was found (both *p*s > .05). 
 
 ### Accuracy
 
-Fixed effects parameter estimates for accuracy models are shown in @tbl-param-dutch-accuracy.
+```{r dutch-accuracy-emm}
+#| include: false
+dutch_stroop_accuracy_emm <- pairwise_tests$accuracy_emms_resp |> 
+  filter(study == "dutch", analysis == "stroop")
+
+dutch_trial_type_accuracy_emm <- pairwise_tests$accuracy_emms_resp |> 
+  filter(study == "dutch", analysis == "trial-type")
+```
+
+There was a significant main effect of Stroop Block with a larger proportion of correct answers in the Neutral condition `r make_descriptives_sentence(dutch_stroop_accuracy_emm, "Neutral", "prob", "asymp.LCL", "asymp.UCL")` than the Incongruent condition `r gsub('.{1}$', ';', make_descriptives_sentence(dutch_stroop_accuracy_emm, "Incongruent", "prob", "asymp.LCL", "asymp.UCL"))` see @fig-dutch-plot and @tbl-param-dutch-accuracy). There was also a significant main effect of Trial Type, with a larger proportion of correct answers for Repetition `r make_descriptives_sentence(dutch_trial_type_accuracy_emm, "Repetition", "prob", "asymp.LCL", "asymp.UCL")` than for Switch trials `r make_descriptives_sentence(dutch_trial_type_accuracy_emm, "Switch", "prob", "asymp.LCL", "asymp.UCL")`. All other effects were non-significant. However, only the Language × Trial Type interaction provided reliable evidence in support of the null hypothesis. 
 
 ```{r tbl-param-dutch-accuracy}
 #| label: tbl-param-dutch-accuracy
@@ -286,32 +338,27 @@ bind_parameters_accuracy(
   parameters_accuracy_gt()
 ```
 
-```{r dutch-accuracy-emm}
-#| include: false
-dutch_stroop_accuracy_emm <- pairwise_tests$accuracy_emms_resp |> 
-  filter(study == "dutch", analysis == "stroop")
+The ANOVA showed no significant main effects for Stroop Block or Language and no interaction between them (all *p*s > .05).
 
-dutch_trial_type_accuracy_emm <- pairwise_tests$accuracy_emms_resp |> 
-  filter(study == "dutch", analysis == "trial-type")
-```
+## Discussion
 
-There was a significant main effect of Stroop Block with a larger proportion of correct answers in the Neutral condition `r make_descriptives_sentence(dutch_stroop_accuracy_emm, "Neutral", "prob", "asymp.LCL", "asymp.UCL")` than the Incongruent condition `r make_descriptives_sentence(dutch_stroop_accuracy_emm, "Incongruent", "prob", "asymp.LCL", "asymp.UCL")`. There was also a significant main effect of Trial Type, with a larger proportion of correct answers for Repetition `r make_descriptives_sentence(dutch_trial_type_accuracy_emm, "Repetition", "prob", "asymp.LCL", "asymp.UCL")` than for Switch trials `r make_descriptives_sentence(dutch_trial_type_accuracy_emm, "Switch", "prob", "asymp.LCL", "asymp.UCL")`. All other effects were non-significant. Of these, only the Language × Trial Type interaction provided reliable evidence in support of the null hypothesis that was insensitive to prior specification. 
+Focusing on the findings related to our primary hypotheses, we found no reliable evidence for the interaction between Stroop Block and Trial Type nor a three-way interaction between Language, Stroop Block, and Trial Type. This was supported by the Bayes Factors for the response times, which indicated that the null hypothesis for the interaction between Stroop Block and Trial Type was 7 times more likely than the alternative hypothesis. For the three-way interaction the Bayes Factor of the response times indicated that the null hypothesis was 9 times more likely than the alternative hypothesis. These findings provide evidence against the idea that cross- and within-language interference is resolved by similar control processes, and thus evidence against the conclusions of some prior studies.
 
-The ANOVA showed a significant main effect of Stroop Block `r make_anova_sentence(freq_results$accuracy_anova_freq_table, "Dutch", "Language")` and Language `r make_anova_sentence(freq_results$accuracy_anova_freq_table, "Dutch", "Language")`, but no significant interaction between Stroop Block and Language (*p* > .05). 
+This raises the question why no significant interaction between Stroop Block and Trial Type nor a significant three-way interaction was observed in the current study. One reason might be the type of analyses. When using a similar analysis as @liu2019symmetries, we replicated their finding of a larger switch cost in the incongruent condition based on the aggregated data for switch costs in response times. Yet, unlike @liu2019symmetries, we observed no switch cost difference across Stroop Block and Language. Moreover, analyses of switch costs by accuracy showed no effects by Stroop Block, Language, or their interaction. Hence, the type of analysis is not the only difference that might lead to inconsistent outcomes.
 
 # Experiment 2
 
-Focusing primarily on the findings related to our primary hypotheses, we found no reliable evidence for a three-way interaction between Language, Stroop Block, and Trial Type. In fact, for response times we found evidence against these interactions. In aggregated analyses most similar to that used by @liu2019symmetries we again found no evidence of an interaction between Language and Stroop block for switch costs for response times or accuracy. 
-
 One possibly important difference between Experiment 1 of the present study and that of @liu2019symmetries is that the latter tested bilinguals with different scripts (Chinese-English), whereas the former used languages in the same script (Dutch-English). Since previous research has shown that languages in different scripts can affect language switching relative to when the scripts are similar [@slevc2016new] and because the main manipulation (i.e., the Stroop effect) relies on reading, relying on different script bilinguals could have resulted in a different pattern in @liu2019symmetries than what we observed in Experiment 1. To accommodate for this difference across studies, Experiment 2 used the same methodology as in Experiment 1 of the current study, but tested bilinguals with different scripts across their languages (Arabic-English).
 
-## Participants
+## Method
+
+### Participants
 
 `r report_participant_numbers(data_checks$participant_numbers, "arabic_stroop")` Arabic-English bilinguals were recruited. `r report_recording_failure(performance_exclusions, "arabic_stroop")` participants were excluded due to a recording failure and `r report_performance_exclusions(performance_exclusions, "arabic_stroop")` participants were excluded due to non-compliance with instructions, leaving `r report_participant_counts(descriptives$gender_counts, "arabic_stroop")` participants with a mean age of `r report_participant_age(descriptives$demo_summary, "arabic_stroop")`. Following the experiment, participants were asked to complete a the same language background questionnaire and English and Arabic vocabulary tests based on lexical decision tasks as in Experiment 1. Following the experiment, the participants were asked to complete a language background questionnaire [cf. @kirk2018can], and English and Arabic vocabulary tests based on lexical decision tasks [@hamed2018role; @lemhofer2012introducing\; see @tbl-arabic-demo].
 
 ```{r tbl-arabic-demo}
 #| label: tbl-arabic-demo
-#| tbl-cap: Mean percentages (SD) for language use and proficiency for each language for participants in Experiment 2
+#| tbl-cap: Overview of the demographic information (SD in brackets) for participants in Experiment 2. Language use corresponds to the percentage of daily use for each language, while vocabulary scores indicate the averaged percentage of correct responses to words and nonwords in the LexTale lexical decision task.
 descriptives$demo_summary |> 
   filter(
     study == "arabic_stroop", 
@@ -324,40 +371,33 @@ descriptives$demo_summary |>
     Parameter = case_when(
       parameter == "current_percent_english" ~ "English Current Use",
       parameter == "current_percent_english_pair" ~ "Arabic Current Use",
-      parameter == "lex_tale_english" ~ "English LexTale",
-      parameter == "lex_tale_english_pair" ~ "Arabic LexTale"
+      parameter == "lex_tale_english" ~ "English Vocabulary Test",
+      parameter == "lex_tale_english_pair" ~ "Arabic Vocabulary Test"
     ),
-    Score = paste0(mean, " (", sd, ")")
+    Percent = paste0(mean, " (", sd, ")")
   ) |> 
-  select(Parameter, Score) |> 
+  select(Parameter, Percent) |> 
   apa_gt()
 ```
 
-We used the same analytical techniques in Experiment 2 as we did for Experiment 1. For accuracy and reaction time analyses, the first trial in each block and "recovery" trials following an error were excluded from the analyses. For reaction time analyses only, reaction times under 150ms, or reaction times over 2500ms or more than three standard deviations above the participant mean were discarded as outliers. Taking these criteria into account, a total of `r report_dropped_trial_numbers_accuracy(data_checks$trial_numbers, "arabic_stroop")`% and `r report_dropped_trial_numbers_rt(data_checks$trial_numbers, "arabic_stroop")`% of trials were excluded from the accuracy and reaction time analyses respectively.
+### Stimuli
 
-Response times and the accuracies are shown in each language split by Stroop Block and Trial Type in @fig-arabic-plot.
+While the same shape cues were used as in Experiment 1, we changed the color words (blue/أزرق, pink/زهري, and orange/برتقالي) and the non-color words (fish/سمكة, spider/عنكبوت, and horse/حصان) so that they were all non-cognates, had a similar number of letters in English (color: 4.7; non-color: 5.0) and graphemes in Arabic (color: 5.0; non-color: 4.7), and a similar word frequency in English [color: 51.1\; non-color: 62.2\; @brysbaert2009moving] and in Arabic [color: 14.1\; non-color: 11.8\; @boudelaa2010aralex].
+
+### Procedure and Analysis
+
+We used the same analytical techniques in Experiment 2 as we did for Experiment 1. For accuracy and response time analyses, the first trial in each block and "recovery" trials following an error were excluded from the analyses. For response time analyses only, response times under 150ms, or response times over 2500ms or more than three standard deviations above the participant mean were discarded as outliers. Taking these criteria into account, a total of `r report_dropped_trial_numbers_accuracy(data_checks$trial_numbers, "arabic_stroop")`% and `r report_dropped_trial_numbers_rt(data_checks$trial_numbers, "arabic_stroop")`% of trials were excluded from the accuracy and response time analyses respectively.
+
+## Results
 
 ```{r fig-arabic-plot}
 #| label: fig-arabic-plot
 #| fig-cap: "Response times and proportions of correct responses by Language, Stroop Block, and Trial Type in Experiment 2"
-#| fig-alt: "A raincloud plot showing the reaction times and proportion of correct responses in English and Arabic."
+#| fig-alt: "A raincloud plot showing the response times and proportion of correct responses in English and Arabic."
 knitr::include_graphics(here("03_plots", "03_descriptive", "arabic_patchwork.png"))
 ```
 
 ### Response Time
-
-Fixed effects parameter estimates for accuracy models are shown in @tbl-param-arabic-rt.
-
-```{r tbl-param-arabic-rt}
-#| label: tbl-param-arabic-rt
-#| tbl-cap: Fixed effects parameter estimates and test statistics for response time in Experiment 2
-bind_parameters_rt(
-  freq_results$rt_mixed_freq_table_est,
-  bayes_results$`rt_bayes-factors`,
-  "Arabic"
-) |> 
-  parameters_rt_gt()
-```
 
 ```{r arabic-rt-emm}
 #| include: false
@@ -365,6 +405,9 @@ arabic_stroop_rt_emm <- pairwise_tests$rt_emms_resp |>
   filter(study == "arabic", analysis == "stroop")
 
 arabic_language_rt_emm <- pairwise_tests$rt_emms_resp |> 
+  filter(study == "arabic", analysis == "language")
+
+arabic_language_rt_anova_emm <- pairwise_tests$anova_rt_emms |> 
   filter(study == "arabic", analysis == "language")
 
 arabic_trial_type_rt_emm <- pairwise_tests$rt_emms_resp |> 
@@ -382,7 +425,20 @@ arabic_language_trial_type_rt_pairs_diffs <- pairwise_tests$rt_pairs_diffs_resp 
   filter(study == "arabic", analysis == "trial-type-groupedby-language")
 ```
 
-There was a significant main effect of Stroop Block with faster response times in the Neutral condition `r make_descriptives_sentence(arabic_stroop_rt_emm, "Neutral", "emmean", "lower.CL", "upper.CL")` than the Incongruent condition `r make_descriptives_sentence(arabic_stroop_rt_emm, "Incongruent", "emmean", "lower.CL", "upper.CL")`. There was also a significant main effect of Language, with faster response times in English `r make_descriptives_sentence(arabic_language_rt_emm, "English", "emmean", "lower.CL", "upper.CL")` than Arabic `r make_descriptives_sentence(arabic_language_rt_emm, "Arabic", "emmean", "lower.CL", "upper.CL")`. There was also a significant main effect of Trial Type, with faster response times in the Repetition `r make_descriptives_sentence(arabic_trial_type_rt_emm, "Repetition", "emmean", "lower.CL", "upper.CL")` than the Switch trials `r make_descriptives_sentence(arabic_trial_type_rt_emm, "Switch", "emmean", "lower.CL", "upper.CL")`. Finally, there was a significant interaction between Language and Trial Type. Estimated marginal means for Trial Type within each Language are shown in @tbl-emmeans-arabic-language-trial-type-rt
+There was a significant main effect of Stroop Block with faster response times in the Neutral condition `r make_descriptives_sentence(arabic_stroop_rt_emm, "Neutral", "emmean", "lower.CL", "upper.CL")` than the Incongruent condition `r gsub('.{1}$', ';', make_descriptives_sentence(arabic_stroop_rt_emm, "Incongruent", "emmean", "lower.CL", "upper.CL"))` see @fig-arabic-plot and @tbl-param-arabic-rt). There was also a significant main effect of Language, with faster response times in English `r make_descriptives_sentence(arabic_language_rt_emm, "English", "emmean", "lower.CL", "upper.CL")` than Arabic `r make_descriptives_sentence(arabic_language_rt_emm, "Arabic", "emmean", "lower.CL", "upper.CL")`. There was also a significant main effect of Trial Type, with faster response times in the Repetition `r make_descriptives_sentence(arabic_trial_type_rt_emm, "Repetition", "emmean", "lower.CL", "upper.CL")` than the Switch trials `r make_descriptives_sentence(arabic_trial_type_rt_emm, "Switch", "emmean", "lower.CL", "upper.CL")`. Finally, there was a significant two-way interaction between Language and Trial Type. Estimated marginal means for Trial Type within each Language are shown in @tbl-emmeans-arabic-language-trial-type-rt.
+
+```{r tbl-param-arabic-rt}
+#| label: tbl-param-arabic-rt
+#| tbl-cap: Fixed effects parameter estimates and test statistics for response time in Experiment 2
+bind_parameters_rt(
+  freq_results$rt_mixed_freq_table_est,
+  bayes_results$`rt_bayes-factors`,
+  "Arabic"
+) |> 
+  parameters_rt_gt()
+```
+
+Pairwise tests show that the switch cost is present in Arabic `r make_pairwise_sentence(arabic_language_trial_type_rt_pairs |> filter(language == "Arabic"), "Switch / Repetition", "ratio", "t.ratio")` and English `r make_pairwise_sentence(arabic_language_trial_type_rt_pairs |> filter(language == "English"), "Switch / Repetition", "ratio", "t.ratio")`. However, the magnitude of effects was stronger in the English than Arabic trials `r make_pairwise_sentence(arabic_language_trial_type_rt_pairs_diffs, "(Switch / Repetition Arabic) / (Switch / Repetition English)", "ratio", "t.ratio")`. All other effects were non-significant, with Bayes factors in support of the null hypothesis. 
 
 ```{r tbl-emmeans-arabic-language-trial-type-rt}
 #| label: tbl-emmeans-arabic-language-trial-type-rt
@@ -398,24 +454,9 @@ arabic_language_trial_type_rt_emm |>
   ) 
 ```
 
-Pairwise tests show that when the switch cost is present in Arabic `r make_pairwise_sentence(arabic_language_trial_type_rt_pairs |> filter(language == "Arabic"), "Switch / Repetition", "ratio")` and English `r make_pairwise_sentence(arabic_language_trial_type_rt_pairs |> filter(language == "English"), "Switch / Repetition", "ratio")`. However, the magnitude of effects was stronger in the English than Arabic trials `r make_pairwise_sentence(arabic_language_trial_type_rt_pairs_diffs, "(Switch / Repetition Arabic) / (Switch / Repetition English)", "ratio")`. All other effects were non-significant, with Bayes factors in support of the null hypothesis. 
-
-The ANOVA showed a main effect of Stroop Block `r make_anova_sentence(freq_results$rt_anova_freq_table, "Arabic", "Stroop")` and Language `r make_anova_sentence(freq_results$rt_anova_freq_table, "Arabic", "Language")`, but no significant interaction between Stroop Block and Language (*p* > .05)
+The ANOVA showed a main effect of Language `r make_anova_sentence(freq_results$rt_anova_freq_table, "Arabic", "Language")` on switch costs, with larger switch costs in English `r make_descriptives_sentence(arabic_language_rt_anova_emm, "English", "emmean", "lower.CL", "upper.CL")` than Arabic `r make_descriptives_sentence(arabic_language_rt_anova_emm, "Arabic", "emmean", "lower.CL", "upper.CL")`. However, no significant main effect of Stroop Block or interaction between Stroop Block and Language was found (both *p*s > .05).
 
 ### Accuracy
-
-Fixed effects parameter estimates for accuracy models are shown in @tbl-param-arabic-accuracy.
-
-```{r tbl-param-arabic-accuracy}
-#| label: tbl-param-arabic-accuracy
-#| tbl-cap: Fixed effects parameter estimates and test statistics for accuracy in Experiment 2
-bind_parameters_accuracy(
-  freq_results$accuracy_mixed_freq_table_est,
-  bayes_results$`accuracy_bayes-factors`,
-  "Arabic"
-) |> 
-  parameters_accuracy_gt()
-```
 
 ```{r arabic-accuracy-emm}
 #| include: false
@@ -429,34 +470,53 @@ arabic_language_accuracy_emm <- pairwise_tests$accuracy_emms_resp |>
   filter(study == "arabic", analysis == "language")
 
 arabic_three_way_emm <- pairwise_tests$accuracy_emms_resp |> 
-  filter(study == "arabic", analysis == "stroop-by-language-by-trial-type")
+  filter(study == "arabic", analysis == "")
 
 arabic_three_way_pairs <- pairwise_tests$accuracy_pairs_resp |> 
   filter(study == "arabic", analysis == "trial-type-groupedby-stroop-by-language")
 
-arabic_three_way_pairs_diffs <- pairwise_tests$accuracy_pairs_diffs_resp |> 
-    filter(study == "arabic", analysis == "trial-type-groupedby-stroop-by-language")
+arabic_three_way_pairs_diffs_asym <- pairwise_tests$rt_pairs_diffs_asym |> 
+    filter(study == "arabic")
 ```
 
-There was a significant main effect of Stroop Block with a small but significantly larger proportion of correct responses in the Neutral condition `r make_descriptives_sentence(arabic_stroop_accuracy_emm, "Neutral", "prob", "asymp.LCL", "asymp.UCL")` than the Incongruent condition `r make_descriptives_sentence(arabic_stroop_accuracy_emm, "Incongruent", "prob", "asymp.LCL", "asymp.UCL")`. There was also a significant main effect of Language, again with a small but significantly larger proportion of correct responses in English `r make_descriptives_sentence(arabic_language_accuracy_emm, "English", "prob", "asymp.LCL", "asymp.UCL")` than Arabic `r make_descriptives_sentence(arabic_language_accuracy_emm, "Arabic", "prob", "asymp.LCL", "asymp.UCL")`. There was also a significant main effect of Trial Type, with a larger proportion of correct responses for Repetition `r make_descriptives_sentence(arabic_trial_type_accuracy_emm, "Repetition", "prob", "asymp.LCL", "asymp.UCL")` than Switch trials `r make_descriptives_sentence(arabic_trial_type_accuracy_emm, "Switch", "prob", "asymp.LCL", "asymp.UCL")`. While all two-way interactions were non-significant and with Bayes factors in support of the null hypothesis, the Bayes factor was only reliable for the Language × Trial Type interaction. Finally, there was a significant 3-way interaction between Stroop Block, Language, and Trial Type. The pattern of results for this interaction is shown in @fig-arabic-plot.
+There was a significant main effect of Stroop Block with a small but significantly larger proportion of correct responses in the Neutral condition `r make_descriptives_sentence(arabic_stroop_accuracy_emm, "Neutral", "prob", "asymp.LCL", "asymp.UCL")` than the Incongruent condition `r gsub('.{1}$', ';', make_descriptives_sentence(arabic_stroop_accuracy_emm, "Incongruent", "prob", "asymp.LCL", "asymp.UCL"))` see @fig-arabic-plot and @tbl-param-arabic-accuracy). There was also a significant main effect of Language, again with a small but significantly larger proportion of correct responses in English `r make_descriptives_sentence(arabic_language_accuracy_emm, "English", "prob", "asymp.LCL", "asymp.UCL")` than Arabic `r make_descriptives_sentence(arabic_language_accuracy_emm, "Arabic", "prob", "asymp.LCL", "asymp.UCL")`. There was also a significant main effect of Trial Type, with a larger proportion of correct responses for Repetition `r make_descriptives_sentence(arabic_trial_type_accuracy_emm, "Repetition", "prob", "asymp.LCL", "asymp.UCL")` than Switch trials `r make_descriptives_sentence(arabic_trial_type_accuracy_emm, "Switch", "prob", "asymp.LCL", "asymp.UCL")`. While all two-way interactions were non-significant and with Bayes factors in support of the null hypothesis, the Bayes factor was only reliable for the Language × Trial Type interaction. Finally, there was a significant 3-way interaction between Stroop Block, Language, and Trial Type. 
 
-Pairwise tests show that in Arabic the switch cost is present for Neutral `r make_pairwise_sentence(arabic_three_way_pairs |> filter(language == "Arabic", stroop == "Neutral"), "Switch / Repetition", "odds.ratio")` and Incongruent `r make_pairwise_sentence(arabic_three_way_pairs |> filter(language == "Arabic", stroop == "Incongruent"), "Switch / Repetition", "odds.ratio")` Stroop blocks. However, in English this effect is only present in Neutral `r make_pairwise_sentence(arabic_three_way_pairs |> filter(language == "English", stroop == "Neutral"), "Switch / Repetition", "odds.ratio")` but not Incongruent `r make_pairwise_sentence(arabic_three_way_pairs |> filter(language == "English", stroop == "Incongruent"), "Switch / Repetition", "odds.ratio")` Stroop blocks.
+```{r tbl-param-arabic-accuracy}
+#| label: tbl-param-arabic-accuracy
+#| tbl-cap: Fixed effects parameter estimates and test statistics for accuracy in Experiment 2
+bind_parameters_accuracy(
+  freq_results$accuracy_mixed_freq_table_est,
+  bayes_results$`accuracy_bayes-factors`,
+  "Arabic"
+) |> 
+  parameters_accuracy_gt()
+```
 
-The ANOVA showed a main effect of Language `r make_anova_sentence(freq_results$accuracy_anova_freq_table, "Arabic", "Language")`, but no significant main effect of Stroop Block or interaction between Stroop Block and Language (both *p*s > .05).
+Pairwise tests show that in Arabic the switch cost is present for Neutral `r make_pairwise_sentence(arabic_three_way_pairs |> filter(language == "Arabic", stroop == "Neutral"), "Switch / Repetition", "odds.ratio", "z.ratio")` and Incongruent `r make_pairwise_sentence(arabic_three_way_pairs |> filter(language == "Arabic", stroop == "Incongruent"), "Switch / Repetition", "odds.ratio", "z.ratio")` Stroop blocks. However, in English this effect is only present in Neutral `r make_pairwise_sentence(arabic_three_way_pairs |> filter(language == "English", stroop == "Neutral"), "Switch / Repetition", "odds.ratio", "z.ratio")` but not Incongruent `r make_pairwise_sentence(arabic_three_way_pairs |> filter(language == "English", stroop == "Incongruent"), "Switch / Repetition", "odds.ratio", "z.ratio")` Stroop blocks. However, following Holm's sequential Bonferroni correction for multiplicity, we found no reliable asymmetrical switch costs in the Neutral `r make_pairwise_sentence(arabic_three_way_pairs_diffs_asym |> filter(stroop == "Neutral"), "(Switch - Repetition Arabic) - (Switch - Repetition English)", "estimate", "t.ratio")` or Incongruent `r make_pairwise_sentence(arabic_three_way_pairs_diffs_asym |> filter(stroop == "Incongruent"), "(Switch - Repetition Arabic) - (Switch - Repetition English)", "estimate", "t.ratio")` blocks.
+
+The ANOVA showed no significant main effects for Stroop Block or Language and no interaction between them (all *p*s > .05).
+
+## Discussion
+
+Experiment 1 (Dutch-English bilinguals) showed no reliable evidence for an interaction between Stroop Block and Trial Type nor a three-way interaction between Language, Stroop Block, and Trial Type. Similarly, Experiment 2 (Arabic-English bilinguals) found no evidence for an interaction between Stroop Block and Trial Type, which was supported by the Bayes Factors that indicated that the null hypothesis was 7 (response times) to 4 (accuracy) times more likely than the alternative hypothesis. While we similarly found no evidence for a three-way interaction in the response time analysis (i.e. BF~01~ = 9.28), we did find evidence for a three-way interaction in the accuracy analysis. However, while there was a numerical difference in the switch costs across languages for neutral trials, when correcting for multiplicity, this was non-significant. 
+
+ANOVAs most similar to the analyses used by @liu2019symmetries failed to replicate the finding of a larger switch cost in the incongruent condition found in Experiment 1. However, similarly to Experiment 1, and unlike @liu2019symmetries, we observed no switch cost difference across Stroop Block and Language. 
+
+Taken together, these findings also provide evidence against the idea that cross- and within-language interference is resolved by similar control processes, and thus evidence against the conclusions of some prior studies. Moreover, relying on different script bilinguals did not result in an overall similar pattern of results to that of Liu et al. [-@liu2019symmetries]. 
 
 # Experiment 3
 
-Focusing primarily on the findings related to our primary hypotheses, Experiment 1 (Dutch-English bilinguals) showed no reliable evidence for a three-way interaction between Language, Stroop Block, and Trial Type or for switch costs by Language and Stroop block in aggregated analyses most similar to that used by @liu2019symmetries. Experiment 2 (Arabic-English bilinguals) found evidence for a three-way interaction in accuracy analyses whereby switch costs were only present in Arabic (L1), with no effect in English (L2). However, there was evidence against a two-way interaction of Stroop and Trial Type and for the three-way interaction for response time. Again, ANOVAs most similar to the analyses used by @liu2019symmetries for response times and accuracy found no interaction between Stroop Block and Language.
+To get as close to Experiment 1 of Liu and colleagues [-@liu2019symmetries], we used the same methodology as their experiment and relied on the same type of bilinguals (Chinese-English) in Experiment 3. 
 
-In Experiment 3, we set out to conduct a replication of Experiment 1 of Liu et al. (2019). To this end, we used the same methodology as the original experiment and relied on the same type of bilinguals (Chinese-English). 
+## Method
 
-## Participants
+### Participants
 
-`r report_participant_numbers(data_checks$participant_numbers, "chinese_stroop")` Chinese-English bilinguals were recruited. `r report_recording_failure(performance_exclusions, "chinese_stroop")` participant was excluded due to a recording failure, and `r report_performance_exclusions(performance_exclusions, "chinese_stroop")` participants were excluded due to non-compliance with instructions, leaving `r report_participant_counts(descriptives$gender_counts, "chinese_stroop")` participants with a mean age of `r report_participant_age(descriptives$demo_summary, "chinese_stroop")`. Following the experiment, the participants were asked to complete a language background questionnaire [cf. @kirk2018can], and English and Chinese vocabulary tests based on lexical decision tasks [@chan2018lextale_ch; @lemhofer2012introducing\; see @tbl-chinese-demo].
+`r report_participant_numbers(data_checks$participant_numbers, "chinese_stroop")` Chinese-English bilinguals were recruited. `r report_recording_failure(performance_exclusions, "chinese_stroop")` participant was excluded due to a recording failure, and `r report_performance_exclusions(performance_exclusions, "chinese_stroop")` participants were excluded due to non-compliance with instructions, leaving `r report_participant_counts(descriptives$gender_counts, "chinese_stroop")` participants with a mean age of `r report_participant_age(descriptives$demo_summary, "chinese_stroop")`. Following the experiment, the participants were asked to complete a language background questionnaire [cf. @kirk2018can], and English and Chinese vocabulary test based on lexical decision tasks [@chan2018lextale_ch; @lemhofer2012introducing\; see @tbl-chinese-demo].
 
 ```{r tbl-chinese-demo}
 #| label: tbl-chinese-demo
-#| tbl-cap: Mean percentages (SD) for language use and proficiency for each language for participants in Experiment 3
+#| tbl-cap: Overview of the demographic information (SD in brackets) for participants in Experiment 3. Language use corresponds to the percentage of daily use for each language, while vocabulary scores indicate the averaged percentage of correct responses to words and nonwords in the LexTale lexical decision task.
 descriptives$demo_summary |> 
   filter(
     study == "chinese_stroop", 
@@ -469,29 +529,67 @@ descriptives$demo_summary |>
     Parameter = case_when(
       parameter == "current_percent_english" ~ "English Current Use",
       parameter == "current_percent_english_pair" ~ "Chinese Current Use",
-      parameter == "lex_tale_english" ~ "English LexTale",
-      parameter == "lex_tale_english_pair" ~ "Chinese LexTale"
+      parameter == "lex_tale_english" ~ "English Vocabulary Test",
+      parameter == "lex_tale_english_pair" ~ "Chinese Vocabulary Test"
     ),
-    Score = paste0(mean, " (", sd, ")")
+    Percent = paste0(mean, " (", sd, ")")
   ) |> 
-  select(Parameter, Score) |> 
+  select(Parameter, Percent) |> 
   apa_gt()
 ```
 
-We used the same analytical techniques in Experiment 3 as we did for Experiments 1 and 2. For accuracy and reaction time analyses, the first trial in each block and "recovery" trials following an error were excluded from the analyses. For reaction time analyses only, reaction times under 150ms, or reaction times over 2500ms or more than three standard deviations above the participant mean were discarded as outliers. Taking these criteria into account, a total of `r report_dropped_trial_numbers_accuracy(data_checks$trial_numbers, "chinese_stroop")`% and `r report_dropped_trial_numbers_rt(data_checks$trial_numbers, "chinese_stroop")`% of trials were excluded from the accuracy and reaction time analyses respectively.
+### Stimuli
 
-Response times and the proportion of correct responses are shown in each language split by Stroop Block and Trial Type in @fig-chinese-plot.
+Identical to Liu and colleagues [-@liu2019symmetries], the color words (red/红, green/绿, and blue/蓝) and the non-color words (tap, carry, and dive; 传, 接, and 置) were used in this experiment. All six words were non-cognates. These two groups of words had a similar number of letters in English (color: 4.0; non-color: 4.0) and all consisted of one character in Chinese. The word frequencies were quite different in both English [color: 107.7\; non-color: 31.2\; @brysbaert2009moving] and Chinese [color: 52.6\; non-color: 134.1\; @cai2010subtlex].
+
+Unlike in Experiment 1 and 2, no additional shape cues were provided to indicate the language in which the ink colors had to be named because that was also not the case in @liu2019symmetries. The script of the written words provided the language cue.
+
+### Procedure and Analysis
+
+A similar procedure and identical analyses as in Experiments 1 and 2 was used in Experiment 3. The only difference in procedure, compared to Experiment 1 and 2, to make it more similar to Liu et al. (2019), consisted of the details of the trial sequence: Each trial started with a fixation cross in the center of the screen (500 ms). This was followed by the simultaneous presentation of the word (2000 ms) during which the participants’ vocal responses were captured. If the participant responded prior to the 2000 ms, the next trial would start. Using the same exclusion criteria as in Experiment 1 and 2 resulted in `r report_dropped_trial_numbers_accuracy(data_checks$trial_numbers, "chinese_stroop")`% and `r report_dropped_trial_numbers_rt(data_checks$trial_numbers, "chinese_stroop")`% of trials being excluded from the accuracy and response time analyses respectively. 
+
+## Results
 
 ```{r fig-chinese-plot}
 #| label: fig-chinese-plot
 #| fig-cap: "Response times and proportions of correct responses by Language, Stroop Block, and Trial Type in Experiment 3"
-#| fig-alt: "A raincloud plot showing the reaction times and proportion of correct responses in English and Chinese."
+#| fig-alt: "A raincloud plot showing the response times and proportion of correct responses in English and Chinese."
 knitr::include_graphics(here("03_plots", "03_descriptive", "chinese_patchwork.png"))
 ```
 
 ### Response Time
 
-Fixed effects parameter estimates for accuracy models are shown in @tbl-param-chinese-rt.
+```{r chinese-rt-emm}
+#| include: false
+chinese_stroop_rt_emm <- pairwise_tests$rt_emms_resp |> 
+  filter(study == "chinese", analysis == "stroop") |> 
+  mutate_if(is.character, str_trim)
+
+chinese_language_rt_emm <- pairwise_tests$rt_emms_resp |> 
+  filter(study == "chinese", analysis == "language") |> 
+  mutate_if(is.character, str_trim)
+
+chinese_trial_type_rt_emm <- pairwise_tests$rt_emms_resp |> 
+  filter(study == "chinese", analysis == "trial-type") |> 
+  mutate_if(is.character, str_trim)
+
+chinese_language_trial_type_rt_emm <- pairwise_tests$rt_emms_resp |> 
+  filter(study == "chinese", analysis == "trial-type-groupedby-language") |> 
+  select(-c(study, response, analysis))
+
+chinese_language_trial_type_rt_pairs <- pairwise_tests$rt_pairs_resp |> 
+  filter(study == "chinese", analysis == "trial-type-groupedby-language") |> 
+  select(-c(study, response, analysis))
+
+chinese_language_trial_type_rt_pairs_diffs <- pairwise_tests$rt_pairs_diffs_resp |> 
+  filter(study == "chinese", analysis == "trial-type-groupedby-language")
+
+chinese_language_rt_anova_emm <- pairwise_tests$anova_rt_emms |> 
+  filter(study == "chinese", analysis == "language") |> 
+  mutate_if(is.character, str_trim)
+```
+
+There was a significant main effect of Stroop Block with faster response times in the Neutral condition `r make_descriptives_sentence(chinese_stroop_rt_emm, "Neutral", "emmean", "lower.CL", "upper.CL")` than the Incongruent condition `r gsub('.{1}$', ';', make_descriptives_sentence(chinese_stroop_rt_emm, "Incongruent", "emmean", "lower.CL", "upper.CL"))` see @fig-chinese-plot and @tbl-param-chinese-rt). There was a significant main effect of Language, with faster response times in Chinese `r make_descriptives_sentence(chinese_language_rt_emm, "Chinese", "emmean", "lower.CL", "upper.CL")` than English `r make_descriptives_sentence(chinese_language_rt_emm, "English", "emmean", "lower.CL", "upper.CL")`. There was also a significant main effect of Trial Type, with faster response times in the Repetition `r make_descriptives_sentence(chinese_trial_type_rt_emm, "Repetition", "emmean", "lower.CL", "upper.CL")` than the Switch trials `r make_descriptives_sentence(chinese_trial_type_rt_emm, "Switch", "emmean", "lower.CL", "upper.CL")`. Finally, there was a significant two-way interaction between Language and Trial Type. Estimated marginal means for Trial Type within each Language are shown in @tbl-emmeans-chinese-language-trial-type-rt.
 
 ```{r tbl-param-chinese-rt}
 #| label: tbl-param-chinese-rt
@@ -504,32 +602,7 @@ bind_parameters_rt(
   parameters_rt_gt()
 ```
 
-```{r chinese-rt-emm}
-#| include: false
-chinese_stroop_rt_emm <- pairwise_tests$rt_emms_resp |> 
-  filter(study == "chinese", analysis == "stroop")
-
-chinese_language_rt_emm <- pairwise_tests$rt_emms_resp |> 
-  filter(study == "chinese", analysis == "language")
-
-chinese_trial_type_rt_emm <- pairwise_tests$rt_emms_resp |> 
-  filter(study == "chinese", analysis == "trial-type")
-
-chinese_language_trial_type_rt_emm <- pairwise_tests$rt_emms_resp |> 
-  filter(study == "chinese", analysis == "trial-type-groupedby-language") |> 
-  select(-c(study, response, analysis))
-
-chinese_language_trial_type_rt_pairs <- pairwise_tests$rt_pairs_resp |> 
-  filter(study == "chinese", analysis == "trial-type-groupedby-language") |> 
-  select(-c(study, response, analysis))
-
-chinese_language_trial_type_rt_pairs_diffs <- pairwise_tests$rt_pairs_diffs_resp |> 
-  filter(study == "chinese", analysis == "trial-type-groupedby-language")
-```
-
-There was a significant main effect of Stroop Block with faster response times in the Neutral condition `r make_descriptives_sentence(chinese_stroop_rt_emm, "Neutral", "emmean", "lower.CL", "upper.CL")` than the Incongruent condition `r make_descriptives_sentence(chinese_stroop_rt_emm, "Incongruent", "emmean", "lower.CL", "upper.CL")`. There was also a significant main effect of Language, with faster response times in Chinese `r make_descriptives_sentence(chinese_language_rt_emm, "Chinese", "emmean", "lower.CL", "upper.CL")` than English `r make_descriptives_sentence(chinese_language_rt_emm, "English", "emmean", "lower.CL", "upper.CL")`. There was also a significant main effect of Trial Type, with faster response times in the Repetition `r make_descriptives_sentence(chinese_trial_type_rt_emm, "Repetition", "emmean", "lower.CL", "upper.CL")` than the Switch trials `r make_descriptives_sentence(chinese_trial_type_rt_emm, "Switch", "emmean", "lower.CL", "upper.CL")`. Finally, there was a significant two-way interaction between Language and Trial Type.
-
-Estimated marginal means for Trial Type within each Language are shown in @tbl-emmeans-chinese-language-trial-type-rt
+Pairwise tests show that the switch costs were present in Chinese `r make_pairwise_sentence(chinese_language_trial_type_rt_pairs |> filter(language == "Chinese"), "Switch / Repetition", "ratio", "t.ratio")` and English `r make_pairwise_sentence(chinese_language_trial_type_rt_pairs |> filter(language == "English"), "Switch / Repetition", "ratio", "t.ratio")`. However, the magnitude of effects was stronger in the Chinese trials `r make_pairwise_sentence(chinese_language_trial_type_rt_pairs_diffs, "(Switch / Repetition Chinese) / (Switch / Repetition English)", "ratio", "t.ratio")`. All other effects were non-significant, with Bayes factors in support of the null hypothesis, apart from the Stroop × Language two-way interaction where the Bayes factor indicates insufficient evidence in support of either model.
 
 ```{r tbl-emmeans-chinese-language-trial-type-rt}
 #| label: tbl-emmeans-chinese-language-trial-type-rt
@@ -545,24 +618,9 @@ chinese_language_trial_type_rt_emm |>
   ) 
 ```
 
-Pairwise tests show that when the switch cost is present in Chinese `r make_pairwise_sentence(chinese_language_trial_type_rt_pairs |> filter(language == "Chinese"), "Switch / Repetition", "ratio")` and English `r make_pairwise_sentence(chinese_language_trial_type_rt_pairs |> filter(language == "English"), "Switch / Repetition", "ratio")`. However, the magnitude of effects was stronger in the Chinese than English trials `r make_pairwise_sentence(chinese_language_trial_type_rt_pairs_diffs, "(Switch / Repetition Chinese) / (Switch / Repetition English)", "ratio")`. All other effects were non-significant, with Bayes factors in support of the null hypothesis, apart from the Stroop × Language two-way interaction where the Bayes factor indicates insufficient evidence in support of either model.
-
-The ANOVA showed a significant main effect of Stroop Block `r make_anova_sentence(freq_results$rt_anova_freq_table, "Chinese", "Stroop")`, Language `r make_anova_sentence(freq_results$rt_anova_freq_table, "Chinese", "Language")`, and a weak but significant interaction between Stroop Block and Language `r make_anova_sentence(freq_results$rt_anova_freq_table, "Chinese", "Stroop × Language")`.
+The ANOVA showed a significant main effect of Language `r make_anova_sentence(freq_results$rt_anova_freq_table, "Chinese", "Language")` on switch costs, with larger switch costs in Chinese `r make_descriptives_sentence(chinese_language_rt_anova_emm, "Chinese", "emmean", "lower.CL", "upper.CL")` than English `r make_descriptives_sentence(chinese_language_rt_anova_emm, "English", "emmean", "lower.CL", "upper.CL")`. However, no significant main effect of Stroop Block or interaction between Stroop Block and Language was found (both *p*s > .05).
 
 ### Accuracy
-
-Fixed effects parameter estimates for accuracy models are shown in @tbl-param-chinese-accuracy.
-
-```{r tbl-param-chinese-accuracy}
-#| label: tbl-param-chinese-accuracy
-#| tbl-cap: Fixed effects parameter estimates and test statistics for accuracy in Experiment 3
-bind_parameters_accuracy(
-  freq_results$accuracy_mixed_freq_table_est,
-  bayes_results$`accuracy_bayes-factors`,
-  "Chinese"
-) |> 
-  parameters_accuracy_gt()
-```
 
 ```{r chinese-accuracy-emm}
 #| include: false
@@ -580,11 +638,28 @@ chinese_language_trial_type_accuracy_pairs <- pairwise_tests$accuracy_pairs_resp
 
 chinese_language_trial_type_accuracy_pairs_diffs <- pairwise_tests$accuracy_pairs_diffs_resp |> 
   filter(study == "chinese", analysis == "trial-type-groupedby-language")
+
+chinese_stroop_accuracy_anova_emm <- pairwise_tests$anova_accuracy_emms |> 
+  filter(study == "chinese", analysis == "stroop")
+
+chinese_language_accuracy_anova_emm <- pairwise_tests$anova_accuracy_emms |> 
+  filter(study == "chinese", analysis == "language")
 ```
 
-There was a significant main effect of Stroop Block with a larger proportion of correct responses in the Neutral condition `r make_descriptives_sentence(chinese_stroop_accuracy_emm, "Neutral", "prob", "asymp.LCL", "asymp.UCL")` than the Incongruent condition `r make_descriptives_sentence(chinese_stroop_accuracy_emm, "Incongruent", "prob", "asymp.LCL", "asymp.UCL")`. There was also a significant main effect of Trial Type, with a larger proportion of correct responses in the Repetition `r make_descriptives_sentence(chinese_trial_type_accuracy_emm, "Repetition", "prob", "asymp.LCL", "asymp.UCL")` than the Switch trials `r make_descriptives_sentence(chinese_trial_type_accuracy_emm, "Switch", "prob", "asymp.LCL", "asymp.UCL")`. Finally, there was also a significant 2-way interaction between Language and Trial Type.
+There was a significant main effect of Stroop Block with a larger proportion of correct responses in the Neutral condition `r make_descriptives_sentence(chinese_stroop_accuracy_emm, "Neutral", "prob", "asymp.LCL", "asymp.UCL")` than the Incongruent condition `r make_descriptives_sentence(chinese_stroop_accuracy_emm, "Incongruent", "prob", "asymp.LCL", "asymp.UCL")`. There was also a significant main effect of Trial Type, with a larger proportion of correct responses in the Repetition `r make_descriptives_sentence(chinese_trial_type_accuracy_emm, "Repetition", "prob", "asymp.LCL", "asymp.UCL")` than the Switch trials `r make_descriptives_sentence(chinese_trial_type_accuracy_emm, "Switch", "prob", "asymp.LCL", "asymp.UCL")`. Finally, there was also a significant 2-way interaction between Language and Trial Type. Estimated marginal means for Trial Type within each Language are shown in @tbl-emmeans-chinese-language-trial-type-accuracy.
 
-Estimated marginal means for Trial Type within each Language are shown in @tbl-emmeans-chinese-language-trial-type-accuracy
+```{r tbl-param-chinese-accuracy}
+#| label: tbl-param-chinese-accuracy
+#| tbl-cap: Fixed effects parameter estimates and test statistics for accuracy in Experiment 3
+bind_parameters_accuracy(
+  freq_results$accuracy_mixed_freq_table_est,
+  bayes_results$`accuracy_bayes-factors`,
+  "Chinese"
+) |> 
+  parameters_accuracy_gt()
+```
+
+Pairwise tests show that the switch costs were present in Chinese `r make_pairwise_sentence(chinese_language_trial_type_accuracy_pairs |> filter(language == "Chinese"), "Switch / Repetition", "odds.ratio", "z.ratio")` and English `r make_pairwise_sentence(chinese_language_trial_type_accuracy_pairs |> filter(language == "English"), "Switch / Repetition", "odds.ratio", "z.ratio")`. However, the magnitude of effects was stronger in the Chinese trials `r make_pairwise_sentence(chinese_language_trial_type_accuracy_pairs_diffs, "(Switch / Repetition Chinese) / (Switch / Repetition English)", "odds.ratio", "z.ratio")`. All other effects were non-significant. Here, Bayes factors were only reliably in support of the null hypothesis for the two-way interaction of Stroop × Trial Type and the three-way interaction of Stroop × Language × Trial Type. The main effect of Language had insufficient evidence in favor of either model. While the two-way interaction of Stroop × Language was in support of the null hypothesis, it was sensitive to the prior specification and thus must be interpreted with caution.
 
 ```{r tbl-emmeans-chinese-language-trial-type-accuracy}
 #| label: tbl-emmeans-chinese-language-trial-type-accuracy
@@ -600,15 +675,174 @@ chinese_language_trial_type_accuracy_emm |>
   ) 
 ```
 
-Pairwise tests show that when the switch cost is present in Chinese `r make_pairwise_sentence(chinese_language_trial_type_accuracy_pairs |> filter(language == "Chinese"), "Switch / Repetition", "odds.ratio")` and English `r make_pairwise_sentence(chinese_language_trial_type_accuracy_pairs |> filter(language == "English"), "Switch / Repetition", "odds.ratio")`. However, the magnitude of effects was stronger in the Chinese than English trials `r make_pairwise_sentence(chinese_language_trial_type_accuracy_pairs_diffs, "(Switch / Repetition Chinese) / (Switch / Repetition English)", "odds.ratio")`. All other effects were non-significant. Here, Bayes factors were only reliably in support of the null hypothesis for the two-way interaction of Stroop × Trial Type and the three-way interaction of Stroop × Language × Trial Type. The main effect of Language had insufficient evidence in favour of either model, while the two-way interaction of Stroop × Language, while in support of the null hypothesis, was sensitive to the prior specification and thus must be interpreted with caution.
+The ANOVA showed a significant main effect of Stroop Block `r make_anova_sentence(freq_results$accuracy_anova_freq_table, "Chinese", "Stroop")`, with larger switch costs in the Incongruent `r make_descriptives_sentence(chinese_stroop_accuracy_anova_emm, "Incongruent", "emmean", "lower.CL", "upper.CL")` than Neutral `r make_descriptives_sentence(chinese_stroop_accuracy_anova_emm, "Neutral", "emmean", "lower.CL", "upper.CL")` trials. There was also a significant main effect of Language `r make_anova_sentence(freq_results$accuracy_anova_freq_table, "Chinese", "Language")`, with larger switch costs in Chinese `r make_descriptives_sentence(chinese_language_accuracy_anova_emm, "Chinese", "emmean", "lower.CL", "upper.CL")` than English `r make_descriptives_sentence(chinese_language_accuracy_anova_emm, "English", "emmean", "lower.CL", "upper.CL")`. However, there was no significant interaction between Stroop Block and Language (*p* > .05).
 
-The ANOVA showed a significant main effect of Stroop Block `r make_anova_sentence(freq_results$accuracy_anova_freq_table, "Chinese", "Stroop")`, Language `r make_anova_sentence(freq_results$accuracy_anova_freq_table, "Chinese", "Language")`, and a weak but significant interaction between Stroop Block and Language `r make_anova_sentence(freq_results$accuracy_anova_freq_table, "Chinese", "Stroop × Language")`.
+## Discussion
 
-# Summary of Results
+Consistent with Experiments 1 and 2, no significant interaction was observed in Experiment 3 between Stroop Block and Trial type. As supported by the Bayes Factors, the null hypothesis was 6 (reaction times) to 4 (accuracy) times more likely than the alternative hypothesis. Moreover, no significant three-way interaction was observed. This was also supported by the Bayes Factors, which indicated that the null hypothesis was 11 (reaction times) to 5 (accuracy) times more likely than the alternative hypothesis. These results seem to indicate that there is little overlap between the control processes implemented to resolve cross- and within-language interference.
 
-Focusing primarily on the findings related to our primary hypotheses, that of a switch cost dependent upon Language and Stroop Block, Experiment 1 (Dutch-English bilinguals) found evidence against a three-way interaction in response time and accuracy analyses. For the response time analyses only, there was also evidence against a two-way interaction between Stroop Block and Trial Type. While this was non-significant in the accuracy analyses the Bayes factor did not meet the threshold for reliable evidence against the effect. ANOVAs most similar to analyses used by @liu2019symmetries for switch costs to response times and accuracies showed no interaction between Stroop Block and Language. Experiment 2 (Arabic-English bilinguals) found evidence against a two-way interaction between Stroop and Trial Type in response time and accuracy analyses. For response times, there was also evidence against a three-way interaction. However, accuracy analyses showed a significant three-way interaction. ANOVAs for response times and accuracy again found no interaction between Stroop Block and Language. Experiment 3 (Chinese-English bilinguals) showed evidence against a two-interaction of Stroop Block and Trial Type and against a three-way interaction in response time and accuracy analyses. However, here ANOVAs found weak but significant interactions between Stroop Block and Language.
+As in Experiment 2, ANOVAs most similar to the analyses used by Liu et al. (2019) failed to replicate the larger switch cost in the incongruent condition found for response times in Experiment 1. However, unlike Experiments 1 and 2, this effect was found for accuracy. Finally, consistent with Experiments 1 and 2, we found no interaction between Stroop Block and Language indicative of asymmetrical switch costs.
 
-Overall, switch costs reliant upon Language and Stroop Block were only found in Arabic-English bilinguals for accuracy analyses and in Chinese-English bilinguals for response times and accuracy when data are aggregated by participants. Overall, this indicates no reliable effect for switch costs dependent upon Language and Stroop Block in Dutch-English, Arabic-English, and Chinese-English bilinguals. 
+## Combined Analysis
+
+While the combined participant sample size and trial numbers in each study were comparable to those used in previous studies [e.g. @liu2019symmetries; @yahya2022interactions], this does not entail that any of the studies are sensitive to reliably detect an effect. Thus, one potential reason for the consistent failure to detect a significant two-way interaction between Stroop Block and Trial type across all three experiments is a lack of sensitivity in the analyses given the experimental design. 
+
+To explore this possibility we pooled the three data sets from each experiment and fitted the data using a single mixed effects model again containing the sum-coded fixed effects of Stroop Block (Neutral or Incongruent), Language (English or Other), and Trial Type (Repetiton or Switch) and crossed random effects of participants, items, and study, using the maximal random effects structure justified by the design that allows for model convergence [@barr2013random]. For a description of the random effects in the model, see @sec-appendix-a.
+
+### Response Time
+
+```{r fig-combined-plot}
+#| label: fig-combined-plot
+#| fig-cap: "Response times and proportions of correct responses by Language, Stroop Block, and Trial Type across Experiments 1—3"
+#| fig-alt: "A raincloud plot showing the response times and proportion of correct responses in English and Other languages."
+knitr::include_graphics(here("03_plots", "03_descriptive", "pooled_patchwork.png"))
+```
+
+```{r combined-rt-emms}
+#| include: false
+combined_stroop_rt_emm <- pooled_emms$rt_stroop_emm_resp |> 
+  as_tibble() |> 
+  rename(condition = stroop, emmean = response) |> 
+  mutate_if(is.numeric, round, 2)
+
+combined_trial_type_rt_emm <- pooled_emms$rt_trial_type_emm_resp |> 
+  as_tibble() |> 
+  rename(condition = trial_type, emmean = response) |> 
+  mutate_if(is.numeric, round, 2)
+```
+
+There was a significant main effect of Stroop Block with faster response times in the Neutral condition `r make_descriptives_sentence(combined_stroop_rt_emm, "Neutral", "emmean", "asymp.LCL", "asymp.UCL")` than the Incongruent condition `r make_descriptives_sentence(combined_stroop_rt_emm, "Incongruent", "emmean", "asymp.LCL", "asymp.UCL")`. There was also a significant main effect of Trial Type, with faster response times in the Repetition `r make_descriptives_sentence(combined_trial_type_rt_emm, "Repetition", "emmean", "asymp.LCL", "asymp.UCL")` than the Switch trials `r make_descriptives_sentence(combined_trial_type_rt_emm, "Switch", "emmean", "asymp.LCL", "asymp.UCL")`. All other parameters, including the Stroop × Trial Type and Stroop × Language × Trial Type interactions were non-significant.
+
+```{r tbl-param-combined-rt}
+#| label: tbl-param-combined-rt
+#| tbl-cap: Fixed effects parameter estimates and test statistics for response time across Experiments 1—3
+pooled_models$`mixed_freq_all-studies_rt`$full_model |> 
+  broom.mixed::tidy() |> 
+  filter(effect == "fixed") |> 
+  mutate(
+    term = factor(
+      term,
+      levels = unique(term),
+      labels = c(
+      "Intercept",
+      "Stroop",
+      "Language",
+      "Trial Type",
+      "Stroop × Language",
+      "Stroop × Trial Type",
+      "Language × Trial Type",
+      "Stroop × Language × Trial Type"
+      )
+    ),
+    p_value = papa(p.value, asterisk = FALSE)
+  ) |> 
+  select(-c(effect, group, p.value)) |>
+  mutate_if(is.numeric, round_pad) |> 
+  apa_gt() |> 
+    cols_label(
+      term = "term",
+      estimate = html("&beta;"),
+      std.error = md("*SE*"),
+      statistic = md("*t*"),
+      df = "df",
+      p_value = md("*p*")
+    ) 
+```
+
+### Accuracy
+
+There was a significant main effect of Stroop Block, Language, and Trial Type, along with a significant two-way interaction of Language × Trial Type and a significant three-way interaction of Stroop × Language × Trial Type. All other parameters were non-significant. Estimated marginal means for Trial Type within each Language and Stroop Block are shown in @tbl-emmeans-combined-stroop-language-trial-type-accuracy.
+
+```{r tbl-param-combined-accuracy}
+#| label: tbl-param-combined-accuracy
+#| tbl-cap: Fixed effects parameter estimates and test statistics for accuracy across Experiments 1—3
+pooled_models$`mixed_freq_all-studies_accuracy`$full_model |> 
+  broom.mixed::tidy() |> 
+  filter(effect == "fixed") |> 
+  mutate(
+    term = factor(
+      term,
+      levels = unique(term),
+      labels = c(
+      "Intercept",
+      "Stroop",
+      "Language",
+      "Trial Type",
+      "Stroop × Language",
+      "Stroop × Trial Type",
+      "Language × Trial Type",
+      "Stroop × Language × Trial Type"
+      )
+    ),
+    p_value = papa(p.value, asterisk = FALSE)
+  ) |> 
+  select(-c(effect, group, p.value)) |>
+  mutate_if(is.numeric, round_pad) |> 
+  apa_gt() |> 
+    cols_label(
+      term = "term",
+      estimate = html("&beta;"),
+      std.error = md("*SE*"),
+      statistic = md("*t*"),
+      p_value = md("*p*")
+    ) 
+```
+
+```{r}
+#| include: false
+pooled_accuracy_three_way_pairs <- pooled_emms$accuracy_three_way_pairs_resp |> 
+  rename(p_value = p.value) |> 
+  mutate(p_value = papa(p_value, asterisk = FALSE)) |> 
+  mutate_if(is.numeric, round, 2) 
+
+pooled_accuracy_two_way_pairs <- pooled_emms$accuracy_two_way_pairs_resp |> 
+  rename(p_value = p.value) |> 
+  mutate(p_value = papa(p_value, asterisk = FALSE)) |> 
+  mutate_if(is.numeric, round, 2) 
+```
+
+
+Pairwise tests show that the language switch costs differ between Stroop incongruent and neutral trials for English `r make_pairwise_sentence(pooled_accuracy_three_way_pairs |> filter(language == "English"), "(Switch / Repetition Incongruent) / (Switch / Repetition Neutral)", "odds.ratio", "z.ratio")` but not for Other languages `r make_pairwise_sentence(pooled_accuracy_three_way_pairs |> filter(language == "Other"), "(Switch / Repetition Incongruent) / (Switch / Repetition Neutral)", "odds.ratio", "z.ratio")`. As shown in @tbl-emmeans-combined-stroop-language-trial-type-accuracy, and counter to previous findings by @liu2019symmetries, this effect is driven primarily by a larger difference in the language switch and repetition trials for the Stroop neutral condition in English. Again, given the relatively high proportion of correct responses across studies, it is unlikely that this reflects a reliable effect. Additionally, given that no significant two-way interaction of Stroop × Trial Type was found, and pairwise tests showed that there was no significant difference in the language switch costs between Stroop neutral and incongruent trials `r make_pairwise_sentence(pooled_accuracy_two_way_pairs, "(Switch / Repetition Incongruent) / (Switch / Repetition Neutral)", "odds.ratio", "z.ratio")`, this effect is not robust across languages.
+
+```{r tbl-emmeans-combined-stroop-language-trial-type-accuracy}
+#| label: tbl-emmeans-combined-stroop-language-trial-type-accuracy
+#| tbl-cap: Estimated marginal means of Accuracy for Stroop Block by Trial Type by Language Variety across Experiments 1—3.
+pooled_emms$accuracy_three_way_emm_resp |> 
+  arrange(language, stroop, trial_type) |> 
+  mutate_if(is.numeric, round, 2) |> 
+  mutate(
+    condition = paste(language, stroop, trial_type),
+    `95% CI` = paste0("[", asymp.LCL, ", ", asymp.UCL, "]")
+  ) |> 
+  select(condition, prob, SE, `95% CI`) |> 
+  apa_gt() |> 
+  cols_label(
+    condition = md("Condition"),
+    prob = md("Mean"),
+    SE = md("*SE*")
+  ) 
+```
+
+## Sensitivity Analysis
+
+As all three studies and their combined analyses failed to report a significant two-way interaction for Stroop × Trial Type in both reaction time and accuracy analyses, one question that remains is whether the study design used throughout had sufficient sensitivity to reliably detect an interaction. To address this question we performed a sensitivity analysis. As we presume reaction times to be the better measure of asymmetrical switch costs, we based this analysis on reaction times only. Additionally, as study 3 was most closely aligned to that of @liu2019symmetries, we used this experiment and the parameter estimates from this model as a baseline. We kept all parameter estimates for fixed and random effects, except the two-way interaction for Stroop × Trial Type, fixed to those reported in the model. We then varied the effect size of the two-way interaction over 16 steps on the log scale ranging from 0 to 0.015. Crucially, we also simulated the same level of missing data in the simulated data sets as reported in Experiment 3. We then sampled 1,000 data sets for each effect size and conducted analyses using the same mixed effects model structure as reported in Experiment 3. For comparison to the analyses reported by @liu2019symmetries, in each sample we also aggregated the data by subjects to perform a by-subjects ANOVA. We then estimated the power at each effect size by using the proportion of significant tests. 
+
+As shown in @fig-sensitivity-plot, this analysis suggests that design is sensitive to effect sizes of `r simulation_summaries$power_lme_predictions |> filter(power_group == "medium") |> pull(beta_st) |> round(4)` with 80% power and effect sizes of `r simulation_summaries$power_lme_predictions |> filter(power_group == "high") |> pull(beta_st) |> round(4)` with 90% power. Analyses aggregated by participant using the same ANOVA method detailed in Liu et al. (2020) showed the design to be sensitive to effect sizes of `r simulation_summaries$power_anova_predictions |> filter(power_group == "medium") |> pull(beta_st) |> round(4)` with 80% power and effect sizes of `r simulation_summaries$power_anova_predictions |> filter(power_group == "high") |> pull(beta_st) |> round(4)` with 90% power. This increased sensitivity is likely caused by an increased Type-I error rate due to aggregation whereby crossed by-subjects and by-items effects aren't taken into account. Indeed, with an effect size of zero for the two-way interaction, `r simulation_summaries$power_lme |> filter(beta_st == 0) |> pull(power)*100`% of the analyses are report a significant effect when analysed using a mixed effects model, which is within an acceptable range of the nominal alpha level of 5%. However, this Type-I error rate rises to `r simulation_summaries$power_anova |> filter(beta_st == 0) |> pull(power)*100`% when analysing the data aggregated by subjects using an ANOVA. This is far beyond the nominal alpha level of 5%, showing this analytical method to be anti-conservative.
+
+```{r}
+#| label: fig-sensitivity-plot
+#| out.width: "100%"
+#| fig.cap: "Power for designs varying in effect size"
+knitr::include_graphics(here("03_plots", "02_sensitivity-checks", "01_frequentist", "power_plot.png"))
+```
+
+```{r}
+#| label: fig-diffs-plot
+#| out.width: "100%"
+#| fig.cap: "Difference in Language Switch Costs between\nIncongruent and Neutral Stroop Trials"
+knitr::include_graphics(here("03_plots", "02_sensitivity-checks", "01_frequentist", "sensitivity_plot.png"))
+```
+
 
 # References
 
@@ -617,7 +851,7 @@ Overall, switch costs reliant upon Language and Stroop Block were only found in 
 
 # Appendices
 
-## Appendix A. Frequentist Model Specification
+## Appendix A. Frequentist Model Specification {#sec-appendix-a}
 
 Where models did not converge we took the strategy of removing correlations between random effects before removing first three-way, then two-way interactions, before removing main effects. This criteria was applied to random effects for items before participants under the assumption that, with carefully developed items, variance will be greater in participants than items such that estimates for these random effects will be larger. All models used the bobyqa optimiser.
 
@@ -625,7 +859,7 @@ Following this criteria, the final R formulae were used:
 
 ### Experiment 1
 
-#### Reaction Time
+#### Response Time
 
     log_rt ~ stroop * language * trial_type + 
       (1 + stroop + language + trial_type + stroop:language + trial_type:language | 
@@ -640,7 +874,7 @@ Following this criteria, the final R formulae were used:
 
 ### Experiment 2
 
-#### Reaction Time
+#### Response Time
 
     log_rt ~ stroop * language * trial_type + 
       (1 + stroop + language + trial_type + stroop:language + trial_type:language || 
@@ -654,7 +888,7 @@ Following this criteria, the final R formulae were used:
 
 ### Experiment 3
 
-#### Reaction Time
+#### Response Time
 
     log_rt ~ stroop * language * trial_type + 
       (1 + stroop + language + trial_type + stroop:language + trial_type:language || 
@@ -666,14 +900,30 @@ Following this criteria, the final R formulae were used:
     correct ~ stroop * trial_type * language +
       (1 + stroop + language | subject_id) + 
       (1 + trial_type | word_colour)
+      
+### Combined Analyses
 
-## Appendix B. Bayesian Model Specification
+#### Response Time
+
+    log_rt ~ stroop * language * trial_type +
+      (1 + stroop + language + trial_type + stroop:language | subject_id) + 
+      (1 + trial_type | word_colour) +
+      (1 + language | study)
+
+#### Accuracy
+
+    correct ~ stroop * language * trial_type +
+      (1 + stroop | subject_id) + 
+      (1 | word_colour) +
+      (1 | study)
+
+## Appendix B. Bayesian Model Specification {#sec-appendix-b}
 
 ### Model Priors
 
 All models used the maximal random effects structure. For each experiment five models were fitted for response time and accuracy models respectively with priors varying across models for the precision of main effects and interactions for the fixed effects.
 
-#### Reaction Time
+#### Response Time
 
 We began with setting priors for a single model in each Experiment with priors based on findings from [@liu2019symmetries]. The grand mean in Experiment 1 of Liu et al. is 1036.75ms (approx 6.9 on log scale). Thus, for our intercept we used a prior with a range of 800 - 1200ms, $Normal(6.9, 0.1)$. Liu et al. found strong effects of Language (i.e. with a $\eta_{p}^{2}$ of 0.4). The biggest difference between languages was around 100ms. Thus, for language we used a prior with a range of -220ms to 220ms, $Normal(0, 0.05)$. While Liu found effects of Stroop half as big as those for language, we assume that an effect at least as big as that of Language should be found for the effect Stroop blocks, so the same prior is used here. Trial type was not calculated in Liu et al., so we again assume the same prior for this main effect. All interactions as in Liu are at least half the size of the main effects, so we make the same assumption in our priors, setting all interactions to have priors of $Normal(0, 0.025)$. 
 
@@ -681,7 +931,7 @@ We then varied priors around this baseline to evaluate their impact on fixed eff
 
 #### Accuracy
 
-Again, we began with setting priors for a single model in each Experiment with priors based on findings from [@liu2019symmetries]. In Experiment 1 of Liu et al. (2019) there is a very high grand mean accuracy of .93 (a logit of approximately 2.6). We thus use a prior with an approximate range of 2.2–3 logits, $Normal(2.6, 0.2)$. Liu et al. found relatively strong Stroop effects of around 2% across conditions. This equates to the difference between an inverse logit of .93 and .91, i.e. a logit of 0.27. We thus set all main effects to allow for effects twice as large as that found in Liu et al. either side of 0, i.e. with a prior of $Normal(0, 0.27)$. Given scores are assumed to be close to ceiling we allowed for broader priors on interaction effects when compared to the reaction time models, allowing for interaction effects around 1/3 as large as main effects, $Normal(0., 0.18)$. 
+Again, we began with setting priors for a single model in each Experiment with priors based on findings from [@liu2019symmetries]. In Experiment 1 of Liu et al. (2019) there is a very high grand mean accuracy of .93 (a logit of approximately 2.6). We thus use a prior with an approximate range of 2.2–3 logits, $Normal(2.6, 0.2)$. Liu et al. found relatively strong Stroop effects of around 2% across conditions. This equates to the difference between an inverse logit of .93 and .91, i.e. a logit of 0.27. We thus set all main effects to allow for effects twice as large as that found in Liu et al. either side of 0, i.e. with a prior of $Normal(0, 0.27)$. Given scores are assumed to be close to ceiling we allowed for broader priors on interaction effects when compared to the response time models, allowing for interaction effects around 1/3 as large as main effects, $Normal(0., 0.18)$. 
 
 We again varied priors around this baseline to evaluate their impact on fixed effect parameter estimates and Bayes factors. We varied main effects with *SD*s from 0.09, 0.18, 0.27, 0.36, 0.45, and with interactions with *SD*s from 0.045, 0.09, 0.18, 0.27, 0.36. We chose the final model for reporting where parameter estimates and Bayes factors were relatively stable. This is model 4 for each experiment and outcome. Finally, all models had the same priors for the remaining terms. We used a $Normal(0, 0.5)$ prior for all group-level (random) effects, exluding the intercept for by-participant effects which had a broader prior of $Normal(0, 2)$. We also used an $LKJ(2)$ prior for the correlations between group-level effects, which regularises correlations to put less weight on correlations of 0 and 1.
 
@@ -689,12 +939,12 @@ We again varied priors around this baseline to evaluate their impact on fixed ef
 
 The following plot shows how sensitive parameter estimates are to the prior specification. Note that only priors that differ across models are highlighted in the plots below.
 
-#### Reaction Time
+#### Response Time
 
 ```{r fig-prior-fixef-rt}
 #| label: fig-prior-fixef-rt
-#| fig-cap: "Sensitivity of fixed effect parameter estimates to prior specification in the Bayesian models for reaction time across studies."
-#| fig-alt: "Plots showing how fixed effect parameter estimates change across Bayesian models with different prior specifications for the reaction time outcome. Parameter estimates are typically stable between the 3rd and 5th models."
+#| fig-cap: "Sensitivity of fixed effect parameter estimates to prior specification in the Bayesian models for response time across studies."
+#| fig-alt: "Plots showing how fixed effect parameter estimates change across Bayesian models with different prior specifications for the response time outcome. Parameter estimates are typically stable between the 3rd and 5th models."
 knitr::include_graphics(here("03_plots", "02_sensitivity-checks", "02_bayesian", "rt_fixef.png"))
 ```
 
@@ -709,9 +959,9 @@ knitr::include_graphics(here("03_plots", "02_sensitivity-checks", "02_bayesian",
 
 ### Sensitivity of Bayes Factors
 
-Similarly, we show how prior specification affects the direction and magnitude of Bayes factors across models and studies. Here , the grey band shows the region where insuffient evidence is found for the null and alternative hypotheses. Values above this band show evidence in support of the null hypothesis. Values below this line show evidence in support of the alternative hypothesis.
+Similarly, we show how prior specification affects the direction and magnitude of Bayes factors across models and studies. Here, the grey band shows the region where insufficient evidence is found for the null and alternative hypotheses. Values above this band show evidence in support of the null hypothesis. Values below this line show evidence in support of the alternative hypothesis.
 
-#### Reaction Time
+#### Response Time
 
 ```{r fig-prior-bf-rt}
 #| label: fig-prior-bf-rt

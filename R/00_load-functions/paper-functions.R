@@ -13,10 +13,18 @@ make_descriptives_sentence <- function(.data, .condition, .outcome = "emmean", .
   )
 }
 
-make_pairwise_sentence <- function(.data, .contrast, .outcome = "ratio") {
+make_pairwise_sentence <- function(.data, .contrast, .outcome = "ratio", .statistic = "t.ratio") {
   .data_subset <- .data |> filter(contrast == .contrast)
+  p_val <- .data_subset |> pull(p_value)
   
-  if(.outcome == "ratio") {
+  # check if p-value has a < sign, if so, keep it. If not, add an equals
+  if(grepl("<", p_val)) {
+    # do nothing
+  } else {
+    p_val <- paste0("= ", p_val)
+  }
+  
+  if(.outcome == "ratio" & .statistic == "t.ratio") {
     paste0(
       "(Ratio = ",
       .data_subset |> pull(.outcome),
@@ -26,12 +34,12 @@ make_pairwise_sentence <- function(.data, .contrast, .outcome = "ratio") {
       "*t*(",
       .data_subset |> pull(df),
       ") = ",
-      .data_subset |> pull(t.ratio),
-      ", *p* = ",
-      .data_subset |> pull(p_value),
+      .data_subset |> pull(.statistic),
+      ", *p* ",
+      p_val,
       ")"
     )
-  } else if (.outcome == "estimate") {
+  } else if (.outcome == "estimate" & .statistic == "z.ratio") {
     paste0(
       "(Est. = ",
       .data_subset |> pull(.outcome),
@@ -39,12 +47,12 @@ make_pairwise_sentence <- function(.data, .contrast, .outcome = "ratio") {
       .data_subset |> pull(SE),
       ", ",
       "*z* = ",
-      .data_subset |> pull(z.ratio),
-      ", *p* = ",
-      .data_subset |> pull(p_value),
+      .data_subset |> pull(.statistic),
+      ", *p* ",
+      p_val,
       ")"
     )
-  } else if (.outcome == "odds.ratio") {
+  } else if (.outcome == "odds.ratio" & .statistic == "z.ratio") {
     paste0(
       "(O.R. = ",
       .data_subset |> pull(.outcome),
@@ -52,9 +60,22 @@ make_pairwise_sentence <- function(.data, .contrast, .outcome = "ratio") {
       .data_subset |> pull(SE),
       ", ",
       "*z* = ",
-      .data_subset |> pull(z.ratio),
-      ", *p* = ",
-      .data_subset |> pull(p_value),
+      .data_subset |> pull(.statistic),
+      ", *p* ",
+      p_val,
+      ")"
+    )
+  } else if (.outcome == "estimate" & .statistic == "t.ratio") {
+    paste0(
+      "(Est. = ",
+      .data_subset |> pull(.outcome),
+      ", *SE* = ",
+      .data_subset |> pull(SE),
+      ", ",
+      "*t* = ",
+      .data_subset |> pull(.statistic),
+      ", *p* ",
+      p_val,
       ")"
     )
   }

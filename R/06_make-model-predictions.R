@@ -7,6 +7,7 @@ library(brms)
 library(broom.mixed)
 library(bayestestR)
 library(bayesplot)
+library(janitor)
 
 # set plotting theme ----
 
@@ -24,7 +25,7 @@ thm <- list(theme(text=element_text(size=rel(5))))
 list.files(here("R", "00_load-functions"), full.names = TRUE) |> 
   purrr::walk(source)
 
-r_file_list <- list.files(
+list.files(
   here::here("R", "06_make-model-predictions"), 
   full.names = TRUE
 ) |> purrr::walk(source)

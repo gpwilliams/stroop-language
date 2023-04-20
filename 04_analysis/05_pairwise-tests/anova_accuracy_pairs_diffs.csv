@@ -1,0 +1,4 @@
+study,response,analysis,contrast,estimate,SE,df,t.ratio,p.value
+arabic,accuracy,stroop-groupedby-language,(Incongruent - Neutral Arabic) - (Incongruent - Neutral English),-0.03842541235627614,0.022597538582942337,44,-1.7004246818846638,0.09611008774088743
+chinese,accuracy,stroop-groupedby-language,(Incongruent - Neutral Chinese) - (Incongruent - Neutral English),-0.03373634325059532,0.023783469921396145,45,-1.4184786056068859,0.16293993423280623
+dutch,accuracy,stroop-groupedby-language,(Incongruent - Neutral Dutch) - (Incongruent - Neutral English),-0.04273840637211583,0.02512033041814004,45,-1.7013473015965317,0.09577877600855479

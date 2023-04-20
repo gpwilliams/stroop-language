@@ -12,7 +12,7 @@ library(bayestestR)
 list.files(here("R", "00_load-functions"), full.names = TRUE) |> 
   purrr::walk(source)
 
-r_file_list <- list.files(
+list.files(
   here::here("R", "04_fit-models"), 
   full.names = TRUE
 ) |> purrr::walk(source)

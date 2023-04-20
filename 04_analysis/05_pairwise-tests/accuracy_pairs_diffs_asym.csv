@@ -1,0 +1,7 @@
+study,response,analysis,stroop,contrast,estimate,SE,df,z.ratio,p.value
+arabic,accuracy,trial-type-groupedby-stroop-by-language,Incongruent,(Switch - Repetition Arabic) - (Switch - Repetition English),-0.33632430260084273,0.21938984081390683,Inf,-1.5329985260626688,0.25055243615044015
+arabic,accuracy,trial-type-groupedby-stroop-by-language,Neutral,(Switch - Repetition Arabic) - (Switch - Repetition English),0.32389639044661295,0.24410828821495792,Inf,1.3268553592141652,0.25055243615044015
+chinese,accuracy,trial-type-groupedby-stroop-by-language,Incongruent,(Switch - Repetition Chinese) - (Switch - Repetition English),-0.42408611984225614,0.22792450173912818,Inf,-1.8606429611838988,0.1255892273714063
+chinese,accuracy,trial-type-groupedby-stroop-by-language,Neutral,(Switch - Repetition Chinese) - (Switch - Repetition English),-0.4042388767993183,0.2693461500448716,Inf,-1.5008154998019252,0.13340328856277883
+dutch,accuracy,trial-type-groupedby-stroop-by-language,Incongruent,(Switch - Repetition Dutch) - (Switch - Repetition English),-0.42350298464374897,0.2100371588674083,Inf,-2.0163240967808784,0.08753219352737483
+dutch,accuracy,trial-type-groupedby-stroop-by-language,Neutral,(Switch - Repetition Dutch) - (Switch - Repetition English),0.20660484156561282,0.25042749127195874,Inf,0.825008630307463,0.4093666910006776
